@@ -1,1 +1,68 @@
-# Restler
+# Restler ![](https://img.shields.io/badge/version-1.0.0--beta5-green.svg)
+
+> Restler has been built with simplicity and ease of use in mind. It allows you send custom HTTP/HTTPS requests and test your REST API anywhere and anytime.
+
+#### Download
+
+[![](img/google-play.png)](https://rebrand.ly/restler-android-app)
+
+#### App Features
+
+* Requests you send are automatically saved so that you can come back and review at any time;
+* Save and organize your requests in folders and load requests without writing its attributes again;
+* Favorite requests and folders so they can be shown at the top and accessed quickly;
+* Edit body, url parameters and headers attributes easily;
+* Parses and displays the complete raw response including headers, cookies, status, etc;
+* Supports the most common HTTP methods (GET, POST, PUT, DELETE, HEAD, PATCH, OPTIONS) and custom methods;
+* Supports Basic, Bearer Token and Hawk Authentication;
+* Import collections from Insomnia;
+* Export collections to Insomnia;
+* Manage cookies and send them with your request;
+* Autocompletes headers with commonly-used values;
+* Quickly copy the response body received;
+* Switch easily between HTTP and HTTPS.
+
+#### Screenshots
+
+|                |                |                |
+| -------------- | -------------- | -------------- |
+| ![](img/1.png) | ![](img/2.png) | ![](img/3.png) |
+| ![](img/4.png) | ![](img/5.png) | ![](img/6.png) |
+
+#### Changelog
+
+* `1.0.0-beta5`
+  * Added ability to syntax highlight the response body for JSON;
+  * Added Brazilian Portuguese translation;
+  * Minor bug fixes;
+  * Minor UI fixes.
+
+* `1.0.0-beta4`
+  - Added support to manage cookies;
+  - Added support to import cookies from Insomnia;
+  - Added support for exporting Insomnia formats;
+  - Minor bug fixes;
+  - Minor UI fixes;
+
+* `1.0.0-beta3`
+  - Added ability to duplicate requests;
+  - Added autocomplete support for header fields;
+  - Added support for importing Insomnia formats;
+  - Added option to reset file for Multipart Form field;
+  - Added support for custom HTTP methods;
+  - Added Hawk authentication method;
+  - Added ability to hide keyboard if user clicks out of input;
+  - Minor bug fixes.
+
+* `1.0.0-beta2`
+  - Added Multipart, Form Url Encoded and Binary File Request Body Type;
+  - Added button to cancel the current request;
+  - Added numeric counter on Request's Body tab;
+  - Minor bug fixes.
+
+* `1.0.0-beta1`
+  * Initial Release.
+
+#### Privacy Policy
+
+[LINK](http://restler.tiagohm.xyz/privacy-policy.html)
