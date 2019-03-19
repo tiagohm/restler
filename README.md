@@ -1,4 +1,4 @@
-# Restler ![](https://img.shields.io/badge/version-1.0.0--beta5-green.svg)
+# Restler ![](https://img.shields.io/badge/version-1.0.0--beta6-green.svg)
 
 > Restler has been built with simplicity and ease of use in mind. It allows you send custom HTTP/HTTPS requests and test your REST API anywhere and anytime.
 
@@ -14,13 +14,14 @@
 * Edit body, url parameters and headers attributes easily;
 * Parses and displays the complete raw response including headers, cookies, status, etc;
 * Supports the most common HTTP methods (GET, POST, PUT, DELETE, HEAD, PATCH, OPTIONS) and custom methods;
-* Supports Basic, Bearer Token and Hawk Authentication;
+* Supports Basic, Bearer Token, Hawk and Digest Authentication;
 * Import collections from Insomnia;
 * Export collections to Insomnia;
 * Manage cookies and send them with your request;
 * Autocompletes headers with commonly-used values;
-* Quickly copy the response body received;
-* Switch easily between HTTP and HTTPS.
+* Quickly copy the response body, headers and cookies received;
+* Switch easily between HTTP and HTTPS;
+* Beautify the response body received.
 
 #### Screenshots
 
@@ -30,6 +31,16 @@
 | ![](img/4.png) | ![](img/5.png) | ![](img/6.png) |
 
 #### Changelog
+
+* `1.0.0-beta6`
+  * Added Digest authentication method;
+  * Added ability to beautify the response body for JSON;
+  * Added ability to copy headers and cookies values from response;
+  * Added support to automatically handle request redirects;
+  * Added max redirects option in Settings;
+  * Added option to disable following redirects in Settings;
+  * Minor bug fixes;
+  * Minor UI fixes;
 
 * `1.0.0-beta5`
   * Added ability to syntax highlight the response body for JSON;
