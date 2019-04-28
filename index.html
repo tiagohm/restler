@@ -4,15 +4,20 @@
 <head>
   <meta charset="utf-8">
   <title>Restler - REST API Client</title>
-  <meta name="description" content="Love appster." />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!--Bootstrap 4-->
-  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <meta name="description" content="Restler - REST API Client" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap 4 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
   <link rel="stylesheet" href="https://cdn.materialdesignicons.com/3.3.92/css/materialdesignicons.min.css">
-  <link rel="stylesheet" href="css/custom.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css"
+    href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,300|Abril+Fatface|Work+Sans:400,700,600">
+  <link rel="stylesheet" href="https://cdn.materialdesignicons.com/3.6.95/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="css/style.css">
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- Google Analytics -->
   <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-102583596-5"></script>
   <script>
     if (location.hostname && location.hostname != "localhost") {
@@ -24,382 +29,108 @@
   </script>
 </head>
 
-<body>
-  <!--header-->
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary sticky-navigation">
-    <a class="navbar-brand" href="#"><img src="img/logo.png"
-        style="width: 60px; margin-right: 5px"><strong>RESTLER</strong></a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-      data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item mr-3">
-          <a class="nav-link page-scroll" href="#features">Features <span class="sr-only">(current)</span></a>
-        </li>
-        <!-- <li class="nav-item mr-3">
-                    <a class="nav-link page-scroll" href="#pricing">Pricing</a>
-                </li> -->
-        <li class="nav-item mr-3">
-          <a class="nav-link page-scroll" href="#download">Download</a>
-        </li>
-        <!-- <li class="nav-item mr-3">
-                    <a class="nav-link page-scroll" href="#team">Team</a>
-                </li> -->
-        <li class="nav-item mr-3">
-          <a class="nav-link page-scroll" href="#contact">Contact</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-
-  <!--main section-->
-  <section class="bg-texture hero pt-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 text-white wow fadeIn">
-          <div class="mt-5 pt-5 d-none d-md-block"></div>
-          <h1>Restler <version>1.0.0-beta6</version>
-          </h1>
-          <h2>A powerful <span class="text-orange">REST API Client</span> for Android.</h2>
-          <p class="mt-4 lead">
-            Restler allows you send custom HTTP/HTTPS requests and test your REST API anywhere and anytime.
-          </p>
-          <p class="mt-5">
-            <a href="https://play.google.com/store/apps/details?id=br.tiagohm.restler" class="mr-2">
-              <img src="img/google-play.png" class="store-img" />
+<body class="pages android not-signed-in">
+  <div class="container-fluid mt-5">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <div class="main-hero animated fadeInDown">
+          <a href="#" class="avatar">
+            <img src="img/logo.png">
+          </a>
+          <h1>Restler</h1>
+          <h2>Powerful REST API Client for Android</h2>
+          <div class="mt-2">
+            <a target="_blank" href="https://play.google.com/store/apps/details?id=br.tiagohm.restler">
+              <img src="img/google-play.png">
             </a>
-            <!-- <a href="#"><img src="img/apple_store.png" class="store-img" /> </a> -->
-          </p>
-        </div>
-        <div class="col-md-6 pt-5 d-none d-md-block wow fadeInRight">
-          <img class="img-fluid mx-auto d-block shot" src="img/5.png" />
+          </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!--main features-->
-  <section class="bg-white" id="features">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 col-sm-8 mx-auto text-center wow fadeIn">
-          <h2 class="text-primary">Why Choose Restler?</h2>
-          <p class="lead">
-            Restler has been built with simplicity and ease of use in mind.
-          </p>
-        </div>
-      </div>
-      <div class="row d-md-flex mt-4 text-center">
-        <div class="col-sm-6 col-md-4 mt-2">
-          <div class="card border-none wow fadeIn">
-            <div class="card-body">
-              <div class="icon-box">
-                <i class="mdi mdi-36px mdi-cursor-pointer"></i>
-              </div>
-              <h5 class="card-title text-primary pt-5">Easy to use</h5>
-              <p class="card-text">Specify URL, headers, and authorization all in one place. Then just
-                hit send.</p>
+  <div class="phone-wrapper">
+    <div class="container small">
+      <div class="phone-container row">
+        <span class="demo animated fadeInUp">
+          <img class="frame" src="img/android-phone-frame.png">
+          <video autoplay loop playsinline width="260" height="463">
+            <source src="media/demo.webm" type="video/webm">
+            <source src="media/demo.mp4" type="video/mp4">
+          </video>
+        </span>
+        <div class="features-left col-md-4">
+          <div class="feature revealOnScroll animated fadeInUp" data-animation="fadeInUp" data-timeout="0">
+            <i class="mdi mdi-history"></i>
+            <div class="content">
+              <h3>History</h3>
+              <p>Requests you send are automatically saved so that you can come back and review at any time.</p>
+            </div>
+          </div>
+          <div class="feature revealOnScroll animated fadeInUp" data-animation="fadeInUp" data-timeout="100">
+            <i class="mdi mdi-folder"></i>
+            <div class="content">
+              <h3>Collection</h3>
+              <p>Save and organize your requests in folders and load requests without writing its attributes again.</p>
+            </div>
+          </div>
+          <div class="feature revealOnScroll animated fadeInUp" data-animation="fadeInUp" data-timeout="200">
+            <i class="mdi mdi-textbox"></i>
+            <div class="content">
+              <h3>Autocomplete</h3>
+              <p>Restler autocompletes headers with commonly-used values.</p>
             </div>
           </div>
         </div>
-        <div class="col-sm-6 col-md-4 mt-2">
-          <div class="card border-none wow fadeIn">
-            <div class="card-body">
-              <div class="icon-box">
-                <i class="mdi mdi-36px mdi-folder"></i>
-              </div>
-              <h5 class="card-title text-primary pt-5">Organize everything</h5>
-              <p class="card-text">Create folders, save your requests, and import and export your data.</p>
+        <div class="features-right  col-md-4 offset-md-4">
+          <div class="feature revealOnScroll animated fadeInUp" data-animation="fadeInUp" data-timeout="300">
+            <i class="mdi mdi-lock"></i>
+            <div class="content">
+              <h3>Authentication</h3>
+              <p>Authenticate your requests with Basic, Bearer Token, Hawk and Digest Auth.</p>
             </div>
           </div>
-        </div>
-        <!-- <div class="col-sm-6 col-md-3 mt-2">
-                    <div class="card border-none wow fadeIn">
-                        <div class="card-body">
-                            <div class="icon-box">
-                                <i class="material-icons dp36">cloud_upload</i>
-                            </div>
-                            <h5 class="card-title text-primary pt-5">Upload at Cloud</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
-                        </div>
-                    </div>
-                </div> -->
-        <div class="col-sm-6 col-md-4 mt-2">
-          <div class="card border-none wow fadeIn">
-            <div class="card-body">
-              <div class="icon-box">
-                <i class="mdi mdi-36px mdi-palette"></i>
-              </div>
-              <h5 class="card-title text-primary pt-5">Beautiful Design</h5>
-              <p class="card-text">Intuitive and beautiful interface using Material Design.</p>
+          <div class="feature revealOnScroll animated fadeInUp" data-animation="fadeInUp" data-timeout="400">
+            <i class="mdi mdi-swap-vertical"></i>
+            <div class="content">
+              <h3>Insomnia Support</h3>
+              <p>Import and export <a href="https://insomnia.rest/" target="_blank">Insomnia</a> collections.</p>
+            </div>
+          </div>
+          <div class="feature revealOnScroll animated fadeInUp" data-animation="fadeInUp" data-timeout="500">
+            <i class="mdi mdi-cookie"></i>
+            <div class="content">
+              <h3>Cookie</h3>
+              <p>Manage cookies and send them with your request.</p>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!--extra features-->
-  <section class="bg-dark text-white" id="extra-features">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-xs-12 text-center wow fadeIn">
-          <h2 class="text-orange">Features & Details</h2>
-          <p class="lead">
-            Insomnia integration, Collections, Authentication and more make Restler one of the most
-            powerful REST API clients on Android.
-          </p>
-        </div>
-      </div>
-      <div class="row d-md-flex mt-5">
-        <div class="col-sm-4 wow fadeIn">
-          <h5 class="text-orange">History</h5>
-          <p>
-            Requests you send are automatically saved so that you can come back and review at any time.
-          </p>
-          <h5 class="text-orange pt-5">Collections</h5>
-          <p>
-            Save and organize your requests in folders and load requests without writing its attributes
-            again.
-          </p>
-          <h5 class="text-orange pt-5">Favorites</h5>
-          <p>
-            Favorite requests and folders so they can be shown at the top and accessed quickly.
-          </p>
-        </div>
-        <div class="col-sm-4 wow fadeIn">
-          <img class="img-fluid mx-auto d-block shot" src="img/4.png">
-        </div>
-        <div class="col-sm-4 wow fadeIn">
-          <h5 class="text-orange">Auto-Complete</h5>
-          <p>
-            Restler autocompletes headers with commonly-used values.
-          </p>
-          <h5 class="text-orange pt-5">Authentication</h5>
-          <p>
-            Authenticate your requests with Basic, Bearer Token, Hawk and Digest Auth.
-          </p>
-          <h5 class="text-orange pt-5">Insomnia Support</h5>
-          <p>
-            Import and export Insomnia collections.
-          </p>
-        </div>
-      </div>
+  <div class="white-wrapper">
+    <div class="container small">
+      <footer>
+        <ul class="list-inline">
+          <li class=""><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li class=""><a href="mailto:tiago.henrique.cco@gmail.com">Contact Us</a></li>
+        </ul>
+        <p>Developed with <span style="color: red">❤️</span> by <a target="_blank"
+            href="https://github.com/tiagohm">@tiagohm</a></p>
+      </footer>
     </div>
-  </section>
+  </div>
 
-  <section class="bg-dark text-white" id="extra-features-2">
-    <div class="container">
-      <div class="row d-md-flex mt-5">
-        <div class="col-sm-4 wow fadeIn">
-          <h5 class="text-orange">View Response Details</h5>
-          <p>
-            Parses and displays the complete raw response including headers, cookies, status, etc.
-          </p>
-          <h5 class="text-orange pt-5">Custom Methods</h5>
-          <p>
-            Supports the most common HTTP methods. Also supports custom methods.
-          </p>
-          <h5 class="text-orange pt-5">Request Body</h5>
-          <p>
-            Supports to Multipart, Form Url Data, Binary File and Text request body types.
-          </p>
-        </div>
-        <div class="col-sm-4 wow fadeIn">
-          <img class="img-fluid mx-auto d-block shot" src="img/1.png">
-        </div>
-        <div class="col-sm-4 wow fadeIn">
-          <h5 class="text-orange">Response Copy</h5>
-          <p>
-            Quickly copy the response body, headers and cookies received.
-          </p>
-          <h5 class="text-orange pt-5">Http & Https</h5>
-          <p>
-            Switch easily between HTTP and HTTPS.
-          </p>
-          <h5 class="text-orange pt-5">Cookies</h5>
-          <p>
-            Manage cookies and send them with your request.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!--pricing-->
-  <!-- <section class="bg-alt" id="pricing">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-sm-8 mx-auto text-center">
-                    <h2 class="text-primary">Pricing</h2>
-                    <p class="lead">
-                        Our no-nonsense pricing.
-                    </p>
-                </div>
-            </div>
-            <div class="row d-md-flex mt-4 text-center">
-                <div class="col-md-4 mt-2 wow fadeIn">
-                    <div class="card card-outline-primary">
-                        <div class="card-body">
-                            <h5 class="card-title pt-4 text-orange">Basic</h5>
-                            <h3 class="card-title text-primary pt-4">FREE</h3>
-                            <p class="card-text text-muted pb-3 border-bottom">per month</p>
-                            <ul class="list-unstyled pricing-list">
-                                <li>Free setup</li>
-                                <li>100MB storage</li>
-                                <li>1GB bandwidth</li>
-                                <li>Basic support</li>
-                            </ul>
-                            <a href="#" class="btn btn-primary btn-radius">Order Now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mt-2 wow fadeIn">
-                    <div class="card card-outline-primary bg-primary text-white">
-                        <div class="card-body">
-                            <h5 class="card-title pt-4 text-white">Standard</h5>
-                            <h3 class="card-title text-orange pt-4"><sup>$</sup> 9.99</h3>
-                            <p class="card-text text-muted pb-3 border-bottom">per month</p>
-                            <ul class="list-unstyled pricing-list">
-                                <li>Free setup</li>
-                                <li>5GB storage</li>
-                                <li>Unlimited bandwidth</li>
-                                <li>Priority support</li>
-                            </ul>
-                            <a href="#" class="btn btn-white btn-radius">Order Now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mt-2 wow fadeIn">
-                    <div class="card card-outline-primary">
-                        <div class="card-body">
-                            <h5 class="card-title pt-4 text-orange">Advanced</h5>
-                            <h3 class="card-title text-primary pt-4"><sup>$</sup> 19.99</h3>
-                            <p class="card-text text-muted pb-3 border-bottom">per month</p>
-                            <ul class="list-unstyled pricing-list">
-                                <li>Free setup</li>
-                                <li>Unlimited storage</li>
-                                <li>Unlimited bandwidth</li>
-                                <li>24/7 support</li>
-                            </ul>
-                            <a href="#" class="btn btn-primary btn-radius">Order Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> -->
-
-  <!--download-->
-  <section class="bg-orange" id="download">
-    <div class="container">
-      <div class="row d-md-flex text-center wow fadeIn">
-        <div class="col-md-6 offset-md-3 col-sm-10 offset-sm-1 col-xs-12">
-          <h2 class="text-primary">Download & get started today!</h2>
-          <p class="mt-4 lead">
-            Go on, give it a try. You won't regret it.
-          </p>
-          <p class="mt-5">
-            <a href="https://rebrand.ly/restler-android-app" class="mr-2">
-              <img src="img/google-play.png" class="store-img" />
-            </a>
-            <!-- <a href="#"><img src="img/apple_store.png" class="store-img" /> </a> -->
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!--team-->
-  <!-- <section class="bg-white" id="team">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-sm-8 mx-auto text-center">
-                    <h2 class="text-primary">Our Team</h2>
-                    <p class="lead">
-                        We're a team of three people.
-                    </p>
-                </div>
-            </div>
-            <div class="row d-md-flex mt-4 text-center">
-                <div class="col-sm-4 mt-2 wow fadeIn">
-                    <div class="card border-none">
-                        <div class="card-body">
-                            <img src="img/team-1.jpg" alt="Male" class="img-team img-fluid rounded-circle" />
-                            <h5 class="card-title text-primary pt-4">John Deo</h5>
-                            <p class="card-text">App Designer</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 mt-2 wow fadeIn">
-                    <div class="card border-none">
-                        <div class="card-body">
-                            <img src="img/team-2.jpg" alt="Male" class="img-team img-fluid rounded-circle" />
-                            <h5 class="card-title text-primary pt-4">Brandon Lee</h5>
-                            <p class="card-text">Ionic Developer</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 mt-2 wow fadeIn">
-                    <div class="card border-none">
-                        <div class="card-body">
-                            <img src="img/team-3.jpg" alt="Male" class="img-team img-fluid rounded-circle" />
-                            <h5 class="card-title text-primary pt-4">Inza Fererri</h5>
-                            <p class="card-text">Android Developer</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> -->
-
-  <!--contact-->
-  <section class="bg-texture-collage p-0" id="contact">
-    <div class="container">
-      <div class="row d-md-flex text-white text-center wow fadeIn">
-        <div class="col-md-4 p-5">
-          <p><i class="mdi mdi-36px mdi-phone"></i></p>
-          <p class="lead">+0 000000000</p>
-        </div>
-        <div class="col-md-4 p-5">
-          <p><i class="mdi mdi-36px mdi-email"></i></p>
-          <p class="lead">tiago.henrique.cco@gmail.com</p>
-        </div>
-        <div class="col-md-4 p-5">
-          <p><i class="mdi mdi-36px mdi-map-marker"></i></p>
-          <p class="lead">Itajubá, MG, Brazil</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!--footer-->
-  <section class="bg-dark pt-5" id="connect">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-xs-12 text-center wow fadeIn">
-          <h2 class="hero-heading text-muted"><img src="img/logo.png" style="width: 96px"></h2>
-          <p class="mt-2" style="color: white; font-weight: bold;">
-            <a href="https://github.com/tiagohm/Restler" target="_blank">GITHUB</a>&nbsp;&middot;
-            <a href="/privacy-policy.html" target="_blank">PRIVACY POLICY</a>&nbsp;
-          </p>
-          <p class="pt-2 text-muted">
-            &copy; 2019 Tiago Melo<br />
-            <small>Appster Theme by <a target="_blank" href="https://wireddots.com">Wired Dots</a></small>.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
-  <script src="js/scripts.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>

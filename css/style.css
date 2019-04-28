@@ -1,0 +1,206 @@
+body {
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #333333;
+    background-color: #fafafa;
+    margin: 0;
+}
+
+body a {
+    color: #c8ff00;
+    font-weight: bold;
+}
+
+body.android {
+    background: #FF9800;
+    color: white;
+}
+
+body .main-hero {
+    margin: 45px 0 45px;
+    text-align: center;
+}
+
+body.android .main-hero {
+    margin-top: 0;
+    margin-bottom: 85px;
+}
+
+body .main-hero .avatar {
+    display: inline-block;
+}
+
+body.android .main-hero .avatar img {
+    width: 140px;
+    height: 140px;
+}
+
+body.android .main-hero h1 {
+    font-size: 40px;
+    text-transform: capitalize;
+    margin-bottom: 7px;
+}
+
+body .main-hero h1 {
+    font-weight: 600;
+    text-transform: capitalize;
+    font-size: 25px;
+    letter-spacing: 0;
+    margin-bottom: 10px;
+}
+
+body.android .main-hero h2 {
+    font-size: 24px;
+    font-weight: 100;
+    text-transform: none;
+    color: white;
+    opacity: 0.6;
+}
+
+body .main-hero h2 {
+    font-size: 16px;
+    line-height: 140%;
+    color: #808285;
+    max-width: 800px;
+    margin: 0 auto 0;
+}
+
+img[src*=google-play] {
+    width: 150px;
+}
+
+body .container.small {
+    max-width: 970px;
+}
+
+body .container {
+    clear: both;
+}
+
+.container:before, 
+.container:after {
+    display: table;
+    content: " ";
+}
+
+small, 
+.small {
+    font-size: 85%;
+}
+
+body.android .phone-container {
+    min-height: 510px;
+}
+
+body.android .phone-container>.demo {
+    position: absolute;
+    left: calc(50% - 158px);
+}
+
+@media (max-width: 991px) {
+    body.android .phone-container>.demo {
+        position: relative;
+        margin-bottom: 50px;
+        margin-left: 0px;
+        width: 100%;
+        height: -moz-available;          /* WebKit-based browsers will ignore this. */
+        height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+        height: fill-available;
+    }
+}
+
+body.android .phone-container .features-left, 
+body.android .phone-container .features-right {
+    margin-top: 55px;
+}
+
+body.android .phone-container .feature {
+    text-align: left;
+    position: relative;
+    margin-bottom: 50px;
+}
+
+body.android .phone-container .feature .content h3 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+body.android .phone-container .feature > i {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 26pt;
+}
+
+body.android .phone-container .feature .content {
+    padding-left: 50px;
+}
+
+body.android .phone-container .feature .content p {
+    font-size: 14px;
+    color: #fff;
+    opacity: 0.6;
+}
+
+body.android .white-wrapper {
+    background: white;
+    position: relative;
+}
+
+body.android .white-wrapper footer {
+    text-align: center;
+}
+
+body footer {
+    overflow: hidden;
+    width: 100%;
+    margin: 50px 0 0;
+    text-align: center;
+    padding-bottom: 35px;
+    background: white;
+    color: #333333;
+}
+
+.list-inline {
+    padding-left: 0;
+    list-style: none;
+}
+
+body.android .white-wrapper footer .list-inline li {
+    display: inline-block;
+}
+
+.list-inline>li:first-child {
+    padding-left: 0;
+}
+
+.list-inline>li {
+    display: inline-block;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+body.android .white-wrapper footer .list-inline li a {
+    margin-bottom: 20px;
+    display: inline-block;
+    padding: 0 10px;
+    color: #333;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.demo .frame,
+.demo video {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.demo video {
+    left: 17px;
+    width: 282px;
+    height: auto;
+    top: 54px;
+}
