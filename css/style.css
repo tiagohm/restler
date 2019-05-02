@@ -7,6 +7,10 @@ body {
     margin: 0;
 }
 
+html, body {
+  overflow-x: hidden;
+}
+
 body a {
     color: #c8ff00;
     font-weight: bold;
@@ -70,10 +74,6 @@ img[src*=google-play] {
     width: 150px;
 }
 
-body .container.small {
-    max-width: 970px;
-}
-
 body .container {
     clear: both;
 }
@@ -101,18 +101,11 @@ body.android .phone-container>.demo {
 @media (max-width: 991px) {
     body.android .phone-container>.demo {
         position: relative;
-        margin-bottom: 50px;
+        margin-bottom: 100px;
         margin-left: 0px;
         width: 100%;
-        height: -moz-available;          /* WebKit-based browsers will ignore this. */
-        height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
-        height: fill-available;
+        height: 572px;
     }
-}
-
-body.android .phone-container .features-left, 
-body.android .phone-container .features-right {
-    margin-top: 55px;
 }
 
 body.android .phone-container .feature {
