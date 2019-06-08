@@ -32,6 +32,22 @@
 
 #### Changelog
 
+* `1.0.0-beta8`
+  * Added ability to choose which cookie will be sent;
+  * Added ability to not save requests to history;
+  * Added ability to save response body as file;
+  * Added support to limit the history size;
+  * Added donation button to support this app development;
+  * Added new logo;
+  * Minor UI fixes;
+  * Minor bug fixes.
+
+* `1.0.0-beta7`
+  * Added option in Settings to allow send requests over Wi-Fi only;
+  * Added support for responses that return images (JPEG, PNG, SVG, WEBP);
+  * Minor UI fixes;
+  * Minor bug fixes.
+
 * `1.0.0-beta6`
   * Added Digest authentication method;
   * Added ability to beautify the response body for JSON;
