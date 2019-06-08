@@ -25,12 +25,19 @@
 
 #### Screenshots
 
-|                |                |                |
-| -------------- | -------------- | -------------- |
-| ![](img/1.png) | ![](img/2.png) | ![](img/3.png) |
-| ![](img/4.png) | ![](img/5.png) | ![](img/6.png) |
+|                 |                 |                 |
+| --------------- | --------------- | --------------- |
+| ![](img/01.png) | ![](img/02.png) | ![](img/03.png) |
+| ![](img/04.png) | ![](img/05.png) | ![](img/06.png) |
 
 #### Changelog
+
+* `1.0.0-beta9`
+  * Added support to multiple tabs;
+  * Added ability to restore automatically last tabs on startup;
+  * Improved performance;
+  * Minor UI fixes;
+  * Minor bug fixes.
 
 * `1.0.0-beta8`
   * Added ability to choose which cookie will be sent;
