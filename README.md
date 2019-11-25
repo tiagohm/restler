@@ -4,24 +4,26 @@
 
 #### Download
 
-[![](img/google-play.png)](https://rebrand.ly/restler-android-app)
+[![](img/google-play.png)](https://play.google.com/store/apps/details?id=br.tiagohm.restler)
 
 #### App Features
 
-* Requests you send are automatically saved so that you can come back and review at any time;
-* Save and organize your requests in folders and load requests without writing its attributes again;
-* Favorite requests and folders so they can be shown at the top and accessed quickly;
-* Edit body, url parameters and headers attributes easily;
-* Parses and displays the complete raw response including headers, cookies, status, etc;
-* Supports the most common HTTP methods (GET, POST, PUT, DELETE, HEAD, PATCH, OPTIONS) and custom methods;
-* Supports Basic, Bearer Token, Hawk and Digest Authentication;
-* Import collections from Insomnia;
-* Export collections to Insomnia;
-* Manage cookies and send them with your request;
-* Autocompletes headers with commonly-used values;
-* Quickly copy the response body, headers and cookies received;
-* Switch easily between HTTP and HTTPS;
-* Beautify the response body received.
+ * Requests you send are automatically saved so that you can come back and review at any time;
+ * Save and organize your requests in folders and load requests without writing its attributes again;
+ * Favorite requests and folders so they can be shown at the top and accessed quickly;
+ * Edit body, url parameters and headers attributes easily;
+ * Parses and displays the complete raw response including headers, cookies, status, etc;
+ * Restler supports the most common HTTP methods (GET, POST, PUT, DELETE, HEAD, PATCH, OPTIONS) and custom methods;
+ * Restler supports Basic, Bearer Token, Hawk and Digest authentication methods;
+ * Import collections from Insomnia (JSON and YAML);
+ * Export collections to Insomnia;
+ * Manage cookies and send them with your request;
+ * Quickly copy the response body, headers e cookies received;
+ * Autocompletes headers with commonly-used values;
+ * Switch easily between HTTP, HTTPS e HTTP2;
+ * Beautify the response body received;
+ * Use tabs to keep multiple requests open at the same time and switch between them without losing data;
+ * Insert client certificates;
 
 #### Screenshots
 
@@ -32,14 +34,27 @@
 
 #### Changelog
 
-* `1.0.0-beta9`
+* `0.10.0`
+  * Added support to select & copy the response body 🎉;
+  * Added support to import collection from URL;
+  * Added support to import collection within a folder;
+  * Added support to HTTP2 (experimental);
+  * Added support to client certificates;
+  * Added support to import/export Restler format (supports encryption);
+  * Added light theme 🌞;
+  * New HTTP Client library;
+  * Made various UI enhancements;
+  * Improved performance;
+  * Made various bug fixes.
+
+* `0.9.0`
   * Added support to multiple tabs;
   * Added ability to restore automatically last tabs on startup;
   * Improved performance;
   * Minor UI fixes;
   * Minor bug fixes.
 
-* `1.0.0-beta8`
+* `0.8.0`
   * Added ability to choose which cookie will be sent;
   * Added ability to not save requests to history;
   * Added ability to save response body as file;
@@ -49,13 +64,13 @@
   * Minor UI fixes;
   * Minor bug fixes.
 
-* `1.0.0-beta7`
+* `0.7.0`
   * Added option in Settings to allow send requests over Wi-Fi only;
   * Added support for responses that return images (JPEG, PNG, SVG, WEBP);
   * Minor UI fixes;
   * Minor bug fixes.
 
-* `1.0.0-beta6`
+* `0.6.0`
   * Added Digest authentication method;
   * Added ability to beautify the response body for JSON;
   * Added ability to copy headers and cookies values from response;
@@ -65,20 +80,20 @@
   * Minor bug fixes;
   * Minor UI fixes;
 
-* `1.0.0-beta5`
+* `0.5.0`
   * Added ability to syntax highlight the response body for JSON;
   * Added Brazilian Portuguese translation;
   * Minor bug fixes;
   * Minor UI fixes.
 
-* `1.0.0-beta4`
+* `0.4.0`
   - Added support to manage cookies;
   - Added support to import cookies from Insomnia;
   - Added support for exporting Insomnia formats;
   - Minor bug fixes;
   - Minor UI fixes;
 
-* `1.0.0-beta3`
+* `0.3.0`
   - Added ability to duplicate requests;
   - Added autocomplete support for header fields;
   - Added support for importing Insomnia formats;
@@ -88,13 +103,13 @@
   - Added ability to hide keyboard if user clicks out of input;
   - Minor bug fixes.
 
-* `1.0.0-beta2`
+* `0.2.0`
   - Added Multipart, Form Url Encoded and Binary File Request Body Type;
   - Added button to cancel the current request;
   - Added numeric counter on Request's Body tab;
   - Minor bug fixes.
 
-* `1.0.0-beta1`
+* `0.1.0`
   * Initial Release.
 
 #### Privacy Policy
