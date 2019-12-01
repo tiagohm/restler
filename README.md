@@ -1,4 +1,4 @@
-# Restler ![](https://img.shields.io/badge/version-1.0.0--beta9-green.svg)
+# Restler ![](https://img.shields.io/badge/version-0.10.3-green.svg)
 
 > Restler has been built with simplicity and ease of use in mind. It allows you send custom HTTP/HTTPS requests and test your REST API anywhere and anytime.
 
@@ -33,6 +33,18 @@
 | ![](img/04.png) | ![](img/05.png) | ![](img/06.png) |
 
 #### Changelog
+
+* `0.10.3`
+  * Added Latin Spanish language (thanks @taksumaki);
+  * Fixed HandshakeException;
+
+* `0.10.2`
+  * Minor bug fixes;
+
+* `0.10.1`
+  * Minor bug fixes;
+  * Minor UI Fixes;
+  * Added option to choose request body content-type;
 
 * `0.10.0`
   * Added support to select & copy the response body 🎉;
@@ -82,7 +94,7 @@
 
 * `0.5.0`
   * Added ability to syntax highlight the response body for JSON;
-  * Added Brazilian Portuguese translation;
+  * Added Brazilian Portuguese language;
   * Minor bug fixes;
   * Minor UI fixes.
 
