@@ -36,7 +36,8 @@
 
 * `0.10.3`
   * Added Latin Spanish language (thanks @taksumaki);
-  * Fixed HandshakeException;
+  * Added option to change request's User-Agent;
+  * Minor bug fixes;
 
 * `0.10.2`
   * Minor bug fixes;
