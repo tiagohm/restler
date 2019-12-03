@@ -150,5 +150,7 @@
     "duration": "Duration",
     "size": "Size",
     "root": "Root",
-    "userAgent": "User-Agent"
+    "userAgent": "User-Agent",
+    "collectionName": "Collection name",
+    "whatsNew": "What's new?"
 }

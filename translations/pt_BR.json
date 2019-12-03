@@ -135,5 +135,7 @@
     "status": "Status",
     "duration": "Duração",
     "size": "Tamanho",
-    "root": "Raiz"
+    "root": "Raiz",
+    "collectionName": "Nome da coleção",
+    "whatsNew": "O que há de novo?"
 }
