@@ -137,5 +137,13 @@
     "size": "Tamanho",
     "root": "Raiz",
     "collectionName": "Nome da coleção",
-    "whatsNew": "O que há de novo?"
+    "whatsNew": "O que há de novo?",
+    "proxy": "Proxy",
+    "clearProxyConfirmationMessage": "Você tem certeza que quer excluir todos os proxies?",
+    "deleteProxyConfirmationMessage": "Você tem certeza que quer excluir este proxy?",
+    "newProxy": "Novo proxy",
+    "editProxy": "Editar proxy",
+    "sendCookies": "Enviar cookies",
+    "storeCookies": "Gravar cookies",
+    "noMessages": "Nenhuma mensagem"
 }

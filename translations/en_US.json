@@ -152,5 +152,14 @@
     "root": "Root",
     "userAgent": "User-Agent",
     "collectionName": "Collection name",
-    "whatsNew": "What's new?"
+    "whatsNew": "What's new?",
+    "proxy": "Proxy",
+    "clearProxyConfirmationMessage": "Are you sure you want to clear all proxies?",
+    "deleteProxyConfirmationMessage": "Are you sure you want to delete this proxy?",
+    "newProxy": "New proxy",
+    "editProxy": "Edit proxy",
+    "sendCookies": "Send cookies",
+    "storeCookies": "Store cookies",
+    "webSocket": "WebSocket",
+    "noMessages": "No messages"
 }
