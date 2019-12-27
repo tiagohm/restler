@@ -161,5 +161,13 @@
     "sendCookies": "Send cookies",
     "storeCookies": "Store cookies",
     "webSocket": "WebSocket",
-    "noMessages": "No messages"
+    "noMessages": "No messages",
+    "#fullDate": "MMM d, yyyy h:mm:ss a",
+    "dns": "DNS",
+    "clearDnsConfirmationMessage": "Are you sure you want to clear all DNS?",
+    "deleteDnsConfirmationMessage": "Are you sure you want to delete this DNS?",
+    "newDns": "New DNS",
+    "editDns": "Edit DNS",
+    "timeline": "Timeline",
+    "time": "Time"
 }

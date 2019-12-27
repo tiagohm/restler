@@ -65,7 +65,7 @@
     "callCount.one": "{quantity} requisição",
     "callCount.other": "{quantity} requisições",
     "folderCount.one": "{quantity} pasta",
-    "folderCount.other": "{quantity} pasta",
+    "folderCount.other": "{quantity} pastas",
     "deleteCallConfirmationMessage": "Você tem certeza que quer excluir esta requisição?",
     "deleteFolderConfirmationMessage": "Você tem certeza que quer excluir esta pasta?",
     "collection": "Coleção",
@@ -145,5 +145,12 @@
     "editProxy": "Editar proxy",
     "sendCookies": "Enviar cookies",
     "storeCookies": "Gravar cookies",
-    "noMessages": "Nenhuma mensagem"
+    "noMessages": "Nenhuma mensagem",
+    "#fullDate": "dd/MM/yyyy HH:mm:ss",
+    "clearDnsConfirmationMessage": "Você tem certeza que quer excluir todos os DNSs?",
+    "deleteDnsConfirmationMessage": "Você tem certeza que quer excluir este DNS?",
+    "newDns": "Novo DNS",
+    "editDns": "Editar DNS",
+    "timeline": "Linha do tempo",
+    "time": "Tempo"
 }
