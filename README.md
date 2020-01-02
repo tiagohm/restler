@@ -1,4 +1,4 @@
-# Restler ![](https://img.shields.io/badge/version-0.14.0-green.svg)
+# Restler ![](https://img.shields.io/badge/version-0.14.8-green.svg)
 
 > Restler has been built with simplicity and ease of use in mind. It allows you send custom HTTP/HTTPS requests and test your REST API anywhere and anytime.
 
@@ -36,70 +36,52 @@
 
 #### Changelog
 
-* `0.14.0`
+* `0.14.x`
   * Added support to DNS;
   * Added Timeline feature to Response tab;
+  * Optimized to display large response body;
   * Minor bug fixes;
-
-* `0.13.0`
+* `0.13.x`
   * Added support to Brotli decompression format;
   * Minor bug fixes;
 
-* `0.12.1`
-  * Minor bug fixes;
-
-* `0.12.0`
-  * Added support to proxy 🎉 (beta);
+* `0.12.x`
+  * Added support to proxy 🎉;
   * Added request settings;
   * Added option to configure send cookies per request;
   * Added option to configure store cookies per request;
   * Added support to WebSocket (beta);
   * Minor bug fixes;
 
-* `0.11.0`
-  * Added support to import/export Postman collection 🎉 (beta);
+* `0.11.x`
+  * Added support to import/export Postman collection 🎉;
   * Minor bug fixes;
 
-* `0.10.5`
-  * Fixed history delete/clear bug;
-
-* `0.10.4`
-  * Fixed Basic auth;
-
-* `0.10.3`
-  * Added Latin Spanish language (thanks @taksumaki);
-  * Added option to change request's User-Agent;
-  * Minor bug fixes;
-
-* `0.10.2`
-  * Minor bug fixes;
-
-* `0.10.1`
-  * Minor bug fixes;
-  * Minor UI Fixes;
-  * Added option to choose request body content-type;
-
-* `0.10.0`
+* `0.10.x`
+  
   * Added support to select & copy the response body 🎉;
   * Added support to import collection from URL;
+  
   * Added support to import collection within a folder;
   * Added support to HTTP2 (experimental);
   * Added support to client certificates;
   * Added support to import/export Restler format (supports encryption);
   * Added light theme 🌞;
   * New HTTP Client library;
+  * Added Latin Spanish language (thanks @taksumaki);
+  * Added option to change request's User-Agent;
+  * Added option to choose request body content-type;
   * Made various UI enhancements;
   * Improved performance;
   * Made various bug fixes.
-
-* `0.9.0`
+* `0.9.x`
   * Added support to multiple tabs;
   * Added ability to restore automatically last tabs on startup;
   * Improved performance;
   * Minor UI fixes;
   * Minor bug fixes.
 
-* `0.8.0`
+* `0.8.x`
   * Added ability to choose which cookie will be sent;
   * Added ability to not save requests to history;
   * Added ability to save response body as file;
@@ -109,13 +91,13 @@
   * Minor UI fixes;
   * Minor bug fixes.
 
-* `0.7.0`
+* `0.7.x`
   * Added option in Settings to allow send requests over Wi-Fi only;
   * Added support for responses that return images (JPEG, PNG, SVG, WEBP);
   * Minor UI fixes;
   * Minor bug fixes.
 
-* `0.6.0`
+* `0.6.x`
   * Added Digest authentication method;
   * Added ability to beautify the response body for JSON;
   * Added ability to copy headers and cookies values from response;
@@ -125,20 +107,20 @@
   * Minor bug fixes;
   * Minor UI fixes;
 
-* `0.5.0`
+* `0.5.x`
   * Added ability to syntax highlight the response body for JSON;
   * Added Brazilian Portuguese language;
   * Minor bug fixes;
   * Minor UI fixes.
 
-* `0.4.0`
+* `0.4.x`
   - Added support to manage cookies;
   - Added support to import cookies from Insomnia;
   - Added support for exporting Insomnia formats;
   - Minor bug fixes;
   - Minor UI fixes;
 
-* `0.3.0`
+* `0.3.x`
   - Added ability to duplicate requests;
   - Added autocomplete support for header fields;
   - Added support for importing Insomnia formats;
@@ -148,13 +130,14 @@
   - Added ability to hide keyboard if user clicks out of input;
   - Minor bug fixes.
 
-* `0.2.0`
+* `0.2.x`
   - Added Multipart, Form Url Encoded and Binary File Request Body Type;
   - Added button to cancel the current request;
   - Added numeric counter on Request's Body tab;
   - Minor bug fixes.
 
-* `0.1.0`
+* `0.1.x`
+  
   * Initial Release.
 
 #### Privacy Policy

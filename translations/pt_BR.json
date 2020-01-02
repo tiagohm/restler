@@ -146,11 +146,17 @@
     "sendCookies": "Enviar cookies",
     "storeCookies": "Gravar cookies",
     "noMessages": "Nenhuma mensagem",
-    "#fullDate": "dd/MM/yyyy HH:mm:ss",
+    "#dateTimePattern": "dd/MM/yyyy HH:mm:ss",
     "clearDnsConfirmationMessage": "Você tem certeza que quer excluir todos os DNSs?",
     "deleteDnsConfirmationMessage": "Você tem certeza que quer excluir este DNS?",
     "newDns": "Novo DNS",
     "editDns": "Editar DNS",
     "timeline": "Linha do tempo",
-    "time": "Tempo"
+    "time": "Tempo",
+    "unnamed": "Sem nome",
+    "invalidFormat": "Formato inválido",
+    "#timePattern": "HH:mm:ss",
+    "connecting": "Conectando...",
+    "connected": "Conectado",
+    "disconnected": "Desconectado"
 }
