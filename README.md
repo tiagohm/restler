@@ -1,4 +1,4 @@
-# Restler ![](https://img.shields.io/badge/version-0.14.8-green.svg)
+# Restler ![](https://img.shields.io/badge/version-0.15.4-green.svg)
 
 > Restler has been built with simplicity and ease of use in mind. It allows you send custom HTTP/HTTPS requests and test your REST API anywhere and anytime.
 
@@ -25,7 +25,9 @@
  * Beautify the response body received;
  * Use tabs to keep multiple requests open at the same time and switch between them without losing data;
  * Add Client Certificates, Proxy servers and DNS resolvers;
+ * Response Caching (RFC 7234);
  * WebSocket;
+ * SSE;
 
 #### Screenshots
 
@@ -36,11 +38,19 @@
 
 #### Changelog
 
+* `0.15.x`
+  * Added support to Response Caching (RFC 7234);
+  * Added support to SSE (Server-Sent Event);
+  * Added option to enable cache per request;
+  * Added option to enable/disable cookies;
+  * Minor bug fixes;
+
 * `0.14.x`
   * Added support to DNS;
   * Added Timeline feature to Response tab;
   * Optimized to display large response body;
   * Minor bug fixes;
+
 * `0.13.x`
   * Added support to Brotli decompression format;
   * Minor bug fixes;
@@ -58,10 +68,8 @@
   * Minor bug fixes;
 
 * `0.10.x`
-  
   * Added support to select & copy the response body 🎉;
   * Added support to import collection from URL;
-  
   * Added support to import collection within a folder;
   * Added support to HTTP2 (experimental);
   * Added support to client certificates;
@@ -74,6 +82,7 @@
   * Made various UI enhancements;
   * Improved performance;
   * Made various bug fixes.
+
 * `0.9.x`
   * Added support to multiple tabs;
   * Added ability to restore automatically last tabs on startup;
@@ -137,7 +146,6 @@
   - Minor bug fixes.
 
 * `0.1.x`
-  
   * Initial Release.
 
 #### Privacy Policy
