@@ -18,7 +18,6 @@ Link to privacy policy of third party service providers used by the app
 
 *   [Google Play Services](https://www.google.com/policies/privacy/)
 *   [Sentry](https://sentry.io/privacy/)
-*   [Flurry Analytics](https://www.verizonmedia.com/policies/ie/en/verizonmedia/privacy/index.html)
 
 **Log Data**
 

@@ -26,8 +26,9 @@
  * Use tabs to keep multiple requests open at the same time and switch between them without losing data;
  * Add Client Certificates, Proxy servers and DNS resolvers;
  * Response Caching (RFC 7234);
- * WebSocket;
- * SSE;
+ * WebSocket & SSE;
+ * Workspace;
+ * Environment Variables;
 
 #### Screenshots
 
@@ -37,6 +38,11 @@
 | ![](img/04.png) | ![](img/05.png) | ![](img/06.png) |
 
 #### Changelog
+
+* `0.16.x`
+  * Added support to Workspaces;
+  * Added support to Environment Variables;
+  * Minor bug fixes;
 
 * `0.15.x`
   * Added support to Response Caching (RFC 7234);
