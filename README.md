@@ -1,4 +1,4 @@
-# Restler ![](https://img.shields.io/badge/version-0.16.15-green.svg)
+# Restler ![](https://img.shields.io/badge/version-0.16.17-green.svg)
 
 > Restler has been built with simplicity and ease of use in mind. It allows you send custom HTTP/HTTPS requests and test your REST API anywhere and anytime.
 
