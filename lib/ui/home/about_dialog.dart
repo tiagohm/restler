@@ -247,6 +247,14 @@ class _AboutTheAppDialogState extends State<AboutTheAppDialog>
                               ),
                               // Website.
                               ListTile(
+                                title: const Text('GitHub'),
+                                subtitle: const Text(gitHubUrl),
+                                onTap: () {
+                                  gitHubUrl.launchUri();
+                                },
+                              ),
+                              // Website.
+                              ListTile(
                                 title: Text(i18n.website),
                                 subtitle: const Text(appWebsite),
                                 onTap: () {

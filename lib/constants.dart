@@ -10,8 +10,8 @@ const issueUrl = 'https://github.com/tiagohm/restler/issues';
 const privacyPolicyUrl = 'https://restler.tiagohm.dev/privacy-policy.html';
 const playStoreUrl =
     'https://play.google.com/store/apps/details?id=br.tiagohm.restler';
-const translationsUrl =
-    'https://github.com/tiagohm/restler/tree/master/translations';
+const translationsUrl = 'https://github.com/tiagohm/restler/tree/github/i18n';
+const gitHubUrl = 'https://github.com/tiagohm/restler/';
 
 const v0_17_0 = '0.17.x';
 const v0_16_0 = '0.16.x';
