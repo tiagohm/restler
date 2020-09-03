@@ -1,0 +1,1 @@
+svg2flutter -i ./assets/icons/ -d ./lib/ -t ./assets/fonts -n "Mdi"

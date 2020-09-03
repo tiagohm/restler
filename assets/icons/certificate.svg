@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<svg
+        xmlns:svg="http://www.w3.org/2000/svg"
+        xmlns="http://www.w3.org/2000/svg"
+        version="1.1"
+        width="512"
+        height="512"
+        viewBox="0 0 512 512">
+    <path
+            d="M85 64Q68 64 55.5 76.5T43 107V320Q43 338 55.5 350.5T85 363H256V469L320 405L384 469V363H427Q444 363 456.5 350.5T469 320V107Q469 89 456.5 76.5T427 64H85zM256 107L320 149L384 107V181L448 213L384 245V320L320 277L256 320V245L192 213L256 181V107zM85 107H192V149H85V107zM85 192H149V235H85V192zM85 277H192V320H85V277z"
+            id="certificate" />
+</svg>

@@ -1,0 +1,58 @@
+name: restler
+description: A beautiful and powerful REST client app for Android.
+version: 0.17.5+76
+
+environment:
+  sdk: ">=2.8.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  uuid: 2.2.0
+  url_launcher: 5.5.2
+  sqflite: 1.3.1+1
+  file_picker: 1.13.3
+  flutter_typeahead: 1.8.8
+  datetime_picker_formfield: 1.0.0
+  path_provider: 1.6.14
+  permission_handler: 5.0.1+1
+  flutter_svg: 0.18.1
+  flutter_inapp_purchase: 2.2.0
+  hive: 1.4.4
+  badges: 1.1.1
+  kiwi: 2.0.0
+  flutter_bloc: 6.0.4
+  restio: 0.10.8
+  restio_cache: 0.1.2+1
+  flushbar: 1.10.4
+  yaml: 2.2.1
+  encrypt: 4.0.2
+  syntax_highlighter: 0.1.1
+  connectivity: 0.4.9+2
+  event_bus: 1.1.1
+  flutter_markdown: 0.4.4
+  rxdart: 0.24.1
+  sqler:
+    git:
+      url: git://github.com/tiagohm/sqler.git
+      ref: cae86d7b48038dd7ef967addb3fa1e9af2b1468b
+  fakedart:
+    git:
+      url: git://github.com/tiagohm/fakedart.git
+      ref: 4b8efa0aae70d87947d85958c4516f4f5f006740
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  tradutor: 0.9.0
+
+flutter:
+  uses-material-design: true
+  fonts:
+    - family: Mdi
+      fonts:
+        - asset: assets/fonts/Mdi.ttf
+  assets:
+    - assets/images/logo.svg

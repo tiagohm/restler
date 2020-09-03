@@ -1,0 +1,1 @@
+const searchTextDebounceTime = 500;

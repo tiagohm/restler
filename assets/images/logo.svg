@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<svg
+        width="512"
+        height="512"
+        version="1.1"
+        viewBox="0 0 135.47 135.47"
+        xmlns="http://www.w3.org/2000/svg">
+    <g stroke-width="0">
+        <path
+                transform="translate(0 -161.53)"
+                d="m27.261 226.71 79.112-35.547-54.523 53.721z"
+                fill="#ffa726"
+                stroke="#ffa726" />
+        <path
+                transform="translate(0 -161.53)"
+                d="m70.826 270.27 35.547-79.112-53.721 54.523z"
+                fill="#f57c00"
+                stroke="#f57c00" />
+    </g>
+</svg>

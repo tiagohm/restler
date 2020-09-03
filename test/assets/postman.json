@@ -1,0 +1,1164 @@
+{
+	"info": {
+		"_postman_id": "e5f7f9ab-9a62-4456-aacd-79c8d77ff8b6",
+		"name": "Restler",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "No Body",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://swapi.co/api/planets",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"planets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "File Body Is Empty",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "file",
+					"file": {}
+				},
+				"url": {
+					"raw": "https://swapi.co/api/planets",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"planets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "File Body With Image",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "file",
+					"file": {
+						"src": "/home/tiagohm/Imagens/me.jpg"
+					}
+				},
+				"url": {
+					"raw": "https://swapi.co/api/planets",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"planets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Text Body Is Empty",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://swapi.co/api/planets",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"planets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Text Body With Plain Text",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "I love Giovanna"
+				},
+				"url": {
+					"raw": "https://swapi.co/api/planets",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"planets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Text Body With XML Text",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<note>\n  <to>Giovanna</to>\n  <from>Tiago</from>\n  <heading>Reminder</heading>\n  <body>I love you!</body>\n</note>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://swapi.co/api/planets",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"planets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Text Body With JSON Text",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"to\": \"Giovanna\", \"from\": \"Tiago\", \"heading\":\"Reminder\",\"body\":\"I love you!\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://swapi.co/api/planets",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"planets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Text Body With HTML Text",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<html></html>",
+					"options": {
+						"raw": {
+							"language": "html"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://swapi.co/api/planets",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"planets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Text Body With Javascript Text",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "Console.log('I love Giovanna')",
+					"options": {
+						"raw": {
+							"language": "javascript"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://swapi.co/api/planets",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"planets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Form Body Is Empty",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "https://swapi.co/api/planets",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"planets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Form Body With Items",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "foo",
+							"value": "bar",
+							"type": "text"
+						},
+						{
+							"key": "",
+							"value": "bar",
+							"type": "text"
+						},
+						{
+							"key": "foo",
+							"value": "bar",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "foo",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://swapi.co/api/planets",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"planets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query Is Empty",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://swapi.co/api/planets",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"planets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query With Items",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://swapi.co/api/planets?foo=bar&=bar&foo",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"planets"
+					],
+					"query": [
+						{
+							"key": "foo",
+							"value": "bar"
+						},
+						{
+							"key": "",
+							"value": "bar"
+						},
+						{
+							"key": "foo",
+							"value": "bar",
+							"disabled": true
+						},
+						{
+							"key": "foo",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query From URL",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://swapi.co/api/planets?format=wookiee",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"planets"
+					],
+					"query": [
+						{
+							"key": "format",
+							"value": "wookiee"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Header Is Empty",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://swapi.co/api/planets",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"planets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Header With Items",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "foo",
+						"value": "bar",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "bar",
+						"type": "text"
+					},
+					{
+						"key": "foo",
+						"value": "bar",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "foo",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://swapi.co/api/planets",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"planets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Multipart Body Is Empty",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://swapi.co/api/planets",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"planets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Multipart Body With Text Items",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "foo",
+							"value": "bar",
+							"type": "text"
+						},
+						{
+							"key": "",
+							"value": "bar",
+							"type": "text"
+						},
+						{
+							"key": "foo",
+							"value": "bar",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "foo",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://swapi.co/api/planets",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"planets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Multipart Body With File Items",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "foo",
+							"type": "file",
+							"src": "/home/tiagohm/Imagens/me.jpg"
+						},
+						{
+							"key": "",
+							"type": "file",
+							"src": "/home/tiagohm/Imagens/me.jpg"
+						},
+						{
+							"key": "foo",
+							"type": "file",
+							"src": "/home/tiagohm/Imagens/me.jpg",
+							"disabled": true
+						},
+						{
+							"key": "foo",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "foo",
+							"type": "file",
+							"src": [
+								"/home/tiagohm/Imagens/download.jpeg",
+								"/home/tiagohm/Imagens/me.jpg"
+							]
+						}
+					]
+				},
+				"url": {
+					"raw": "https://swapi.co/api/planets",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"planets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Multipart Body With Text And File Items",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "foo",
+							"value": "bar",
+							"type": "text"
+						},
+						{
+							"key": "foo",
+							"type": "file",
+							"src": "/home/tiagohm/Imagens/me.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://swapi.co/api/planets",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"planets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "No Auth",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://swapi.co/api/planets",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"planets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Basic Auth",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "username",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://swapi.co/api/planets",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"planets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Digest Auth",
+			"request": {
+				"auth": {
+					"type": "digest",
+					"digest": [
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "username",
+							"type": "string"
+						},
+						{
+							"key": "algorithm",
+							"value": "MD5",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://swapi.co/api/planets",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"planets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Bearer Auth",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Giovanna",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://swapi.co/api/planets",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"planets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Header API Key Is Bearer Auth",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "123456789",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://swapi.co/api/planets",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"planets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query API Key",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "api_key",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "123456789",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://swapi.co/api/planets",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"planets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Hawk Auth SHA1",
+			"request": {
+				"auth": {
+					"type": "hawk",
+					"hawk": [
+						{
+							"key": "algorithm",
+							"value": "sha1",
+							"type": "string"
+						},
+						{
+							"key": "extraData",
+							"value": "ext",
+							"type": "string"
+						},
+						{
+							"key": "authKey",
+							"value": "key",
+							"type": "string"
+						},
+						{
+							"key": "authId",
+							"value": "id",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://swapi.co/api/planets",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"planets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Hawk Auth SHA256",
+			"request": {
+				"auth": {
+					"type": "hawk",
+					"hawk": [
+						{
+							"key": "algorithm",
+							"value": "sha256",
+							"type": "string"
+						},
+						{
+							"key": "extraData",
+							"value": "ext",
+							"type": "string"
+						},
+						{
+							"key": "authKey",
+							"value": "key",
+							"type": "string"
+						},
+						{
+							"key": "authId",
+							"value": "id",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://swapi.co/api/planets",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"planets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request Description",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://swapi.co/api/planets",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"planets"
+					]
+				},
+				"description": "This is a request description that supports **Markdown**!"
+			},
+			"response": []
+		},
+		{
+			"name": "Custom Method",
+			"request": {
+				"method": "GIOVANNA",
+				"header": [],
+				"url": {
+					"raw": "https://swapi.co/api/planets",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"planets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "URL Is Http",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://swapi.co/api/planets",
+					"protocol": "http",
+					"host": [
+						"swapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"planets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "URL Is Https",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://swapi.co/api/planets",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"planets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "URL Is An IPv4",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://104.31.76.248:443/api/planets",
+					"protocol": "https",
+					"host": [
+						"104",
+						"31",
+						"76",
+						"248"
+					],
+					"port": "443",
+					"path": [
+						"api",
+						"planets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "URL Is An IPv6",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://[2001:4860:4860::8888]:443",
+					"protocol": "https",
+					"host": [
+						"[2001:4860:4860::8888]"
+					],
+					"port": "443"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "URL Contains Encoded Chinese Chars",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://xn--nw2a.xn--j6w193g/",
+					"protocol": "http",
+					"host": [
+						"xn--nw2a",
+						"xn--j6w193g"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "URL Contains Chinese Chars",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://見.香港/",
+					"protocol": "http",
+					"host": [
+						"見",
+						"香港"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "URL Is Empty",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "URL Parts Are Variables",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{scheme}}://{{host}}:{{port}}/{{path}}?{{qn0}}={{qv0}}",
+					"protocol": "{{scheme}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"{{path}}"
+					],
+					"query": [
+						{
+							"key": "{{qn0}}",
+							"value": "{{qv0}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "URL Has No Scheme",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080",
+					"host": [
+						"localhost"
+					],
+					"port": "8080"
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<svg
+        xmlns:svg="http://www.w3.org/2000/svg"
+        xmlns="http://www.w3.org/2000/svg"
+        version="1.1"
+        width="512"
+        height="512"
+        viewBox="0 0 512 512">
+    <path
+            d="M160 119L107 149L137 96L107 43L160 73L213 43L183 96L213 149zM416 329L469 299L439 352L469 405L416 375L363 405L393 352L363 299zM469 43L439 96L469 149L416 119L363 149L393 96L363 43L416 73zM285 273L337 221L291 175L239 227zM307 156L356 205Q363 211 363 220T356 236L108 484Q101 491 92 491T77 484L28 435Q21 429 21 420T28 404L276 156Q283 149 292 149T307 156z"
+            id="auto-fix" />
+</svg>
