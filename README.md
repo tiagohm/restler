@@ -4,7 +4,7 @@
 
 #### Download
 
-[![](img/google-play.png)](https://play.google.com/store/apps/details?id=br.tiagohm.restler)
+[![](docs/img/google-play.png)](https://play.google.com/store/apps/details?id=br.tiagohm.restler)
 
 #### Features
 
