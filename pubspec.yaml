@@ -1,6 +1,6 @@
 name: restler
 description: A beautiful and powerful REST client app for Android.
-version: 0.17.5+76
+version: 0.17.6+77
 
 environment:
   sdk: ">=2.8.0 <3.0.0"

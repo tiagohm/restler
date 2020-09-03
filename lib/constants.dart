@@ -3,7 +3,7 @@ const databaseName = 'restler.db';
 const databaseVersion = 12;
 
 // APP.
-const appVersion = '0.17.5';
+const appVersion = '0.17.6';
 const authorEmail = 'tiago.henrique.cco@gmail.com';
 const appWebsite = 'https://restler.tiagohm.dev';
 const issueUrl = 'https://github.com/tiagohm/restler/issues';
@@ -33,6 +33,7 @@ const v0_1_0 = '0.1.x';
 
 const changelog = <String, List<String>>{
   v0_17_0: [
+    'Now, the app is open source!!! 🎉',
     'Added option to keep equal sign for empty query',
     'Added Connection pool (HTTP session) support',
     'Added Simplified Chinese translation (Thanks @joytou)',
