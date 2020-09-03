@@ -34,8 +34,8 @@
 
 |                 |                 |                 |
 | --------------- | --------------- | --------------- |
-| ![](img/01.png) | ![](img/02.png) | ![](img/03.png) |
-| ![](img/04.png) | ![](img/05.png) | ![](img/06.png) |
+| ![](docs/img/01.png) | ![](docs/img/02.png) | ![](docs/img/03.png) |
+| ![](docs/img/04.png) | ![](docs/img/05.png) | ![](docs/img/06.png) |
 
 #### Changelog
 * `0.17.x`
