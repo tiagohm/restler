@@ -192,10 +192,10 @@ class _InsomniaBodyState extends State<_InsomniaBody>
   }
 
   void _onChooseFile() async {
-    final path = await FilePicker.getFilePath();
+    final res = await FilePicker.platform.pickFiles();
 
-    if (path != null) {
-      widget.filepathOrUrl.text = path;
+    if (res != null && res.files.isNotEmpty) {
+      widget.filepathOrUrl.text = res.paths[0];
     }
   }
 }
@@ -242,10 +242,10 @@ class _PostmanBodyState extends State<_PostmanBody>
   }
 
   void _onChooseFile() async {
-    final path = await FilePicker.getFilePath();
+    final res = await FilePicker.platform.pickFiles();
 
-    if (path != null) {
-      widget.filepathOrUrl.text = path;
+    if (res != null && res.files.isNotEmpty) {
+      widget.filepathOrUrl.text = res.paths[0];
     }
   }
 }
@@ -315,10 +315,10 @@ class _RestlerBodyState extends State<_RestlerBody>
   }
 
   void _onChooseFile() async {
-    final path = await FilePicker.getFilePath();
+    final res = await FilePicker.platform.pickFiles();
 
-    if (path != null) {
-      widget.filepathOrUrl.text = path;
+    if (res != null && res.files.isNotEmpty) {
+      widget.filepathOrUrl.text = res.paths[0];
     }
   }
 }

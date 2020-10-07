@@ -182,18 +182,18 @@ class CreateOrEditCertificateState extends State<CreateEditCertificateDialog>
   }
 
   Future<void> _onChooseCrt() async {
-    final path = await FilePicker.getFilePath();
+    final res = await FilePicker.platform.pickFiles();
 
-    if (path != null) {
-      _crtTextController.text = path;
+    if (res != null && res.files.isNotEmpty) {
+      _crtTextController.text = res.paths[0];
     }
   }
 
   Future<void> _onChooseKey() async {
-    final path = await FilePicker.getFilePath();
+    final res = await FilePicker.platform.pickFiles();
 
-    if (path != null) {
-      _keyTextController.text = path;
+    if (res != null && res.files.isNotEmpty) {
+      _keyTextController.text = res.paths[0];
     }
   }
 }

@@ -137,7 +137,7 @@ class _CollectionPageState extends State<CollectionPage>
 
             if (!res.cancelled && res.data != null) {
               if (await handlePermission(Permission.storage)) {
-                final path = await FilePicker.getDirectoryPath();
+                final path = await FilePicker.platform.getDirectoryPath();
 
                 if (path != null) {
                   _bloc.add(CollectionExported(res.data, path));

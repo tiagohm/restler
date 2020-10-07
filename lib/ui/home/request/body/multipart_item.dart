@@ -242,9 +242,10 @@ class _MultipartItemState extends State<MultipartItem>
 
   Future<void> _onChooseFile() async {
     try {
-      final path = await FilePicker.getFilePath();
+      final res = await FilePicker.platform.pickFiles();
 
-      if (path != null && path.isNotEmpty) {
+      if (res != null && res.files.isNotEmpty) {
+        final path = res.paths[0];
         final name = path.split('/').last;
         final file = MultipartFileEntity(path: path, name: name);
         _file.value = file;

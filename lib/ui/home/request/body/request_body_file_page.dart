@@ -93,10 +93,10 @@ class RequestBodyFilePage extends StatelessWidget {
 
   Future<void> _onChoose() async {
     try {
-      final path = await FilePicker.getFilePath();
+      final res = await FilePicker.platform.pickFiles();
 
-      if (path != null && path.isNotEmpty) {
-        onFileChoosed?.call(path);
+      if (res != null && res.files.isNotEmpty) {
+        onFileChoosed?.call(res.paths[0]);
       }
     } on Exception catch (e) {
       print('Error while picking the file: $e');

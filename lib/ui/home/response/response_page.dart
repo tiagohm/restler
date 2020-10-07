@@ -257,7 +257,7 @@ class _ResponsePageState extends State<ResponsePage>
 
           // O usuário escolheu um nome (não cancelou a janela).
           if (!res.cancelled) {
-            final path = await FilePicker.getDirectoryPath();
+            final path = await FilePicker.platform.getDirectoryPath();
 
             if (path != null) {
               widget.bloc.add(ResponseBodySavedAsFile(res.data, path));
