@@ -60,6 +60,7 @@ class _DnsPageState extends State<DnsPage> with StateMixin<DnsPage> {
                   _bloc.add(SearchTextChanged(text));
                 },
                 hintText: i18n.search,
+                underlined: true,
               );
             }
             // Title.

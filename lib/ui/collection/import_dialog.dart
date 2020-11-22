@@ -178,6 +178,7 @@ class _InsomniaBodyState extends State<_InsomniaBody>
           child: PowerfulTextField(
             controller: widget.filepathOrUrl,
             hintText: i18n.filepathOrUrl,
+            underlined: true,
           ),
         ),
         // Choose.
@@ -228,6 +229,7 @@ class _PostmanBodyState extends State<_PostmanBody>
           child: PowerfulTextField(
             controller: widget.filepathOrUrl,
             hintText: i18n.filepathOrUrl,
+            underlined: true,
           ),
         ),
         // Choose.
@@ -282,6 +284,7 @@ class _RestlerBodyState extends State<_RestlerBody>
           child: PowerfulTextField(
             controller: widget.filepathOrUrl,
             hintText: i18n.filepathOrUrl,
+            underlined: true,
           ),
         ),
         // Choose.

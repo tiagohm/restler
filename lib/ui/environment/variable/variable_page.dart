@@ -66,6 +66,7 @@ class _VariablePageState extends State<VariablePage>
                   _bloc.add(SearchTextChanged(text));
                 },
                 hintText: i18n.search,
+                underlined: true,
               );
             }
             // Title.

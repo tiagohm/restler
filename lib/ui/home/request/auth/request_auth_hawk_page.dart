@@ -70,9 +70,7 @@ class _RequestAuthHawkState extends State<RequestAuthHawkPage>
           ListTile(
             title: PowerfulTextField(
               controller: _idController,
-              decoration: InputDecoration(
-                labelText: i18n.id,
-              ),
+              hintText: i18n.id,
               style: defaultInputTextStyle,
               onChanged: widget.onIdChanged,
               suggestionsCallback: variableSuggestions,
@@ -82,11 +80,19 @@ class _RequestAuthHawkState extends State<RequestAuthHawkPage>
           ListTile(
             title: PowerfulTextField(
               controller: _keyController,
-              decoration: InputDecoration(
-                labelText: i18n.key,
-              ),
+              hintText: i18n.key,
               style: defaultInputTextStyle,
               onChanged: widget.onKeyChanged,
+              suggestionsCallback: variableSuggestions,
+            ),
+          ),
+          // Ext.
+          ListTile(
+            title: PowerfulTextField(
+              controller: _extController,
+              hintText: i18n.ext,
+              style: defaultInputTextStyle,
+              onChanged: widget.onExtChanged,
               suggestionsCallback: variableSuggestions,
             ),
           ),
@@ -116,18 +122,6 @@ class _RequestAuthHawkState extends State<RequestAuthHawkPage>
                 widget.onAlgorithmChanged?.call(algorithm);
                 _algorithmController.text = _obtainHawkAlgorithmName(algorithm);
               },
-            ),
-          ),
-          // Ext.
-          ListTile(
-            title: PowerfulTextField(
-              controller: _extController,
-              decoration: InputDecoration(
-                labelText: i18n.ext,
-              ),
-              style: defaultInputTextStyle,
-              onChanged: widget.onExtChanged,
-              suggestionsCallback: variableSuggestions,
             ),
           ),
         ],

@@ -62,6 +62,7 @@ class _CertificatePageState extends State<CertificatePage>
                   _bloc.add(SearchTextChanged(text));
                 },
                 hintText: i18n.search,
+                underlined: true,
               );
             }
             // Title.

@@ -73,135 +73,128 @@ class _MultipartItemState extends State<MultipartItem>
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4),
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 1),
-        child: ListTile(
-          contentPadding: const EdgeInsets.all(0),
-          // Enable.
-          leading: Checkbox(
-            value: widget.item.enabled,
-            onChanged: (checked) {
-              widget.onEnabled?.call(checked);
-              widget.onItemChanged
-                  ?.call(widget.item.copyWith(enabled: checked));
-            },
-          ),
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Name.
-              Expanded(
-                flex: 50,
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: PowerfulTextField(
-                    controller: _nameTextController,
-                    style: defaultInputTextStyle,
-                    decoration: InputDecoration(
-                      labelText: i18n.name.toLowerCase(),
-                    ),
-                    onChanged: (text) {
-                      widget.onNameChanged?.call(text);
-                      widget.onItemChanged
-                          ?.call(widget.item.copyWith(name: text));
-                    },
-                    suggestionsCallback: variableSuggestions,
-                    showDefaultItems: false,
-                  ),
-                ),
-              ),
-              // Value.
-              Expanded(
-                flex: 50,
-                child: ValueListenableBuilder(
-                  valueListenable: _type,
-                  builder: (context, type, child) {
-                    if (type == MultipartType.text) {
-                      return PowerfulTextField(
-                        controller: _valueTextController,
-                        // TODO: Suportar futuramente multiline exibindo num dialog.
-                        keyboardType: TextInputType.text,
-                        style: defaultInputTextStyle,
-                        decoration: InputDecoration(
-                          labelText: i18n.value.toLowerCase(),
-                        ),
-                        onChanged: (text) {
-                          widget.onValueChanged?.call(text);
-                          widget.onItemChanged
-                              ?.call(widget.item.copyWith(value: text));
-                        },
-                        suggestionsCallback: variableSuggestions,
-                        showDefaultItems: false,
-                      );
-                    } else {
-                      // Choose file...
-                      return FlatButton(
-                        color: Theme.of(context).indicatorColor,
-                        onPressed: _onChooseFile,
-                        child: ValueListenableBuilder<MultipartFileEntity>(
-                          valueListenable: _file,
-                          builder: (context, file, child) {
-                            return Text(
-                              file?.path?.isNotEmpty == true
-                                  ? file.path
-                                  : i18n.choose,
-                              overflow: TextOverflow.ellipsis,
-                            );
-                          },
-                        ),
-                      );
-                    }
+      padding: const EdgeInsets.only(top: 8),
+      child: ListTile(
+        contentPadding: EdgeInsets.zero,
+        visualDensity: const VisualDensity(horizontal: -4),
+        // Enable.
+        leading: Checkbox(
+          value: widget.item.enabled,
+          onChanged: (checked) {
+            widget.onEnabled?.call(checked);
+            widget.onItemChanged?.call(widget.item.copyWith(enabled: checked));
+          },
+        ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Name.
+            Expanded(
+              flex: 50,
+              child: Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: PowerfulTextField(
+                  controller: _nameTextController,
+                  style: defaultInputTextStyle,
+                  hintText: i18n.name.toLowerCase(),
+                  onChanged: (text) {
+                    widget.onNameChanged?.call(text);
+                    widget.onItemChanged
+                        ?.call(widget.item.copyWith(name: text));
                   },
+                  suggestionsCallback: variableSuggestions,
+                  showDefaultItems: false,
                 ),
               ),
-            ],
-          ),
-          trailing: ValueListenableBuilder(
-            valueListenable: _type,
-            builder: (context, type, child) {
-              // Menu.
-              return DotMenuButton<MultipartItemAction>(
-                items: _obtainActionsByType(type),
-                itemBuilder: (context, index, action) {
-                  switch (action) {
-                    // Text.
-                    case MultipartItemAction.text:
-                      return ListTile(
-                        leading: const Icon(Mdi.text),
-                        title: Text(i18n.text),
-                      );
-                    // File.
-                    case MultipartItemAction.file:
-                      return ListTile(
-                        leading: const Icon(Mdi.file),
-                        title: Text(i18n.file),
-                      );
-                    case MultipartItemAction.remove:
-                      return ListTile(
-                        leading: const Icon(Icons.clear),
-                        title: Text(i18n.clear),
-                      );
-                    // Duplicate.
-                    case MultipartItemAction.duplicate:
-                      return ListTile(
-                        leading: const Icon(Icons.content_copy),
-                        title: Text(i18n.duplicate),
-                      );
-                    // Delete.
-                    case MultipartItemAction.delete:
-                      return ListTile(
-                        leading: const Icon(Icons.delete),
-                        title: Text(i18n.delete),
-                      );
-                    default:
-                      return null;
+            ),
+            // Value.
+            Expanded(
+              flex: 50,
+              child: ValueListenableBuilder(
+                valueListenable: _type,
+                builder: (context, type, child) {
+                  if (type == MultipartType.text) {
+                    return PowerfulTextField(
+                      controller: _valueTextController,
+                      // TODO: Suportar futuramente multiline exibindo num dialog.
+                      keyboardType: TextInputType.text,
+                      style: defaultInputTextStyle,
+                      hintText: i18n.value.toLowerCase(),
+                      onChanged: (text) {
+                        widget.onValueChanged?.call(text);
+                        widget.onItemChanged
+                            ?.call(widget.item.copyWith(value: text));
+                      },
+                      suggestionsCallback: variableSuggestions,
+                      showDefaultItems: false,
+                    );
+                  } else {
+                    // Choose file...
+                    return FlatButton(
+                      color: Theme.of(context).indicatorColor,
+                      onPressed: _onChooseFile,
+                      child: ValueListenableBuilder<MultipartFileEntity>(
+                        valueListenable: _file,
+                        builder: (context, file, child) {
+                          return Text(
+                            file?.path?.isNotEmpty == true
+                                ? file.path
+                                : i18n.choose,
+                            overflow: TextOverflow.ellipsis,
+                          );
+                        },
+                      ),
+                    );
                   }
                 },
-                onSelected: _onActionSelected,
-              );
-            },
-          ),
+              ),
+            ),
+          ],
+        ),
+        trailing: ValueListenableBuilder(
+          valueListenable: _type,
+          builder: (context, type, child) {
+            // Menu.
+            return DotMenuButton<MultipartItemAction>(
+              items: _obtainActionsByType(type),
+              itemBuilder: (context, index, action) {
+                switch (action) {
+                  // Text.
+                  case MultipartItemAction.text:
+                    return ListTile(
+                      leading: const Icon(Mdi.text),
+                      title: Text(i18n.text),
+                    );
+                  // File.
+                  case MultipartItemAction.file:
+                    return ListTile(
+                      leading: const Icon(Mdi.file),
+                      title: Text(i18n.file),
+                    );
+                  case MultipartItemAction.remove:
+                    return ListTile(
+                      leading: const Icon(Icons.clear),
+                      title: Text(i18n.clear),
+                    );
+                  // Duplicate.
+                  case MultipartItemAction.duplicate:
+                    return ListTile(
+                      leading: const Icon(Icons.content_copy),
+                      title: Text(i18n.duplicate),
+                    );
+                  // Delete.
+                  case MultipartItemAction.delete:
+                    return ListTile(
+                      leading: const Icon(Icons.delete),
+                      title: Text(i18n.delete),
+                    );
+                  default:
+                    return null;
+                }
+              },
+              onSelected: _onActionSelected,
+            );
+          },
         ),
       ),
     );

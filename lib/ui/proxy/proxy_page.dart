@@ -61,6 +61,7 @@ class _ProxyPageState extends State<ProxyPage> with StateMixin<ProxyPage> {
                   _bloc.add(SearchTextChanged(text));
                 },
                 hintText: i18n.search,
+                underlined: true,
               );
             }
             // Title.

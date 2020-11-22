@@ -72,6 +72,7 @@ class _WebSocketState extends State<WebSocketPage>
                   _bloc.add(SearchTextChanged(text));
                 },
                 hintText: i18n.search,
+                underlined: true,
               );
             }
             // Title.
@@ -157,7 +158,10 @@ class _WebSocketState extends State<WebSocketPage>
                             onChanged: (text) {
                               _bloc.add(UriChanged(text));
                             },
-                            hintText: 'URL',
+                            decoration: const InputDecoration(
+                              border: InputBorder.none,
+                              labelText: 'URL',
+                            ),
                           ),
                         ),
                       ],

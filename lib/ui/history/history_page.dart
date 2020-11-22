@@ -61,6 +61,7 @@ class _HistoryPageState extends State<HistoryPage>
                   _bloc.add(SearchTextChanged(text));
                 },
                 hintText: i18n.search,
+                underlined: true,
               );
             }
             // Title.

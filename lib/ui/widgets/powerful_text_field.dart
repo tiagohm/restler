@@ -122,6 +122,8 @@ class PowerfulTextField<T> extends StatefulWidget {
   final double suggestionsBoxVerticalOffset;
   final bool getImmediateSuggestions;
 
+  final bool underlined;
+
   const PowerfulTextField({
     Key key,
     this.inputKey,
@@ -186,6 +188,7 @@ class PowerfulTextField<T> extends StatefulWidget {
     this.animationDuration = const Duration(milliseconds: 500),
     this.getImmediateSuggestions = true,
     this.suggestionsBoxVerticalOffset = 4.0,
+    this.underlined = false,
   })  : smartDashesType = smartDashesType ??
             (obscureText ? SmartDashesType.disabled : SmartDashesType.enabled),
         smartQuotesType = smartQuotesType ??
@@ -255,8 +258,20 @@ class PowerfulTextFieldState<T> extends State<PowerfulTextField> with StateMixin
                   controller: widget.controller,
                   focusNode: _focusNode,
                   decoration: widget.hintText != null ? InputDecoration(
-                    border: InputBorder.none,
+                    border: widget.underlined ? InputBorder.none : const OutlineInputBorder(),
+                    enabledBorder: widget.underlined ? null : const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    filled: !widget.underlined,
+                    fillColor: Theme.of(context).brightness == Brightness.dark ?
+                     Colors.white.withOpacity(0.05) :
+                     Colors.grey[100],
                     labelText: widget.hintText,
+                    labelStyle: TextStyle(
+                      color: Theme.of(context).indicatorColor.withOpacity(0.4),
+                    ),
                     contentPadding: const EdgeInsets.only(left: 8, top: 4, bottom: 4),
                   ) : widget.decoration,
                   keyboardType: widget.keyboardType,
