@@ -1,12 +1,15 @@
 import 'package:restio/restio.dart';
+import 'package:restler/data/entities/data_entity.dart';
 import 'package:restler/data/entities/form_entity.dart';
 import 'package:restler/data/entities/header_entity.dart';
 import 'package:restler/data/entities/multipart_entity.dart';
+import 'package:restler/data/entities/notification_entity.dart';
 import 'package:restler/data/entities/query_entity.dart';
 import 'package:restler/data/entities/request_auth_entity.dart';
 import 'package:restler/data/entities/request_body_entity.dart';
 import 'package:restler/data/entities/request_entity.dart';
 import 'package:restler/data/entities/request_settings_entity.dart';
+import 'package:restler/data/entities/target_entity.dart';
 
 abstract class RequestEvent {}
 
@@ -17,6 +20,12 @@ class RequestLoaded extends RequestEvent {
 }
 
 class RequestCleared extends RequestEvent {}
+
+class TypeChanged extends RequestEvent {
+  final String type;
+
+  TypeChanged(this.type);
+}
 
 class MethodChanged extends RequestEvent {
   final String method;
@@ -50,6 +59,22 @@ class BodyEnabled extends RequestEvent {
   });
 }
 
+class DataEnabled extends RequestEvent {
+  final bool enabled;
+
+  DataEnabled({
+    this.enabled,
+  });
+}
+
+class NotificationEnabled extends RequestEvent {
+  final bool enabled;
+
+  NotificationEnabled({
+    this.enabled,
+  });
+}
+
 class QueryEnabled extends RequestEvent {
   final bool enabled;
 
@@ -65,6 +90,8 @@ class HeaderEnabled extends RequestEvent {
     this.enabled,
   });
 }
+
+// Body.
 
 class BodyTypeChanged extends RequestEvent {
   final RequestBodyType type;
@@ -132,6 +159,74 @@ class FileChoosed extends RequestEvent {
 
 class FileRemoved extends RequestEvent {}
 
+// Target.
+
+class TargetAdded extends RequestEvent {}
+
+class TargetEdited extends RequestEvent {
+  final TargetEntity target;
+
+  TargetEdited(this.target);
+}
+
+class TargetDeleted extends RequestEvent {
+  final TargetEntity target;
+
+  TargetDeleted(this.target);
+}
+
+class TargetDuplicated extends RequestEvent {
+  final TargetEntity target;
+
+  TargetDuplicated(this.target);
+}
+
+// Data.
+
+class DataAdded extends RequestEvent {}
+
+class DataEdited extends RequestEvent {
+  final DataEntity data;
+
+  DataEdited(this.data);
+}
+
+class DataDeleted extends RequestEvent {
+  final DataEntity data;
+
+  DataDeleted(this.data);
+}
+
+class DataDuplicated extends RequestEvent {
+  final DataEntity data;
+
+  DataDuplicated(this.data);
+}
+
+// Notification.
+
+class NotificationAdded extends RequestEvent {}
+
+class NotificationEdited extends RequestEvent {
+  final NotificationEntity notification;
+
+  NotificationEdited(this.notification);
+}
+
+class NotificationDeleted extends RequestEvent {
+  final NotificationEntity notification;
+
+  NotificationDeleted(this.notification);
+}
+
+class NotificationDuplicated extends RequestEvent {
+  final NotificationEntity notification;
+
+  NotificationDuplicated(this.notification);
+}
+
+// Query.
+
 class QueryAdded extends RequestEvent {}
 
 class QueryEdited extends RequestEvent {
@@ -151,6 +246,8 @@ class QueryDuplicated extends RequestEvent {
 
   QueryDuplicated(this.query);
 }
+
+// Header.
 
 class HeaderAdded extends RequestEvent {}
 

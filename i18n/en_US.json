@@ -217,6 +217,7 @@
     "tab": "Tab",
     "tagCantBeResolved": "The tag can't be resolved: {tag}",
     "tagHasWrongParameter": "The tag '{tag}' has wrong parameters",
+    "targets": "Targets",
     "text": "Text",
     "time": "Time",
     "timeline": "Timeline",

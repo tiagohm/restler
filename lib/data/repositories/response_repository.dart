@@ -6,8 +6,7 @@ class ResponseRepository {
 
   ResponseRepository(this.responseProvider);
 
-  Future<ResponseEntity> get(
-    String uid) async {
+  Future<ResponseEntity> get(String uid) async {
     if (uid == null) return null;
     final res = await responseProvider.get(uid);
     return res != null && res.isNotEmpty

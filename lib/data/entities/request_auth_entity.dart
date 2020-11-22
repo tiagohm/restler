@@ -91,7 +91,7 @@ class RequestAuthEntity extends Equatable {
         );
 
   factory RequestAuthEntity.fromJson(Map<String, dynamic> json) {
-    if (json == null) {
+    if (json == null || json.isEmpty) {
       return empty;
     } else {
       return RequestAuthEntity(

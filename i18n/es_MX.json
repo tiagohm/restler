@@ -217,6 +217,7 @@
     "tab": "Pestaña",
     "tagCantBeResolved": null,
     "tagHasWrongParameter": null,
+    "targets": null,
     "text": null,
     "time": null,
     "timeline": null,

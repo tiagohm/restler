@@ -217,6 +217,7 @@
     "tab": "标签",
     "tagCantBeResolved": "无法解析此标记：{tag}",
     "tagHasWrongParameter": "标记'{tag}'存在错误参数",
+    "targets": null,
     "text": "文本",
     "time": "用时",
     "timeline": "时间线",

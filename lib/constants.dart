@@ -1,6 +1,6 @@
 // Database.
 const databaseName = 'restler.db';
-const databaseVersion = 12;
+const databaseVersion = 13;
 
 // APP.
 const appVersion = '0.17.6';

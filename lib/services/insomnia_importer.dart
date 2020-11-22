@@ -133,10 +133,12 @@ class InsomniaImporter extends Importer {
       folders: sortFolders(folders),
       requests: requests,
       workspaces: [
-        for (final item in _workspaces.values) if (item.uid != null) item,
+        for (final item in _workspaces.values)
+          if (item.uid != null) item,
       ],
       environments: [
-        for (final item in _environments.values) if (item.uid != null) item,
+        for (final item in _environments.values)
+          if (item.uid != null) item,
       ],
       variables: variables,
     );

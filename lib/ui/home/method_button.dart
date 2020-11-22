@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:restler/ui/widgets/context_menu_button.dart';
+import 'package:restler/ui/widgets/item_menu_button.dart';
 
-class MethodButton extends ContextMenuButton<String> {
+class MethodButton extends ItemMenuButton {
   MethodButton({
     String initialValue,
     PopupMenuItemSelected<String> onChanged,
@@ -17,20 +18,6 @@ class MethodButton extends ContextMenuButton<String> {
             'OPTIONS',
             'CUSTOM',
           ],
-          itemBuilder: (context, index, item) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: index == -1
-                  ? Text(
-                      item,
-                      style: TextStyle(
-                        color: Theme.of(context).indicatorColor,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    )
-                  : Text(item),
-            );
-          },
           onChanged: onChanged,
         );
 }
