@@ -25,9 +25,13 @@ class FolderItem extends StatelessWidget {
           if (!item.isRoot)
             Text(
               '${item.parent?.path(i18n.root) ?? i18n.root} /',
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 9,
-                color: Colors.grey,
+                color: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .color
+                    .withOpacity(0.8),
               ),
               overflow: TextOverflow.ellipsis,
             ),
@@ -35,8 +39,9 @@ class FolderItem extends StatelessWidget {
           Text(
             item.name ?? i18n.root,
             overflow: TextOverflow.ellipsis,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 14,
+              color: Theme.of(context).textTheme.bodyText1.color,
             ),
           ),
         ],
