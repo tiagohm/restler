@@ -68,36 +68,33 @@ class _DescriptionDialogState extends State<DescriptionDialog>
         },
       ),
       bodyBuilder: (context) {
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            // Body.
-            ValueListenableBuilder(
-              valueListenable: _edit,
-              builder: (context, value, child) {
-                return value
-                    ? Flexible(
-                        child: TextField(
-                          controller: _textController,
-                          keyboardType: TextInputType.multiline,
-                          textInputAction: TextInputAction.newline,
-                          autocorrect: false,
-                          maxLines: null,
-                          buildCounter: _charCounter,
-                          decoration: InputDecoration(
-                            hintText: i18n.enterTextHere,
-                          ),
-                          style: defaultInputTextStyle,
-                        ),
-                      )
-                    : Markdown(
-                        data: _textController.value.text,
-                        shrinkWrap: true,
-                        onTapLink: (text, href, title) => launch(href),
-                      );
-              },
-            ),
-          ],
+        return ValueListenableBuilder(
+          valueListenable: _edit,
+          builder: (context, value, child) {
+            return value
+                ? TextField(
+                    controller: _textController,
+                    keyboardType: TextInputType.multiline,
+                    textInputAction: TextInputAction.newline,
+                    autocorrect: false,
+                    maxLines: null,
+                    minLines: 13,
+                    buildCounter: _charCounter,
+                    decoration: InputDecoration(
+                      hintText: i18n.enterTextHere,
+                    ),
+                    style: defaultInputTextStyle,
+                  )
+                : SizedBox(
+                    width: 0,
+                    height: MediaQuery.of(context).size.height / 3.94,
+                    child: Markdown(
+                      data: _textController.value.text,
+                      shrinkWrap: true,
+                      onTapLink: (text, href, title) => launch(href),
+                    ),
+                  );
+          },
         );
       },
     );
