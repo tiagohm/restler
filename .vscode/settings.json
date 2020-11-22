@@ -6,5 +6,12 @@
         "**/android/**": true,
         "**/ios/**": true,
         "**/build/**": true,
+    },
+    "files.exclude": {
+        "**/.dart_tool": true,
+        "**/.flutter-plugins": true,
+        "**/.flutter-plugins-dependencies": true,
+        "**/.packages": true,
+        "build": true
     }
 }
