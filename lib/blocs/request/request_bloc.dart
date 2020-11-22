@@ -537,7 +537,6 @@ class RequestBloc extends Bloc<RequestEvent, RequestState>
     VariableResolverCallback callback,
   ) {
     final headers = HeadersBuilder();
-    headers.add('Content-Type', 'application/json');
     headers.add('Authorization', 'key=${request.url}');
     return headers.build();
   }
@@ -628,6 +627,36 @@ class RequestBloc extends Bloc<RequestEvent, RequestState>
           data['notification'][key] = value;
         }
       }
+    }
+
+    String to, condition;
+    final ids = <String>[];
+
+    for (final item in request.target.targets) {
+      if (item.isValid) {
+        final key = callback(item.name);
+        final value = callback(item.value);
+
+        if (key == 'to') {
+          to = value;
+        } else if (key == 'registration_id') {
+          ids.add(value);
+        } else if (key == 'condition') {
+          condition = value;
+        }
+      }
+    }
+
+    if (to != null && to.isNotEmpty) {
+      data['to'] = to;
+    }
+
+    if (condition != null && condition.isNotEmpty) {
+      data['condition'] = condition;
+    }
+
+    if (ids.isNotEmpty) {
+      data['registration_ids'] = ids;
     }
 
     return RequestBody.json(data);

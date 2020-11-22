@@ -272,6 +272,7 @@ class _HomePageState extends State<HomePage>
                   final res = await RequestSettingsDialog.show(
                     context,
                     request.settings,
+                    isRest: _isRest,
                   );
 
                   if (res != null && !res.cancelled && res.data != null) {
