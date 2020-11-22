@@ -139,7 +139,7 @@ class _VariablePageState extends State<VariablePage>
                       item,
                     );
 
-                    if (!res.cancelled && res.data != null) {
+                    if (res != null && !res.cancelled && res.data != null) {
                       _bloc.add(VariableEdited(
                         item.copyWith(
                           name: res.data[0],
@@ -168,7 +168,7 @@ class _VariablePageState extends State<VariablePage>
             onAdded: () async {
               final res = await CreateEditVariableDialog.show(context, null);
 
-              if (!res.cancelled && res.data != null) {
+              if (res != null && !res.cancelled && res.data != null) {
                 _bloc.add(VariableCreated(
                   res.data[0],
                   res.data[1],

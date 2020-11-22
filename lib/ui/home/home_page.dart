@@ -151,7 +151,7 @@ class _HomePageState extends State<HomePage>
                     i18n.tab,
                   );
 
-                  if (!res.cancelled) {
+                  if (res != null && !res.cancelled) {
                     _dispatch(TabRenamed(res.data));
                   }
                 } else if (action == HomeTabAction.close) {
@@ -236,7 +236,7 @@ class _HomePageState extends State<HomePage>
                     i18n.newTab,
                   );
 
-                  if (!res.cancelled) {
+                  if (res != null && !res.cancelled) {
                     _open(res.data);
                   }
                   break;
@@ -256,7 +256,8 @@ class _HomePageState extends State<HomePage>
                     _tabBloc.state.currentTab.name,
                   );
 
-                  if (!res.cancelled &&
+                  if (res != null &&
+                      !res.cancelled &&
                       res.data != null &&
                       res.data.length == 2) {
                     _dispatch(TabSavedAs(res.data[0], res.data[1]));
@@ -271,7 +272,7 @@ class _HomePageState extends State<HomePage>
                     request.settings,
                   );
 
-                  if (!res.cancelled && res.data != null) {
+                  if (res != null && !res.cancelled && res.data != null) {
                     _dispatch(RequestSettingsEdited(res.data));
                   }
                   break;
@@ -320,7 +321,8 @@ class _HomePageState extends State<HomePage>
                                             uppercase: true,
                                           );
 
-                                          if (!res.cancelled &&
+                                          if (res != null &&
+                                              !res.cancelled &&
                                               res.data != null) {
                                             _dispatch(MethodChanged(res.data));
                                           }
@@ -356,7 +358,7 @@ class _HomePageState extends State<HomePage>
                                   _requestBloc.state.request.description,
                                 );
 
-                                if (!res.cancelled) {
+                                if (res != null && !res.cancelled) {
                                   _dispatch(DescriptionChanged(res.data));
                                 }
                               },

@@ -138,7 +138,7 @@ class _CertificatePageState extends State<CertificatePage>
                     final res =
                         await CreateEditCertificateDialog.show(context, item);
 
-                    if (!res.cancelled && res.data != null) {
+                    if (res != null && !res.cancelled && res.data != null) {
                       _bloc.add(CertificateEdited(res.data));
                     }
                   }
@@ -154,7 +154,7 @@ class _CertificatePageState extends State<CertificatePage>
                       i18n.moveCertificate,
                     );
 
-                    if (!res.cancelled && res.data != null) {
+                    if (res != null && !res.cancelled && res.data != null) {
                       _bloc.add(CertificateMoved(item, res.data));
                     }
                   }
@@ -166,7 +166,7 @@ class _CertificatePageState extends State<CertificatePage>
                       i18n.copyCertificate,
                     );
 
-                    if (!res.cancelled && res.data != null) {
+                    if (res != null && !res.cancelled && res.data != null) {
                       _bloc.add(CertificateCopied(item, res.data));
                     }
                   }
@@ -185,7 +185,7 @@ class _CertificatePageState extends State<CertificatePage>
             onAdded: () async {
               final res = await CreateEditCertificateDialog.show(context, null);
 
-              if (!res.cancelled && res.data != null) {
+              if (res != null && !res.cancelled && res.data != null) {
                 _bloc.add(CertificateCreated(res.data));
               }
             },

@@ -120,7 +120,7 @@ class _HomeDrawerState extends State<HomeDrawer> with StateMixin<HomeDrawer> {
                             i18n.newWorkspace,
                           );
 
-                          if (!res.cancelled) {
+                          if (res != null && !res.cancelled) {
                             _workspaceBloc.add(WorkspaceCreated(res.data));
                           }
                         }
@@ -137,7 +137,7 @@ class _HomeDrawerState extends State<HomeDrawer> with StateMixin<HomeDrawer> {
                               i18n.editWorkspace,
                             );
 
-                            if (!res.cancelled) {
+                            if (res != null && !res.cancelled) {
                               _workspaceBloc.add(WorkspaceEdited(res.data));
                             }
                           } else {
@@ -467,7 +467,10 @@ class _HomeDrawerState extends State<HomeDrawer> with StateMixin<HomeDrawer> {
                   onTap: () async {
                     final res = await DonationDialog.show(context);
 
-                    if (!res.cancelled && res.data != null && res.data) {
+                    if (res != null &&
+                        !res.cancelled &&
+                        res.data != null &&
+                        res.data) {
                       _messager.show((i18n) => i18n.donateThankYou);
                     }
                   },

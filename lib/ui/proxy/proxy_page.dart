@@ -136,7 +136,7 @@ class _ProxyPageState extends State<ProxyPage> with StateMixin<ProxyPage> {
                   if (action == ProxyCardAction.edit) {
                     final res = await CreateEditProxyDialog.show(context, item);
 
-                    if (!res.cancelled && res.data != null) {
+                    if (res != null && !res.cancelled && res.data != null) {
                       _bloc.add(ProxyEdited(res.data));
                     }
                   }
@@ -152,7 +152,7 @@ class _ProxyPageState extends State<ProxyPage> with StateMixin<ProxyPage> {
                       i18n.moveProxy,
                     );
 
-                    if (!res.cancelled && res.data != null) {
+                    if (res != null && !res.cancelled && res.data != null) {
                       _bloc.add(ProxyMoved(item, res.data));
                     }
                   }
@@ -164,7 +164,7 @@ class _ProxyPageState extends State<ProxyPage> with StateMixin<ProxyPage> {
                       i18n.copyProxy,
                     );
 
-                    if (!res.cancelled && res.data != null) {
+                    if (res != null && !res.cancelled && res.data != null) {
                       _bloc.add(ProxyCopied(item, res.data));
                     }
                   }
@@ -183,7 +183,7 @@ class _ProxyPageState extends State<ProxyPage> with StateMixin<ProxyPage> {
             onAdded: () async {
               final res = await CreateEditProxyDialog.show(context, null);
 
-              if (!res.cancelled && res.data != null) {
+              if (res != null && !res.cancelled && res.data != null) {
                 _bloc.add(ProxyCreated(res.data));
               }
             },

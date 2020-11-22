@@ -135,7 +135,7 @@ class _CookiePageState extends State<CookiePage> with StateMixin<CookiePage> {
                     final res =
                         await CreateEditCookieDialog.show(context, item);
 
-                    if (!res.cancelled && res.data != null) {
+                    if (res != null && !res.cancelled && res.data != null) {
                       _bloc.add(CookieEdited(res.data));
                     }
                   }
@@ -151,7 +151,7 @@ class _CookiePageState extends State<CookiePage> with StateMixin<CookiePage> {
                       i18n.moveCookie,
                     );
 
-                    if (!res.cancelled && res.data != null) {
+                    if (res != null && !res.cancelled && res.data != null) {
                       _bloc.add(CookieMoved(item, res.data));
                     }
                   }
@@ -163,7 +163,7 @@ class _CookiePageState extends State<CookiePage> with StateMixin<CookiePage> {
                       i18n.copyCookie,
                     );
 
-                    if (!res.cancelled && res.data != null) {
+                    if (res != null && !res.cancelled && res.data != null) {
                       _bloc.add(CookieCopied(item, res.data));
                     }
                   }
@@ -182,7 +182,7 @@ class _CookiePageState extends State<CookiePage> with StateMixin<CookiePage> {
             onAdded: () async {
               final res = await CreateEditCookieDialog.show(context, null);
 
-              if (!res.cancelled && res.data != null) {
+              if (res != null && !res.cancelled && res.data != null) {
                 _bloc.add(CookieCreated(res.data));
               }
             },

@@ -135,7 +135,7 @@ class _DnsPageState extends State<DnsPage> with StateMixin<DnsPage> {
                   if (action == DnsCardAction.edit) {
                     final res = await CreateEditDnsDialog.show(context, item);
 
-                    if (!res.cancelled && res.data != null) {
+                    if (res != null && !res.cancelled && res.data != null) {
                       _bloc.add(DnsEdited(res.data));
                     }
                   }
@@ -151,7 +151,7 @@ class _DnsPageState extends State<DnsPage> with StateMixin<DnsPage> {
                       i18n.moveDns,
                     );
 
-                    if (!res.cancelled && res.data != null) {
+                    if (res != null && !res.cancelled && res.data != null) {
                       _bloc.add(DnsMoved(item, res.data));
                     }
                   }
@@ -163,7 +163,7 @@ class _DnsPageState extends State<DnsPage> with StateMixin<DnsPage> {
                       i18n.copyDns,
                     );
 
-                    if (!res.cancelled && res.data != null) {
+                    if (res != null && !res.cancelled && res.data != null) {
                       _bloc.add(DnsCopied(item, res.data));
                     }
                   }
@@ -182,7 +182,7 @@ class _DnsPageState extends State<DnsPage> with StateMixin<DnsPage> {
             onAdded: () async {
               final res = await CreateEditDnsDialog.show(context, null);
 
-              if (!res.cancelled && res.data != null) {
+              if (res != null && !res.cancelled && res.data != null) {
                 _bloc.add(DnsCreated(res.data));
               }
             },

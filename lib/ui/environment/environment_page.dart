@@ -138,7 +138,7 @@ class _EnvironmentPageState extends State<EnvironmentPage> {
                       item,
                     );
 
-                    if (!res.cancelled && res.data != null) {
+                    if (res != null && !res.cancelled && res.data != null) {
                       _bloc.add(
                         EnvironmentEdited(item.copyWith(name: res.data)),
                       );
@@ -156,7 +156,7 @@ class _EnvironmentPageState extends State<EnvironmentPage> {
                       i18n.moveEnvironment,
                     );
 
-                    if (!res.cancelled) {
+                    if (res != null && !res.cancelled) {
                       _bloc.add(EnvironmentMoved(item, res.data));
                     }
                   }
@@ -164,7 +164,7 @@ class _EnvironmentPageState extends State<EnvironmentPage> {
                   else if (action == EnvironmentCardAction.copy) {
                     final res = await CopyEnvironmentDialog.show(context, item);
 
-                    if (!res.cancelled) {
+                    if (res != null && !res.cancelled) {
                       _bloc.add(
                         EnvironmentCopied(item, res.data[0], res.data[1]),
                       );
@@ -185,7 +185,7 @@ class _EnvironmentPageState extends State<EnvironmentPage> {
             onAdded: () async {
               final res = await CreateEditEnvironmentDialog.show(context, null);
 
-              if (!res.cancelled && res.data != null) {
+              if (res != null && !res.cancelled && res.data != null) {
                 _bloc.add(EnvironmentCreated(res.data));
               }
             },

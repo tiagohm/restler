@@ -108,7 +108,7 @@ class _HistoryPageState extends State<HistoryPage>
           else if (item == HistoryPageAction.sort) {
             final res = await SortDialog.show(context, _bloc.state.sort);
 
-            if (!res.cancelled && res.data != null) {
+            if (res != null && !res.cancelled && res.data != null) {
               _bloc.add(HistorySorted(res.data));
             }
           }
@@ -145,7 +145,8 @@ class _HistoryPageState extends State<HistoryPage>
                     final res =
                         await SaveCallDialog.show(context, i18n.save, '');
 
-                    if (!res.cancelled &&
+                    if (res != null &&
+                        !res.cancelled &&
                         res.data != null &&
                         res.data.length == 2) {
                       _bloc.add(HistorySaved(item, res.data[0], res.data[1]));

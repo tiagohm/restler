@@ -127,7 +127,7 @@ class _CollectionPageState extends State<CollectionPage>
           else if (item == CollectionPageAction.import) {
             final res = await ImportDialog.show(context);
 
-            if (!res.cancelled && res.data != null) {
+            if (res != null && !res.cancelled && res.data != null) {
               _bloc.add(CollectionImported(res.data));
             }
           }
@@ -135,7 +135,7 @@ class _CollectionPageState extends State<CollectionPage>
           else if (item == CollectionPageAction.export) {
             final res = await ExportDialog.show(context);
 
-            if (!res.cancelled && res.data != null) {
+            if (res != null && !res.cancelled && res.data != null) {
               if (await handlePermission(Permission.storage)) {
                 final path = await FilePicker.platform.getDirectoryPath();
 
@@ -165,7 +165,7 @@ class _CollectionPageState extends State<CollectionPage>
                 i18n.newFolder,
               );
 
-              if (!res.cancelled) {
+              if (res != null && !res.cancelled) {
                 _bloc.add(FolderCreated(res.data));
               }
             },
@@ -189,7 +189,7 @@ class _CollectionPageState extends State<CollectionPage>
                         i18n.editFolder,
                       );
 
-                      if (!res.cancelled) {
+                      if (res != null && !res.cancelled) {
                         _bloc.add(FolderEdited(item.copyWith(name: res.data)));
                       }
                     }
@@ -197,7 +197,7 @@ class _CollectionPageState extends State<CollectionPage>
                     else if (action == FolderCardAction.move) {
                       final res = await MoveFolderDialog.show(context, item);
 
-                      if (!res.cancelled && res.data != null) {
+                      if (res != null && !res.cancelled && res.data != null) {
                         _bloc.add(FolderMoved(item, res.data[0], res.data[1]));
                       }
                     }
@@ -213,7 +213,7 @@ class _CollectionPageState extends State<CollectionPage>
                     else if (action == FolderCardAction.import) {
                       final res = await ImportDialog.show(context);
 
-                      if (!res.cancelled && res.data != null) {
+                      if (res != null && !res.cancelled && res.data != null) {
                         _bloc.add(CollectionImported(res.data, item));
                       }
                     }
@@ -243,7 +243,7 @@ class _CollectionPageState extends State<CollectionPage>
                         i18n.editCall,
                       );
 
-                      if (!res.cancelled) {
+                      if (res != null && !res.cancelled) {
                         _bloc.add(CallEdited(item.copyWith(name: res.data)));
                       }
                     }
@@ -254,7 +254,7 @@ class _CollectionPageState extends State<CollectionPage>
                         item,
                       );
 
-                      if (!res.cancelled && res.data != null) {
+                      if (res != null && !res.cancelled && res.data != null) {
                         _bloc.add(CallMoved(item, res.data[0], res.data[1]));
                       }
                     }
@@ -269,7 +269,7 @@ class _CollectionPageState extends State<CollectionPage>
                         item,
                       );
 
-                      if (!res.cancelled && res.data != null) {
+                      if (res != null && !res.cancelled && res.data != null) {
                         _bloc.add(CallCopied(
                             item, res.data[0], res.data[1], res.data[2]));
                       }

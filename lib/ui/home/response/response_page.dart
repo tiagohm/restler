@@ -256,7 +256,7 @@ class _ResponsePageState extends State<ResponsePage>
           );
 
           // O usuário escolheu um nome (não cancelou a janela).
-          if (!res.cancelled) {
+          if (res != null && !res.cancelled) {
             final path = await FilePicker.platform.getDirectoryPath();
 
             if (path != null) {

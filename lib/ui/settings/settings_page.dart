@@ -164,7 +164,9 @@ class _SettingsPageState extends State<SettingsPage>
                             maxLength: null,
                           );
 
-                          if (!res.cancelled && res.data != null) {
+                          if (res != null &&
+                              !res.cancelled &&
+                              res.data != null) {
                             _bloc.add(SettingsEdited(userAgent: res.data));
                           }
                         },
@@ -404,7 +406,10 @@ class _TextInputOption extends _InputOption {
       keyboardType: keyboardType,
     );
 
-    if (!res.cancelled && res.data != null && res.data.isNotEmpty) {
+    if (res != null &&
+        !res.cancelled &&
+        res.data != null &&
+        res.data.isNotEmpty) {
       onChanged?.call(res.data);
     }
   }
