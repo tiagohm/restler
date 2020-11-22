@@ -32,15 +32,15 @@ ThemeData theme({
 }) {
   return ThemeData(
     brightness: isDark ? Brightness.dark : Brightness.light,
-    // Indicator color.
     indicatorColor: indicatorColor,
     accentColor: indicatorColor,
     toggleableActiveColor: indicatorColor,
-    cursorColor: indicatorColor,
     buttonColor: indicatorColor,
-    textSelectionHandleColor: indicatorColor,
-    // Secondary indicator color.
-    textSelectionColor: secondaryIndicatorColor,
+    textSelectionTheme: TextSelectionThemeData(
+      selectionColor: secondaryIndicatorColor,
+      selectionHandleColor: indicatorColor,
+      cursorColor: indicatorColor,
+    ),
     tabBarTheme: TabBarTheme(
       indicator: UnderlineTabIndicator(
         borderSide: BorderSide(

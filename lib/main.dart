@@ -50,4 +50,10 @@ class _BlocObserver implements BlocObserver {
     print('error: $error');
     print(stackTrace);
   }
+
+  @override
+  void onClose(Cubit cubit) {}
+
+  @override
+  void onCreate(Cubit cubit) {}
 }

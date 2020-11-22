@@ -93,7 +93,7 @@ class _DescriptionDialogState extends State<DescriptionDialog>
                     : Markdown(
                         data: _textController.value.text,
                         shrinkWrap: true,
-                        onTapLink: launch,
+                        onTapLink: (text, href, title) => launch(href),
                       );
               },
             ),
