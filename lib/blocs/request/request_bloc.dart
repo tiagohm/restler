@@ -342,7 +342,9 @@ class RequestBloc extends Bloc<RequestEvent, RequestState>
     return uri.copyWith(
       scheme: request.scheme == 'http2'
           ? 'https'
-          : request.scheme == 'auto' ? uri.scheme : request.scheme,
+          : request.scheme == 'auto'
+              ? uri.scheme
+              : request.scheme,
       port: port,
     );
   }

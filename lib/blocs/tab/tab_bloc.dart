@@ -239,6 +239,7 @@ class TabBloc extends Bloc<TabEvent, TabState> {
         scheme: event.request.scheme,
         url: event.request.url,
         settings: event.request.settings,
+        description: event.request.description,
       );
     }
 

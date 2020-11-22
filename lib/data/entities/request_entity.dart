@@ -113,8 +113,8 @@ class RequestEntity extends Equatable {
       'req_query_data': jsonEncode(query),
       'req_header_data': jsonEncode(header),
       'req_auth': jsonEncode(auth),
-      'req_settings': jsonEncode(settings),
       'req_description': description,
+      'req_settings': jsonEncode(settings),
     };
   }
 
@@ -166,8 +166,11 @@ class RequestEntity extends Equatable {
         url != null &&
         !url.startsWith('http://') &&
         !url.startsWith('https://')) {
-      final realScheme =
-          scheme == null ? 'http' : scheme == 'http2' ? 'https' : scheme;
+      final realScheme = scheme == null
+          ? 'http'
+          : scheme == 'http2'
+              ? 'https'
+              : scheme;
       return '$realScheme://$url';
     } else {
       return url;
