@@ -711,3 +711,26 @@ const postmanDynamicVariables = [
   'randomZipCode',
   'timestamp',
 ];
+
+const fcmParameters = {
+  'both': [
+    'title',
+    'body',
+    'sound',
+    'click_action',
+    'body_loc_key',
+    'body_loc_args',
+    'title_loc_key',
+    'title_loc_args',
+  ],
+  'ios': [
+    'badge',
+    'subtitle',
+  ],
+  'android': [
+    'android_channel_id',
+    'icon',
+    'tag',
+    'color',
+  ],
+};
