@@ -175,66 +175,69 @@ class _AboutTheAppDialogState extends State<AboutTheAppDialog>
       onDone: () => null,
       title: i18n.about,
       bodyBuilder: (context) {
-        return DefaultTabController(
-          length: 4,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              // Logo.
-              SvgPicture.asset(
-                'assets/images/logo.svg',
-                width: 84,
-                height: 84,
-              ),
-              // App name.
-              Text(
-                i18n.appName,
-                style: defaultInputTextStyle.copyWith(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              // App version.
-              Text(
-                appVersion,
-                style: defaultInputTextStyle.copyWith(
-                  fontSize: 12,
-                  color: Colors.white70,
-                ),
-              ),
-              // App copyright.
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 8),
-                child: Text(
-                  '© 2019-2020 Tiago Melo 🇧🇷',
-                  style: TextStyle(
-                    fontSize: 14,
+        return Container(
+          width: 0,
+          height: 360,
+          child: SingleChildScrollView(
+            child: DefaultTabController(
+              length: 4,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  // Logo.
+                  SvgPicture.asset(
+                    'assets/images/logo.svg',
+                    width: 84,
+                    height: 84,
                   ),
-                ),
-              ),
-              // Tabs.
-              TabBar(
-                isScrollable: true,
-                tabs: <Widget>[
-                  Tab(text: i18n.contact.toUpperCase()),
-                  Tab(text: i18n.licenses.toUpperCase()),
-                  Tab(text: i18n.changelog.toUpperCase()),
-                  Tab(text: i18n.translators.toUpperCase()),
-                ],
-              ),
-              // Body.
-              Container(
-                height: 150,
-                child: TabBarView(
-                  children: <Widget>[
-                    // Contact.
-                    Material(
-                      borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(4),
-                        bottomRight: Radius.circular(4),
+                  // App name.
+                  Text(
+                    i18n.appName,
+                    style: defaultInputTextStyle.copyWith(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  // App version.
+                  Text(
+                    appVersion,
+                    style: defaultInputTextStyle.copyWith(
+                      fontSize: 12,
+                      color: Colors.white70,
+                    ),
+                  ),
+                  // App copyright.
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8),
+                    child: Text(
+                      '© 2019-2020 Tiago Melo 🇧🇷',
+                      style: TextStyle(
+                        fontSize: 14,
                       ),
-                      child: Scrollbar(
-                        child: SingleChildScrollView(
+                    ),
+                  ),
+                  // Tabs.
+                  TabBar(
+                    isScrollable: true,
+                    tabs: <Widget>[
+                      Tab(text: i18n.contact.toUpperCase()),
+                      Tab(text: i18n.licenses.toUpperCase()),
+                      Tab(text: i18n.changelog.toUpperCase()),
+                      Tab(text: i18n.translators.toUpperCase()),
+                    ],
+                  ),
+                  // Body.
+                  Container(
+                    height: 2215,
+                    child: TabBarView(
+                      children: <Widget>[
+                        // Contact.
+                        Material(
+                          borderRadius: const BorderRadius.only(
+                            bottomLeft: Radius.circular(4),
+                            bottomRight: Radius.circular(4),
+                          ),
+                          color: Theme.of(context).dialogBackgroundColor,
                           child: Column(
                             children: <Widget>[
                               // Email.
@@ -293,16 +296,13 @@ class _AboutTheAppDialogState extends State<AboutTheAppDialog>
                             ],
                           ),
                         ),
-                      ),
-                    ),
-                    // Licenses.
-                    Material(
-                      borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(4),
-                        bottomRight: Radius.circular(4),
-                      ),
-                      child: Scrollbar(
-                        child: SingleChildScrollView(
+                        // Licenses.
+                        Material(
+                          borderRadius: const BorderRadius.only(
+                            bottomLeft: Radius.circular(4),
+                            bottomRight: Radius.circular(4),
+                          ),
+                          color: Theme.of(context).dialogBackgroundColor,
                           child: Column(
                             children: <Widget>[
                               for (final item in _libraries)
@@ -314,36 +314,34 @@ class _AboutTheAppDialogState extends State<AboutTheAppDialog>
                             ],
                           ),
                         ),
-                      ),
-                    ),
-                    // Changelog.
-                    Material(
-                      borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(4),
-                        bottomRight: Radius.circular(4),
-                      ),
-                      child: Scrollbar(
-                        child: SingleChildScrollView(
+                        // Changelog.
+                        Material(
+                          borderRadius: const BorderRadius.only(
+                            bottomLeft: Radius.circular(4),
+                            bottomRight: Radius.circular(4),
+                          ),
+                          color: Theme.of(context).dialogBackgroundColor,
                           child: _Changelog(),
                         ),
-                      ),
-                    ),
-                    // Translators.
-                    Material(
-                      borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(4),
-                        bottomRight: Radius.circular(4),
-                      ),
-                      child: Scrollbar(
-                        child: SingleChildScrollView(
-                          child: _Translator(),
+                        // Translators.
+                        Material(
+                          borderRadius: const BorderRadius.only(
+                            bottomLeft: Radius.circular(4),
+                            bottomRight: Radius.circular(4),
+                          ),
+                          color: Theme.of(context).dialogBackgroundColor,
+                          child: Scrollbar(
+                            child: SingleChildScrollView(
+                              child: _Translator(),
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         );
       },
