@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:restler/data/entities/call_entity.dart';
@@ -34,23 +36,29 @@ class CallCard extends StatelessWidget {
           margin: const EdgeInsets.all(2),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: call.request.method.methodColor,
+            color: call.request.isFCM
+                ? Colors.orange
+                : call.request.method.methodColor,
           ),
           child: Center(
-            child: Text(
-              call.request.method.shorten(),
-              style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            child: call.request.isFCM
+                ? const Icon(Mdi.firebase)
+                : Text(
+                    call.request.method.shorten(),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
           ),
         ),
         // Name.
         title: Text(call.name),
         // URL.
         subtitle: Text(
-          call.request.rightUrl,
+          call.request.isFCM
+              ? call.request.url.substring(0, min(32, call.request.url.length))
+              : call.request.rightUrl,
           style: const TextStyle(
             fontSize: 12,
           ),

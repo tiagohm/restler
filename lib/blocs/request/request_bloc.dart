@@ -158,9 +158,9 @@ class RequestBloc extends Bloc<RequestEvent, RequestState>
     final request = state.request;
 
     try {
-      if (request.type == 'rest') {
+      if (request.isREST) {
         yield* _makeRestRequestAndSendIt(request);
-      } else if (request.type == 'fcm') {
+      } else if (request.isFCM) {
         yield* _makeFcmRequestAndSendIt(request);
       }
     } on CancelledException {

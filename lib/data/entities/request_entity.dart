@@ -85,6 +85,10 @@ class RequestEntity extends Equatable {
     }
   }
 
+  bool get isREST => type == 'rest';
+
+  bool get isFCM => type == 'fcm';
+
   Map<String, dynamic> toJson() {
     return {
       'uid': uid,

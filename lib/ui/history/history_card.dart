@@ -1,8 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:restler/data/entities/history_entity.dart';
 import 'package:restler/extensions.dart';
 import 'package:restler/i18n.dart';
+import 'package:restler/mdi.dart';
 import 'package:restler/ui/widgets/dot_menu_button.dart';
 import 'package:restler/ui/widgets/label.dart';
 
@@ -37,23 +40,30 @@ class HistoryCard extends StatelessWidget {
               margin: const EdgeInsets.all(2),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: history.request.method.methodColor,
+                color: history.request.isFCM
+                    ? Colors.orange
+                    : history.request.method.methodColor,
               ),
               child: Center(
-                child: Text(
-                  history.request.method.shorten(),
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                child: history.request.isFCM
+                    ? const Icon(Mdi.firebase)
+                    : Text(
+                        history.request.method.shorten(),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
               ),
             ),
             // URL.
             title: Padding(
               padding: const EdgeInsets.only(left: 4),
               child: Text(
-                history.request.rightUrl,
+                history.request.isFCM
+                    ? history.request.url
+                        .substring(0, min(32, history.request.url.length))
+                    : history.request.rightUrl,
                 style: const TextStyle(
                   fontSize: 14,
                 ),

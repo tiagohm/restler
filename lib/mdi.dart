@@ -15,21 +15,22 @@ class Mdi {
   static const eye = _MdiIconData(59914);
   static const eyeOff = _MdiIconData(59915);
   static const file = _MdiIconData(59916);
-  static const folderMove = _MdiIconData(59917);
-  static const folderPlus = _MdiIconData(59918);
-  static const import = _MdiIconData(59919);
-  static const magic = _MdiIconData(59920);
-  static const save = _MdiIconData(59921);
-  static const saveAs = _MdiIconData(59922);
-  static const serverNetwork = _MdiIconData(59923);
-  static const tab = _MdiIconData(59924);
-  static const tabPlus = _MdiIconData(59925);
-  static const text = _MdiIconData(59926);
-  static const theme = _MdiIconData(59927);
-  static const variable = _MdiIconData(59928);
-  static const viewList = _MdiIconData(59929);
-  static const web = _MdiIconData(59930);
-  static const workspace = _MdiIconData(59931);
+  static const firebase = _MdiIconData(59917);
+  static const folderMove = _MdiIconData(59918);
+  static const folderPlus = _MdiIconData(59919);
+  static const import = _MdiIconData(59920);
+  static const magic = _MdiIconData(59921);
+  static const save = _MdiIconData(59922);
+  static const saveAs = _MdiIconData(59923);
+  static const serverNetwork = _MdiIconData(59924);
+  static const tab = _MdiIconData(59925);
+  static const tabPlus = _MdiIconData(59926);
+  static const text = _MdiIconData(59927);
+  static const theme = _MdiIconData(59928);
+  static const variable = _MdiIconData(59929);
+  static const viewList = _MdiIconData(59930);
+  static const web = _MdiIconData(59931);
+  static const workspace = _MdiIconData(59932);
 }
 
 class _MdiIconData extends IconData {

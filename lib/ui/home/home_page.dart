@@ -529,7 +529,7 @@ class _HomePageState extends State<HomePage>
         event is TabFetched ||
         event is TabReseted) {
       setState(() {
-        _isRest = next.currentTab.request.type == 'rest';
+        _isRest = next.currentTab.request.isREST;
       });
 
       _dispatch(RequestLoaded(next.currentTab.request));
@@ -543,10 +543,9 @@ class _HomePageState extends State<HomePage>
       final request = next.request as RequestEntity;
 
       // Atualizar tudo quando trocar o tipo.
-      if ((request.type == 'rest') ^ _isRest) {
+      if (request.isREST ^ _isRest) {
         setState(() {
-          _isRest = request.type == 'rest';
-          print('Request type: ${request.type}');
+          _isRest = request.isREST;
         });
       }
 
@@ -555,7 +554,7 @@ class _HomePageState extends State<HomePage>
     // Setar a URL quando uma requisição for recarregada.
     if (event is RequestLoaded || event is RequestCleared) {
       setState(() {
-        _isRest = next.request.type == 'rest';
+        _isRest = next.request.isREST;
       });
 
       _urlTextController.text = next.request.url;
