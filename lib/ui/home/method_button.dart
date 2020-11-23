@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:restler/ui/widgets/context_menu_button.dart';
 import 'package:restler/ui/widgets/item_menu_button.dart';
 
 class MethodButton extends ItemMenuButton {
