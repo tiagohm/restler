@@ -217,6 +217,7 @@
     "tab": "Aba",
     "tagCantBeResolved": "A tag não pode ser resolvida: {tag}",
     "tagHasWrongParameter": "A tag '{tag}' possui parâmetros errados",
+    "targets": "Destinos",
     "text": "Text",
     "time": "Tempo",
     "timeline": "Linha do tempo",

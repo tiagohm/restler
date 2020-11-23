@@ -80,6 +80,7 @@ class _CollectionPageState extends State<CollectionPage>
                   _bloc.add(SearchTextChanged(text));
                 },
                 hintText: i18n.search,
+                underlined: true,
               );
             }
             // Title.

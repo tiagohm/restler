@@ -55,9 +55,7 @@ class _RequestAuthBearerState extends State<RequestAuthBearerPage> {
           ListTile(
             title: PowerfulTextField(
               controller: _tokenController,
-              decoration: InputDecoration(
-                labelText: i18n.token,
-              ),
+              hintText: i18n.token,
               style: defaultInputTextStyle,
               onChanged: widget.onTokenChanged,
               suggestionsCallback: variableSuggestions,
@@ -67,9 +65,7 @@ class _RequestAuthBearerState extends State<RequestAuthBearerPage> {
           ListTile(
             title: PowerfulTextField(
               controller: _prefixController,
-              decoration: InputDecoration(
-                labelText: i18n.prefix,
-              ),
+              hintText: i18n.prefix,
               style: defaultInputTextStyle,
               onChanged: widget.onPrefixChanged,
               suggestionsCallback: variableSuggestions,

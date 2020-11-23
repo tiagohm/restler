@@ -61,6 +61,7 @@ class _CookiePageState extends State<CookiePage> with StateMixin<CookiePage> {
                   _bloc.add(SearchTextChanged(text));
                 },
                 hintText: i18n.search,
+                underlined: true,
               );
             }
             // Title.

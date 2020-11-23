@@ -55,9 +55,7 @@ class _RequestAuthDigestState extends State<RequestAuthDigestPage> {
           ListTile(
             title: PowerfulTextField(
               controller: _usernameController,
-              decoration: InputDecoration(
-                labelText: i18n.username,
-              ),
+              hintText: i18n.username,
               style: defaultInputTextStyle,
               onChanged: widget.onUsernameChanged,
               suggestionsCallback: variableSuggestions,
@@ -67,9 +65,7 @@ class _RequestAuthDigestState extends State<RequestAuthDigestPage> {
           ListTile(
             title: PowerfulTextField(
               controller: _passwordController,
-              decoration: InputDecoration(
-                labelText: i18n.password,
-              ),
+              hintText: i18n.password,
               style: defaultInputTextStyle,
               onChanged: widget.onPasswordChanged,
               isPassword: true,

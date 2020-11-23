@@ -65,6 +65,7 @@ class _EnvironmentPageState extends State<EnvironmentPage> {
                   _bloc.add(SearchTextChanged(text));
                 },
                 hintText: i18n.search,
+                underlined: true,
               );
             }
             // Title.

@@ -24,7 +24,7 @@ class RequestBodyEntity extends Equatable {
   static const empty = RequestBodyEntity();
 
   factory RequestBodyEntity.fromJson(Map<String, dynamic> json) {
-    if (json == null) {
+    if (json == null || json.isEmpty) {
       return empty;
     } else {
       return RequestBodyEntity(
@@ -41,7 +41,9 @@ class RequestBodyEntity extends Equatable {
             [],
         file: json['file'] == null
             ? ''
-            : json['file'] is bool ? '' : json['file'],
+            : json['file'] is bool
+                ? ''
+                : json['file'],
       );
     }
   }

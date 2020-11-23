@@ -26,7 +26,7 @@ class RequestSettingsEntity extends Equatable {
   static const empty = RequestSettingsEntity();
 
   factory RequestSettingsEntity.fromJson(Map<String, dynamic> json) {
-    if (json == null || json['proxy'] is! Map) {
+    if (json == null || json.isEmpty || json['proxy'] is! Map) {
       return RequestSettingsEntity.empty;
     } else {
       return RequestSettingsEntity(

@@ -15,20 +15,26 @@ import 'package:restler/ui/widgets/state_mixin.dart';
 
 class RequestSettingsDialog extends StatefulWidget {
   final RequestSettingsEntity settings;
+  final bool isRest;
 
   const RequestSettingsDialog({
     Key key,
     @required this.settings,
+    @required this.isRest,
   }) : super(key: key);
 
   static Future<DialogResult<RequestSettingsEntity>> show(
     BuildContext context,
-    RequestSettingsEntity settings,
-  ) async {
+    RequestSettingsEntity settings, {
+    @required bool isRest,
+  }) async {
     return showDialog<DialogResult<RequestSettingsEntity>>(
       context: context,
       barrierDismissible: false,
-      builder: (context) => RequestSettingsDialog(settings: settings),
+      builder: (context) => RequestSettingsDialog(
+        settings: settings,
+        isRest: isRest,
+      ),
     );
   }
 
@@ -158,9 +164,9 @@ class _RequestSettingsDialogState extends State<RequestSettingsDialog>
                   },
                   builder: (context, state) {
                     return LabeledCheckbox(
-                      value: state.settings.cache,
+                      value: widget.isRest && state.settings.cache,
                       text: i18n.cache,
-                      onChanged: !_settings.cacheEnabled
+                      onChanged: !widget.isRest || !_settings.cacheEnabled
                           ? null
                           : (enabled) {
                               _bloc.add(
@@ -199,11 +205,13 @@ class _RequestSettingsDialogState extends State<RequestSettingsDialog>
                     return LabeledCheckbox(
                       value: state.settings.keepEqualSign,
                       text: i18n.keepEqualSignForEmptyQuery,
-                      onChanged: (enabled) {
-                        _bloc.add(RequestSettingsChanged(
-                          keepEqualSign: enabled,
-                        ));
-                      },
+                      onChanged: !widget.isRest
+                          ? null
+                          : (enabled) {
+                              _bloc.add(RequestSettingsChanged(
+                                keepEqualSign: enabled,
+                              ));
+                            },
                     );
                   },
                 ),

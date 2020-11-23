@@ -13,7 +13,7 @@ class RequestQueryEntity extends Equatable {
   });
 
   factory RequestQueryEntity.fromJson(Map<String, dynamic> json) {
-    if (json == null) {
+    if (json == null || json.isEmpty) {
       return empty;
     } else {
       return RequestQueryEntity(

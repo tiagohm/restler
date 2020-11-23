@@ -7,10 +7,12 @@ import 'package:restio/restio.dart' hide RequestEvent;
 import 'package:restler/blocs/request/request_event.dart';
 import 'package:restler/blocs/request/request_state.dart';
 import 'package:restler/data/entities/cookie_entity.dart';
+import 'package:restler/data/entities/data_entity.dart';
 import 'package:restler/data/entities/form_entity.dart';
 import 'package:restler/data/entities/header_entity.dart';
 import 'package:restler/data/entities/history_entity.dart';
 import 'package:restler/data/entities/multipart_entity.dart';
+import 'package:restler/data/entities/notification_entity.dart';
 import 'package:restler/data/entities/query_entity.dart';
 import 'package:restler/data/entities/redirect_entity.dart';
 import 'package:restler/data/entities/request_auth_entity.dart';
@@ -20,6 +22,7 @@ import 'package:restler/data/entities/request_header_entity.dart';
 import 'package:restler/data/entities/request_query_entity.dart';
 import 'package:restler/data/entities/request_settings_entity.dart';
 import 'package:restler/data/entities/response_entity.dart';
+import 'package:restler/data/entities/target_entity.dart';
 import 'package:restler/data/entities/variable_entity.dart';
 import 'package:restler/data/repositories/certificate_repository.dart';
 import 'package:restler/data/repositories/cookie_repository.dart';
@@ -60,6 +63,8 @@ class RequestBloc extends Bloc<RequestEvent, RequestState>
       yield* _mapRequestClearedToState();
     } else if (event is MethodChanged) {
       yield* _mapMethodChangedToState(event);
+    } else if (event is TypeChanged) {
+      yield* _mapTypeChangedToState(event);
     } else if (event is SchemeChanged) {
       yield* _mapSchemeChangedToState(event);
     } else if (event is UrlChanged) {
@@ -70,6 +75,10 @@ class RequestBloc extends Bloc<RequestEvent, RequestState>
       yield* _mapBodyEnabledToState(event);
     } else if (event is BodyTypeChanged) {
       yield* _mapBodyTypeChangedToState(event);
+    } else if (event is DataEnabled) {
+      yield* _mapDataEnabledToState(event);
+    } else if (event is NotificationEnabled) {
+      yield* _mapNotificationEnabledToState(event);
     } else if (event is QueryEnabled) {
       yield* _mapQueryEnabledToState(event);
     } else if (event is HeaderEnabled) {
@@ -98,6 +107,30 @@ class RequestBloc extends Bloc<RequestEvent, RequestState>
       yield* _mapFileChoosedToState(event);
     } else if (event is FileRemoved) {
       yield* _mapFileRemovedToState(event);
+    } else if (event is TargetAdded) {
+      yield* _mapTargetAddedToState();
+    } else if (event is TargetEdited) {
+      yield* _mapTargetEditedToState(event);
+    } else if (event is TargetDuplicated) {
+      yield* _mapTargetDuplicatedToState(event);
+    } else if (event is TargetDeleted) {
+      yield* _mapTargetDeletedToState(event);
+    } else if (event is DataAdded) {
+      yield* _mapDataAddedToState();
+    } else if (event is DataEdited) {
+      yield* _mapDataEditedToState(event);
+    } else if (event is DataDuplicated) {
+      yield* _mapDataDuplicatedToState(event);
+    } else if (event is DataDeleted) {
+      yield* _mapDataDeletedToState(event);
+    } else if (event is NotificationAdded) {
+      yield* _mapNotificationAddedToState();
+    } else if (event is NotificationEdited) {
+      yield* _mapNotificationEditedToState(event);
+    } else if (event is NotificationDuplicated) {
+      yield* _mapNotificationDuplicatedToState(event);
+    } else if (event is NotificationDeleted) {
+      yield* _mapNotificationDeletedToState(event);
     } else if (event is QueryAdded) {
       yield* _mapQueryAddedToState();
     } else if (event is QueryEdited) {
@@ -123,6 +156,56 @@ class RequestBloc extends Bloc<RequestEvent, RequestState>
 
   Stream<RequestState> _mapRequestSentToState(RequestSent event) async* {
     final request = state.request;
+
+    try {
+      if (request.isREST) {
+        yield* _makeRestRequestAndSendIt(request);
+      } else if (request.isFCM) {
+        yield* _makeFcmRequestAndSendIt(request);
+      }
+    } on CancelledException {
+      yield state.copyWith(sending: false);
+    } on TooManyRedirectsException {
+      final response = _obtainResponseError('Too many redirects');
+      yield state.copyWith(sending: false, response: response);
+    } on TimedOutException {
+      final response = _obtainResponseError('Connection timed out');
+      yield state.copyWith(sending: false, response: response);
+    } on ArgumentError catch (e) {
+      final response = _obtainResponseError(e.message);
+      yield state.copyWith(sending: false, response: response);
+    } on FormatException catch (e) {
+      final response = _obtainResponseError(e.message);
+      yield state.copyWith(sending: false, response: response);
+    } on FileSystemException catch (e) {
+      final response = _obtainResponseError('${e.message}: ${e.path}');
+      yield state.copyWith(sending: false, response: response);
+    } on HandshakeException catch (e) {
+      final message = e.osError?.message ?? e.message;
+      final response = _obtainResponseError(message);
+      yield state.copyWith(sending: false, response: response);
+    } on TlsException catch (e) {
+      final response = _obtainResponseError(e.osError?.message ?? e.message);
+      yield state.copyWith(sending: false, response: response);
+    } on HttpException catch (e) {
+      final message = e.toString();
+      final response = _obtainResponseError(message);
+      yield state.copyWith(sending: false, response: response);
+    } on SocketException catch (e) {
+      final response = _obtainResponseError(e.osError?.message ?? e.message);
+      yield state.copyWith(sending: false, response: response);
+    } on VariableException catch (e) {
+      _messager.show(
+        (i18n) => obtainVariableExceptionMessage(i18n, e),
+        type: MessagerType.error,
+      );
+    } catch (e) {
+      final response = _obtainResponseError(e.toString());
+      yield state.copyWith(sending: false, response: response);
+    }
+  }
+
+  Stream<RequestState> _makeRestRequestAndSendIt(RequestEntity request) async* {
     // Força o cache se não tiver internet.
     final connectivity = await Connectivity().checkConnectivity();
     final forceCache =
@@ -260,45 +343,125 @@ class RequestBloc extends Bloc<RequestEvent, RequestState>
           type: MessagerType.error,
         );
       }
-    } on CancelledException {
-      yield state.copyWith(sending: false);
-    } on TooManyRedirectsException {
-      final response = _obtainResponseError('Too many redirects');
-      yield state.copyWith(sending: false, response: response);
-    } on TimedOutException {
-      final response = _obtainResponseError('Connection timed out');
-      yield state.copyWith(sending: false, response: response);
-    } on ArgumentError catch (e) {
-      final response = _obtainResponseError(e.message);
-      yield state.copyWith(sending: false, response: response);
-    } on FormatException catch (e) {
-      final response = _obtainResponseError(e.message);
-      yield state.copyWith(sending: false, response: response);
-    } on FileSystemException catch (e) {
-      final response = _obtainResponseError('${e.message}: ${e.path}');
-      yield state.copyWith(sending: false, response: response);
-    } on HandshakeException catch (e) {
-      final message = e.osError?.message ?? e.message;
-      final response = _obtainResponseError(message);
-      yield state.copyWith(sending: false, response: response);
-    } on TlsException catch (e) {
-      final response = _obtainResponseError(e.osError?.message ?? e.message);
-      yield state.copyWith(sending: false, response: response);
-    } on HttpException catch (e) {
-      final message = e.toString();
-      final response = _obtainResponseError(message);
-      yield state.copyWith(sending: false, response: response);
-    } on SocketException catch (e) {
-      final response = _obtainResponseError(e.osError?.message ?? e.message);
-      yield state.copyWith(sending: false, response: response);
+    } finally {
+      await httpResponse?.close();
+    }
+  }
+
+  Stream<RequestState> _makeFcmRequestAndSendIt(RequestEntity request) async* {
+    final connectTimeout = _settings.connectionTimeout;
+    // Busca o proxy.
+    final proxy = _settings.proxyEnabled && request.settings?.proxy?.uid != null
+        ? await _proxyRepository.get(request.settings.proxy.uid)
+        : null;
+    // Busca o DNS.
+    final dns = _settings.dnsEnabled && request.settings?.dns?.uid != null
+        ? await _dnsRepository.get(request.settings.dns.uid)
+        : null;
+    // Habilita variáveis.
+    final enableVariables = request.settings.enableVariables;
+    // Variáveis de ambiente.
+    final workspace = await _workspaceRepository.active();
+    final environment = await _environmentRepository.active(workspace);
+    // Busca as variáveis do ambiente selecionado.
+    final variables = _mapVariables(await _variableRepository.all(environment));
+    // Busca as variáveis globais do workspace.
+    final globals = _mapVariables(await _variableRepository.global(workspace));
+
+    final vr = VariableResolver(globals: globals, variables: variables);
+
+    // Método que resolve um texto a partir das variáveis.
+    String variableResolver(String text) {
+      return enableVariables ? vr.resolve(text) : text;
+    }
+
+    Restio restio;
+
+    try {
+      final options = RequestOptions(
+        followRedirects: _settings.followRedirects,
+        maxRedirects: _settings.maxRedirects,
+        verifySSLCertificate: _settings.validateCertificates,
+        connectTimeout:
+            connectTimeout <= -1 ? null : Duration(seconds: connectTimeout),
+        userAgent: _settings.userAgent,
+        proxy: proxy?.enabled == true ? proxy : null,
+        dns: dns != null && dns.enabled
+            ? (dns.https == true
+                ? DnsOverHttps(RequestUri.parse(dns.url))
+                : DnsOverUdp(
+                    remoteAddress: dns.address,
+                    remotePort: dns.port,
+                  ))
+            : null,
+        http2: true,
+        persistentConnection: request.settings.persistentConnection,
+      );
+
+      // Cria o cliente.
+      restio = Restio(
+        options: options,
+        // networkInterceptors: [const LogInterceptor()],
+        cookieJar: _settings.cookieEnabled ? this : null,
+        connectionPool: kiwi<ConnectionPool>(),
+      );
     } on VariableException catch (e) {
       _messager.show(
         (i18n) => obtainVariableExceptionMessage(i18n, e),
         type: MessagerType.error,
       );
+
+      return;
     } catch (e) {
-      final response = _obtainResponseError(e.toString());
-      yield state.copyWith(sending: false, response: response);
+      _messager.show(
+        (i18n) => 'DNS: $e',
+        type: MessagerType.error,
+      );
+
+      return;
+    }
+
+    Response httpResponse;
+
+    // Inicia a chamada.
+    try {
+      final req = Request(
+        method: 'POST',
+        uri: RequestUri.parse('https://fcm.googleapis.com/fcm/send'),
+        headers: _obtainFcmHeaders(request, variableResolver),
+        queries: _obtainFcmQueries(request, variableResolver),
+        body: _obtainFcmBody(request, variableResolver),
+      );
+
+      final call = restio.newCall(req);
+
+      yield state.copyWith(sending: true, call: call);
+
+      httpResponse = await call.execute();
+      final response = await _obtainResponse(httpResponse);
+
+      print('TCP port: ${httpResponse.localPort}');
+      print('DNS address: ${httpResponse.address}');
+
+      if (_settings.historyEnabled && response.status > 0) {
+        final saveResponseBody = _settings.saveResponseBody;
+
+        final history = HistoryEntity(
+          uid: generateUuid(),
+          date: currentMillis(),
+          request: request.clone(),
+          response: response.copyWith(
+            data: saveResponseBody ? null : const <int>[],
+          ),
+        );
+
+        await _historyRepository.insert(history);
+      }
+
+      yield state.copyWith(
+        sending: false,
+        response: response,
+      );
     } finally {
       await httpResponse?.close();
     }
@@ -369,6 +532,15 @@ class RequestBloc extends Bloc<RequestEvent, RequestState>
     return headers.build();
   }
 
+  static Headers _obtainFcmHeaders(
+    RequestEntity request,
+    VariableResolverCallback callback,
+  ) {
+    final headers = HeadersBuilder();
+    headers.add('Authorization', 'key=${request.url}');
+    return headers.build();
+  }
+
   static Queries _obtainQueries(
     RequestQueryEntity requestQuery,
     VariableResolverCallback callback,
@@ -387,6 +559,13 @@ class RequestBloc extends Bloc<RequestEvent, RequestState>
     }
 
     return queries.build();
+  }
+
+  static Queries _obtainFcmQueries(
+    RequestEntity request,
+    VariableResolverCallback callback,
+  ) {
+    return Queries.empty;
   }
 
   static RequestBody _obtainBody(
@@ -418,6 +597,69 @@ class RequestBloc extends Bloc<RequestEvent, RequestState>
     }
 
     return null;
+  }
+
+  static RequestBody _obtainFcmBody(
+    RequestEntity request,
+    VariableResolverCallback callback,
+  ) {
+    final data = <String, dynamic>{};
+
+    if (request.data.enabled) {
+      data['data'] = <String, dynamic>{};
+
+      for (final item in request.data.data) {
+        if (item.isValid) {
+          final key = callback(item.name);
+          final value = callback(item.value);
+          data['data'][key] = value;
+        }
+      }
+    }
+
+    if (request.notification.enabled) {
+      data['notification'] = <String, dynamic>{};
+
+      for (final item in request.notification.notifications) {
+        if (item.isValid) {
+          final key = callback(item.name);
+          final value = callback(item.value);
+          data['notification'][key] = value;
+        }
+      }
+    }
+
+    String to, condition;
+    final ids = <String>[];
+
+    for (final item in request.target.targets) {
+      if (item.isValid) {
+        final key = callback(item.name);
+        final value = callback(item.value);
+
+        if (key == 'to') {
+          to = value;
+        } else if (key == 'registration_id') {
+          ids.add(value);
+        } else if (key == 'condition') {
+          condition = value;
+        }
+      }
+    }
+
+    if (to != null && to.isNotEmpty) {
+      data['to'] = to;
+    }
+
+    if (condition != null && condition.isNotEmpty) {
+      data['condition'] = condition;
+    }
+
+    if (ids.isNotEmpty) {
+      data['registration_ids'] = ids;
+    }
+
+    return RequestBody.json(data);
   }
 
   static RequestBody _obtainTextBody(
@@ -659,6 +901,15 @@ class RequestBloc extends Bloc<RequestEvent, RequestState>
     yield state.copyWith(request: newRequest);
   }
 
+  Stream<RequestState> _mapTypeChangedToState(
+    TypeChanged event,
+  ) async* {
+    final request = state.request;
+    final newRequest = request.copyWith(type: event.type);
+
+    yield state.copyWith(request: newRequest);
+  }
+
   Stream<RequestState> _mapSchemeChangedToState(
     SchemeChanged event,
   ) async* {
@@ -706,6 +957,29 @@ class RequestBloc extends Bloc<RequestEvent, RequestState>
     final newRequest = request.copyWith(
       body: request.body.copyWith(
         type: event.type,
+      ),
+    );
+
+    yield state.copyWith(request: newRequest);
+  }
+
+  Stream<RequestState> _mapDataEnabledToState(DataEnabled event) async* {
+    final request = state.request;
+    final newRequest = request.copyWith(
+      data: request.data.copyWith(
+        enabled: event.enabled,
+      ),
+    );
+
+    yield state.copyWith(request: newRequest);
+  }
+
+  Stream<RequestState> _mapNotificationEnabledToState(
+      NotificationEnabled event) async* {
+    final request = state.request;
+    final newRequest = request.copyWith(
+      notification: request.notification.copyWith(
+        enabled: event.enabled,
       ),
     );
 
@@ -959,6 +1233,258 @@ class RequestBloc extends Bloc<RequestEvent, RequestState>
     final request = state.request;
     final newRequest = request.copyWith(
       body: request.body.copyWith(file: ''),
+    );
+
+    yield state.copyWith(request: newRequest);
+  }
+
+  Stream<RequestState> _mapTargetAddedToState() async* {
+    final request = state.request;
+    final newRequest = request.copyWith(
+      target: request.target.copyWith(
+        targets: [
+          ...request.target.targets,
+          TargetEntity(uid: generateUuid()),
+        ],
+      ),
+    );
+
+    yield state.copyWith(request: newRequest);
+  }
+
+  Stream<RequestState> _mapTargetEditedToState(
+    TargetEdited event,
+  ) async* {
+    final request = state.request;
+    final items = List.of(request.target.targets);
+
+    final index = items.indexWhere((item) => item.uid == event.target.uid);
+
+    if (index < 0) {
+      return;
+    }
+
+    items[index] = event.target;
+
+    final newRequest = request.copyWith(
+      target: request.target.copyWith(
+        targets: items,
+      ),
+    );
+
+    yield state.copyWith(request: newRequest);
+  }
+
+  Stream<RequestState> _mapTargetDuplicatedToState(
+    TargetDuplicated event,
+  ) async* {
+    final request = state.request;
+    final items = List.of(request.target.targets);
+
+    final index = items.indexWhere((item) => item.uid == event.target.uid);
+
+    if (index < 0) {
+      return;
+    }
+
+    items.insert(index, items[index].copyWith(uid: generateUuid()));
+
+    final newRequest = request.copyWith(
+      target: request.target.copyWith(
+        targets: items,
+      ),
+    );
+
+    yield state.copyWith(request: newRequest);
+  }
+
+  Stream<RequestState> _mapTargetDeletedToState(
+    TargetDeleted event,
+  ) async* {
+    final request = state.request;
+    final items = List.of(request.target.targets);
+
+    final index = items.indexWhere((item) => item.uid == event.target.uid);
+
+    if (index < 0) {
+      return;
+    }
+
+    items.removeAt(index);
+
+    final newRequest = request.copyWith(
+      target: request.target.copyWith(
+        targets: items,
+      ),
+    );
+
+    yield state.copyWith(request: newRequest);
+  }
+
+  Stream<RequestState> _mapDataAddedToState() async* {
+    final request = state.request;
+    final newRequest = request.copyWith(
+      data: request.data.copyWith(
+        data: [
+          ...request.data.data,
+          DataEntity(uid: generateUuid()),
+        ],
+      ),
+    );
+
+    yield state.copyWith(request: newRequest);
+  }
+
+  Stream<RequestState> _mapDataEditedToState(
+    DataEdited event,
+  ) async* {
+    final request = state.request;
+    final items = List.of(request.data.data);
+
+    final index = items.indexWhere((item) => item.uid == event.data.uid);
+
+    if (index < 0) {
+      return;
+    }
+
+    items[index] = event.data;
+
+    final newRequest = request.copyWith(
+      data: request.data.copyWith(
+        data: items,
+      ),
+    );
+
+    yield state.copyWith(request: newRequest);
+  }
+
+  Stream<RequestState> _mapDataDuplicatedToState(
+    DataDuplicated event,
+  ) async* {
+    final request = state.request;
+    final items = List.of(request.data.data);
+
+    final index = items.indexWhere((item) => item.uid == event.data.uid);
+
+    if (index < 0) {
+      return;
+    }
+
+    items.insert(index, items[index].copyWith(uid: generateUuid()));
+
+    final newRequest = request.copyWith(
+      data: request.data.copyWith(
+        data: items,
+      ),
+    );
+
+    yield state.copyWith(request: newRequest);
+  }
+
+  Stream<RequestState> _mapDataDeletedToState(
+    DataDeleted event,
+  ) async* {
+    final request = state.request;
+    final items = List.of(request.data.data);
+
+    final index = items.indexWhere((item) => item.uid == event.data.uid);
+
+    if (index < 0) {
+      return;
+    }
+
+    items.removeAt(index);
+
+    final newRequest = request.copyWith(
+      data: request.data.copyWith(
+        data: items,
+      ),
+    );
+
+    yield state.copyWith(request: newRequest);
+  }
+
+  Stream<RequestState> _mapNotificationAddedToState() async* {
+    final request = state.request;
+    final newRequest = request.copyWith(
+      notification: request.notification.copyWith(
+        notifications: [
+          ...request.notification.notifications,
+          NotificationEntity(uid: generateUuid()),
+        ],
+      ),
+    );
+
+    yield state.copyWith(request: newRequest);
+  }
+
+  Stream<RequestState> _mapNotificationEditedToState(
+    NotificationEdited event,
+  ) async* {
+    final request = state.request;
+    final items = List.of(request.notification.notifications);
+
+    final index =
+        items.indexWhere((item) => item.uid == event.notification.uid);
+
+    if (index < 0) {
+      return;
+    }
+
+    items[index] = event.notification;
+
+    final newRequest = request.copyWith(
+      notification: request.notification.copyWith(
+        notifications: items,
+      ),
+    );
+
+    yield state.copyWith(request: newRequest);
+  }
+
+  Stream<RequestState> _mapNotificationDuplicatedToState(
+    NotificationDuplicated event,
+  ) async* {
+    final request = state.request;
+    final items = List.of(request.notification.notifications);
+
+    final index =
+        items.indexWhere((item) => item.uid == event.notification.uid);
+
+    if (index < 0) {
+      return;
+    }
+
+    items.insert(index, items[index].copyWith(uid: generateUuid()));
+
+    final newRequest = request.copyWith(
+      notification: request.notification.copyWith(
+        notifications: items,
+      ),
+    );
+
+    yield state.copyWith(request: newRequest);
+  }
+
+  Stream<RequestState> _mapNotificationDeletedToState(
+    NotificationDeleted event,
+  ) async* {
+    final request = state.request;
+    final items = List.of(request.notification.notifications);
+
+    final index =
+        items.indexWhere((item) => item.uid == event.notification.uid);
+
+    if (index < 0) {
+      return;
+    }
+
+    items.removeAt(index);
+
+    final newRequest = request.copyWith(
+      notification: request.notification.copyWith(
+        notifications: items,
+      ),
     );
 
     yield state.copyWith(request: newRequest);

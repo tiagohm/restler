@@ -21,6 +21,7 @@ import 'package:restler/data/migrations/migration09.dart';
 import 'package:restler/data/migrations/migration10.dart';
 import 'package:restler/data/migrations/migration11.dart';
 import 'package:restler/data/migrations/migration12.dart';
+import 'package:restler/data/migrations/migration13.dart';
 import 'package:restler/data/providers/call_provider.dart';
 import 'package:restler/data/providers/certificate_provider.dart';
 import 'package:restler/data/providers/cookie_provider.dart';
@@ -130,6 +131,7 @@ Future<Database> _initDatabase() async {
       const NineToTenMigration(),
       const TenToElevenMigration(),
       const ElevenToTwelveMigration(),
+      const TwelveToThirteenMigration(),
     ],
   );
 

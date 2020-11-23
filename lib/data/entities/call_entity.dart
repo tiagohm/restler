@@ -80,7 +80,11 @@ class CallEntity extends Equatable {
     return CallEntity(
       uid: uid ?? this.uid,
       name: name ?? this.name,
-      folder: folder == null ? this.folder : folder == false ? null : folder,
+      folder: folder == null
+          ? this.folder
+          : folder == false
+              ? null
+              : folder,
       request: request ?? this.request,
       favorite: favorite ?? this.favorite,
       workspace: workspace ?? this.workspace,

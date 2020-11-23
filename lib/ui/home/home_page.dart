@@ -28,6 +28,7 @@ import 'package:restler/ui/home/response/response_page.dart';
 import 'package:restler/ui/home/save_button.dart';
 import 'package:restler/ui/home/scheme_button.dart';
 import 'package:restler/ui/home/send_button.dart';
+import 'package:restler/ui/home/type_button.dart';
 import 'package:restler/ui/widgets/dot_menu_button.dart';
 import 'package:restler/ui/widgets/state_mixin.dart';
 import 'package:restler/ui/widgets/input_text_dialog.dart';
@@ -67,6 +68,7 @@ class _HomePageState extends State<HomePage>
 
   TabController _tabController;
   StreamSubscription _transitionSubscription;
+  var _isRest = true;
 
   @override
   void initState() {
@@ -270,6 +272,7 @@ class _HomePageState extends State<HomePage>
                   final res = await RequestSettingsDialog.show(
                     context,
                     request.settings,
+                    isRest: _isRest,
                   );
 
                   if (res != null && !res.cancelled && res.data != null) {
@@ -283,7 +286,7 @@ class _HomePageState extends State<HomePage>
             },
           ),
         ],
-        // URL.
+        // URL/API Key.
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(96),
           child: Column(
@@ -301,52 +304,69 @@ class _HomePageState extends State<HomePage>
                           children: [
                             Row(
                               children: <Widget>[
+                                // Type.
+                                BlocBuilder<RequestBloc, RequestState>(
+                                  cubit: _requestBloc,
+                                  buildWhen: (a, b) =>
+                                      a.request.type != b.request.type,
+                                  builder: (context, state) {
+                                    return TypeButton(
+                                      initialValue: state.request.type,
+                                      onChanged: (type) {
+                                        _dispatch(TypeChanged(type));
+                                      },
+                                    );
+                                  },
+                                ),
                                 // Method.
-                                BlocBuilder<RequestBloc, RequestState>(
-                                  cubit: _requestBloc,
-                                  buildWhen: (a, b) =>
-                                      a.request.method != b.request.method,
-                                  builder: (context, state) {
-                                    return MethodButton(
-                                      initialValue: state.request.method,
-                                      onChanged: (method) async {
-                                        if (method == 'CUSTOM') {
-                                          // Exibe uma janela de diálogo para digitar um método.
-                                          final res =
-                                              await InputTextDialog.show(
-                                            context,
-                                            _requestBloc.state.request.method,
-                                            i18n.name,
-                                            i18n.httpMethod,
-                                            uppercase: true,
-                                          );
+                                if (_isRest)
+                                  BlocBuilder<RequestBloc, RequestState>(
+                                    cubit: _requestBloc,
+                                    buildWhen: (a, b) =>
+                                        a.request.method != b.request.method,
+                                    builder: (context, state) {
+                                      return MethodButton(
+                                        initialValue: state.request.method,
+                                        onChanged: (method) async {
+                                          if (method == 'CUSTOM') {
+                                            // Exibe uma janela de diálogo para digitar um método.
+                                            final res =
+                                                await InputTextDialog.show(
+                                              context,
+                                              _requestBloc.state.request.method,
+                                              i18n.name,
+                                              i18n.httpMethod,
+                                              uppercase: true,
+                                            );
 
-                                          if (res != null &&
-                                              !res.cancelled &&
-                                              res.data != null) {
-                                            _dispatch(MethodChanged(res.data));
+                                            if (res != null &&
+                                                !res.cancelled &&
+                                                res.data != null) {
+                                              _dispatch(
+                                                  MethodChanged(res.data));
+                                            }
+                                          } else {
+                                            _dispatch(MethodChanged(method));
                                           }
-                                        } else {
-                                          _dispatch(MethodChanged(method));
-                                        }
-                                      },
-                                    );
-                                  },
-                                ),
+                                        },
+                                      );
+                                    },
+                                  ),
                                 // Scheme.
-                                BlocBuilder<RequestBloc, RequestState>(
-                                  cubit: _requestBloc,
-                                  buildWhen: (a, b) =>
-                                      a.request.scheme != b.request.scheme,
-                                  builder: (context, state) {
-                                    return SchemeButton(
-                                      initialValue: state.request.scheme,
-                                      onChanged: (scheme) {
-                                        _dispatch(SchemeChanged(scheme));
-                                      },
-                                    );
-                                  },
-                                ),
+                                if (_isRest)
+                                  BlocBuilder<RequestBloc, RequestState>(
+                                    cubit: _requestBloc,
+                                    buildWhen: (a, b) =>
+                                        a.request.scheme != b.request.scheme,
+                                    builder: (context, state) {
+                                      return SchemeButton(
+                                        initialValue: state.request.scheme,
+                                        onChanged: (scheme) {
+                                          _dispatch(SchemeChanged(scheme));
+                                        },
+                                      );
+                                    },
+                                  ),
                               ],
                             ),
                             // Description.
@@ -365,7 +385,7 @@ class _HomePageState extends State<HomePage>
                             ),
                           ],
                         ),
-                        // URL.
+                        // URL/API Key.
                         Row(
                           children: [
                             Expanded(
@@ -374,16 +394,18 @@ class _HomePageState extends State<HomePage>
                                 onChanged: (text) {
                                   _dispatch(UrlChanged(text));
                                 },
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                   border: InputBorder.none,
-                                  labelText: 'URL',
-                                  contentPadding: EdgeInsets.only(
+                                  labelText: _isRest ? 'URL' : 'API Key',
+                                  contentPadding: const EdgeInsets.only(
                                     left: 8,
                                     top: 4,
                                     bottom: 4,
                                   ),
                                 ),
-                                keyboardType: TextInputType.url,
+                                keyboardType: _isRest
+                                    ? TextInputType.url
+                                    : TextInputType.text,
                                 suggestionsCallback: variableSuggestions,
                               ),
                             ),
@@ -476,8 +498,8 @@ class _HomePageState extends State<HomePage>
                   child: TabBarView(
                     controller: _tabController,
                     children: [
-                      RequestPage(bloc: _requestBloc),
-                      ResponsePage(bloc: _responseBloc),
+                      RequestPage(bloc: _requestBloc, isRest: _isRest),
+                      ResponsePage(bloc: _responseBloc, isRest: _isRest),
                     ],
                   ),
                 ),
@@ -506,6 +528,10 @@ class _HomePageState extends State<HomePage>
         event is TabClosed ||
         event is TabFetched ||
         event is TabReseted) {
+      setState(() {
+        _isRest = next.currentTab.request.isREST;
+      });
+
       _dispatch(RequestLoaded(next.currentTab.request));
       _dispatch(ResponseLoaded(next.currentTab.response));
     }
@@ -514,10 +540,23 @@ class _HomePageState extends State<HomePage>
         event is! RequestLoaded &&
         event is! RequestSent &&
         event is! RequestStopped) {
-      _dispatch(TabEdited(request: next.request));
+      final request = next.request as RequestEntity;
+
+      // Atualizar tudo quando trocar o tipo.
+      if (request.isREST ^ _isRest) {
+        setState(() {
+          _isRest = request.isREST;
+        });
+      }
+
+      _dispatch(TabEdited(request: request));
     }
     // Setar a URL quando uma requisição for recarregada.
     if (event is RequestLoaded || event is RequestCleared) {
+      setState(() {
+        _isRest = next.request.isREST;
+      });
+
       _urlTextController.text = next.request.url;
     }
     // Limpar a resposta quando a requisição for limpa.

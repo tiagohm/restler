@@ -471,7 +471,9 @@ class CollectionBloc extends Bloc<CollectionEvent, CollectionState> {
     final workspace = await _workspaceRepository.active();
     // Pega todas as pastas e chamadas.
     final folders = await _collectionRepository.allFolders(workspace);
-    final requests = await _collectionRepository.allCalls(workspace);
+    final requests = (await _collectionRepository.allCalls(workspace))
+        .where((i) => i.request.isREST)
+        .toList(growable: false);
     // Pega todos os cookies.
     final cookies = await _cookieRepository.all(workspace);
     // Pega todos os proxies.

@@ -20,10 +20,12 @@ enum BodyAction { copy, pretty, raw, visual, saveAsFile }
 
 class ResponsePage extends StatefulWidget {
   final ResponseBloc bloc;
+  final bool isRest;
 
   const ResponsePage({
     Key key,
     @required this.bloc,
+    this.isRest = true,
   }) : super(key: key);
 
   @override
