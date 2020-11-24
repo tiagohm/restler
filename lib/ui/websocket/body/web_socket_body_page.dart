@@ -51,7 +51,7 @@ class _WebSocketBodyState extends State<WebSocketBodyPage>
               textInputAction: TextInputAction.newline,
               autocorrect: false,
               maxLines: null,
-              buildCounter: _charCounter,
+              buildCounter: charCounter,
               decoration: InputDecoration(
                 // fillColor: Theme.of(context).scaffoldBackgroundColor,
                 // filled: true,
@@ -97,21 +97,6 @@ class _WebSocketBodyState extends State<WebSocketBodyPage>
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _charCounter(
-    BuildContext context, {
-    int currentLength,
-    int maxLength,
-    bool isFocused,
-  }) {
-    return Text(
-      i18n.charCount(currentLength),
-      style: TextStyle(
-        fontSize: 12,
-        color: isFocused ? Theme.of(context).indicatorColor : null,
       ),
     );
   }

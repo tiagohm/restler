@@ -122,6 +122,7 @@ class PowerfulTextField<T> extends StatefulWidget {
   final double animationStart;
   final double suggestionsBoxVerticalOffset;
   final bool getImmediateSuggestions;
+  final bool autoFlipDirection;
 
   final bool underlined;
 
@@ -190,6 +191,7 @@ class PowerfulTextField<T> extends StatefulWidget {
     this.getImmediateSuggestions = true,
     this.suggestionsBoxVerticalOffset = 4.0,
     this.underlined = false,
+    this.autoFlipDirection = true,
   })  : smartDashesType = smartDashesType ??
             (obscureText ? SmartDashesType.disabled : SmartDashesType.enabled),
         smartQuotesType = smartQuotesType ??
@@ -346,7 +348,7 @@ class PowerfulTextFieldState<T> extends State<PowerfulTextField>
                 suggestionsBoxVerticalOffset:
                     widget.suggestionsBoxVerticalOffset,
                 transitionBuilder: widget.transitionBuilder,
-                autoFlipDirection: true,
+                autoFlipDirection: widget.autoFlipDirection,
                 itemBuilder: (context, item) {
                   return Padding(
                     padding:

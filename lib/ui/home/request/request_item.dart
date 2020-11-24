@@ -5,6 +5,7 @@ import 'package:restler/i18n.dart';
 import 'package:restler/ui/constants.dart';
 import 'package:restler/ui/widgets/dot_menu_button.dart';
 import 'package:restler/ui/widgets/item_menu_button.dart';
+import 'package:restler/ui/widgets/multiline_text_dialog.dart';
 import 'package:restler/ui/widgets/powerful_text_field.dart';
 
 enum RequestItemAction { duplicate, delete }
@@ -124,32 +125,61 @@ class _RequestItemState<T extends ItemEntity> extends State<RequestItem<T>> {
                 },
                 suggestionsCallback: widget.valueSuggestions,
                 showDefaultItems: false,
+                maxLines: null,
               ),
             ),
           ],
         ),
         // Menu.
-        trailing: DotMenuButton<RequestItemAction>(
-          items: RequestItemAction.values,
+        trailing: DotMenuButton<String>(
+          items: ['dup', 'edit', null, 'del'],
           itemBuilder: (context, index, action) {
             switch (action) {
               // Duplicate.
-              case RequestItemAction.duplicate:
+              case 'dup':
                 return ListTile(
                   leading: const Icon(Icons.content_copy),
                   title: Text(i18n.duplicate),
                 );
               // Delete.
-              case RequestItemAction.delete:
+              case 'del':
                 return ListTile(
                   leading: const Icon(Icons.delete),
                   title: Text(i18n.delete),
+                );
+              // Edit.
+              case 'edit':
+                return ListTile(
+                  leading: const Icon(Icons.edit),
+                  title: Text(i18n.edit),
                 );
               default:
                 return null;
             }
           },
-          onSelected: widget.onActionSelected,
+          onSelected: (value) async {
+            switch (value) {
+              case 'dup':
+                return widget.onActionSelected(RequestItemAction.duplicate);
+              case 'del':
+                return widget.onActionSelected(RequestItemAction.delete);
+              case 'edit':
+                final res = await MultilineTextDialog.show(
+                  context,
+                  i18n.value,
+                  _valueTextController.text,
+                  suggestionsCallback: widget.valueSuggestions,
+                );
+
+                if (res != null && !res.cancelled) {
+                  final text = res.data;
+                  _valueTextController.text = text;
+                  widget.onValueChanged?.call(text);
+                  widget.onItemChanged?.call(widget.item.copyWith(value: text));
+                }
+                break;
+            }
+          },
         ),
       ),
     );
