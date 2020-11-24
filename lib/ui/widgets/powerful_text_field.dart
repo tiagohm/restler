@@ -286,7 +286,7 @@ class PowerfulTextFieldState<T> extends State<PowerfulTextField>
                                 .withOpacity(0.4),
                           ),
                           contentPadding:
-                              const EdgeInsets.only(left: 8, top: 4, bottom: 4),
+                              const EdgeInsets.only(left: 8, top: 8, bottom: 8),
                         )
                       : widget.decoration,
                   keyboardType: widget.keyboardType,
