@@ -68,7 +68,8 @@ class _RequestItemState<T extends ItemEntity> extends State<RequestItem<T>> {
       padding: const EdgeInsets.only(top: 8),
       child: ListTile(
         contentPadding: EdgeInsets.zero,
-        visualDensity: const VisualDensity(horizontal: -4),
+        horizontalTitleGap: 4,
+        dense: true,
         // Enable.
         leading: Checkbox(
           value: widget.item.enabled,

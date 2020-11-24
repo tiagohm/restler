@@ -52,8 +52,9 @@ class PostmanAutocompleteItem extends AutocompleteItem {
   String get type => 'POSTMAN';
 }
 
-typedef AutocompleteItemSuggestionCallback = 
-  FutureOr<Iterable<AutocompleteItem>> Function(String pattern, int cursorPosition);
+typedef AutocompleteItemSuggestionCallback
+    = FutureOr<Iterable<AutocompleteItem>> Function(
+        String pattern, int cursorPosition);
 
 class PowerfulTextField<T> extends StatefulWidget {
   final TextEditingController controller;
@@ -217,7 +218,8 @@ class PowerfulTextField<T> extends StatefulWidget {
   PowerfulTextFieldState<T> createState() => PowerfulTextFieldState<T>();
 }
 
-class PowerfulTextFieldState<T> extends State<PowerfulTextField> with StateMixin<PowerfulTextField> {
+class PowerfulTextFieldState<T> extends State<PowerfulTextField>
+    with StateMixin<PowerfulTextField> {
   final _focusNode = FocusNode();
   final _showPassword = ValueNotifier<bool>(false);
 
@@ -250,37 +252,49 @@ class PowerfulTextFieldState<T> extends State<PowerfulTextField> with StateMixin
       children: [
         Flexible(
           child: ValueListenableBuilder(
-            valueListenable: _showPassword, 
+            valueListenable: _showPassword,
             builder: (context, show, child) {
               return TypeAheadField<AutocompleteItem>(
                 key: widget.inputKey,
                 textFieldConfiguration: TextFieldConfiguration<String>(
                   controller: widget.controller,
                   focusNode: _focusNode,
-                  decoration: widget.hintText != null ? InputDecoration(
-                    border: widget.underlined ? InputBorder.none : const OutlineInputBorder(),
-                    enabledBorder: widget.underlined ? null : const OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                      ),
-                    ),
-                    filled: !widget.underlined,
-                    fillColor: Theme.of(context).brightness == Brightness.dark ?
-                     Colors.white.withOpacity(0.05) :
-                     Colors.grey[100],
-                    labelText: widget.hintText,
-                    labelStyle: TextStyle(
-                      color: Theme.of(context).indicatorColor.withOpacity(0.4),
-                    ),
-                    contentPadding: const EdgeInsets.only(left: 8, top: 4, bottom: 4),
-                  ) : widget.decoration,
+                  decoration: widget.hintText != null
+                      ? InputDecoration(
+                          border: widget.underlined
+                              ? InputBorder.none
+                              : const OutlineInputBorder(),
+                          enabledBorder: widget.underlined
+                              ? null
+                              : OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Theme.of(context)
+                                          .indicatorColor
+                                          .withOpacity(0.1)),
+                                ),
+                          filled: !widget.underlined,
+                          fillColor:
+                              Theme.of(context).brightness == Brightness.dark
+                                  ? Colors.white.withOpacity(0.05)
+                                  : Colors.grey[100],
+                          labelText: widget.hintText,
+                          labelStyle: TextStyle(
+                            color: Theme.of(context)
+                                .indicatorColor
+                                .withOpacity(0.4),
+                          ),
+                          contentPadding:
+                              const EdgeInsets.only(left: 8, top: 4, bottom: 4),
+                        )
+                      : widget.decoration,
                   keyboardType: widget.keyboardType,
                   textInputAction: widget.textInputAction,
                   textCapitalization: widget.textCapitalization,
-                  style: widget.style ??  const TextStyle(
-                    fontFamily: 'monospace',
-                    color: Colors.grey,
-                  ),
+                  style: widget.style ??
+                      const TextStyle(
+                        fontFamily: 'monospace',
+                        color: Colors.grey,
+                      ),
                   // strutStyle: widget.strutStyle,
                   textAlign: widget.textAlign,
                   // textAlignVertical: widget.textAlignVertical,
@@ -289,7 +303,8 @@ class PowerfulTextFieldState<T> extends State<PowerfulTextField> with StateMixin
                   // toolbarOptions: widget.toolbarOptions,
                   // showCursor: widget.showCursor,
                   autofocus: widget.autofocus,
-                  obscureText: !show && (widget.obscureText || widget.isPassword),
+                  obscureText:
+                      !show && (widget.obscureText || widget.isPassword),
                   autocorrect: widget.autocorrect,
                   // smartDashesType: widget.smartDashesType,
                   // smartQuotesType: widget.smartQuotesType,
@@ -322,30 +337,35 @@ class PowerfulTextFieldState<T> extends State<PowerfulTextField> with StateMixin
                 animationStart: widget.animationStart,
                 debounceDuration: widget.debounceDuration,
                 errorBuilder: widget.errorBuilder,
-                getImmediateSuggestions: widget.suggestionsCallback != null && 
-                    !widget.isPassword && widget.getImmediateSuggestions,
+                getImmediateSuggestions: widget.suggestionsCallback != null &&
+                    !widget.isPassword &&
+                    widget.getImmediateSuggestions,
                 loadingBuilder: widget.loadingBuilder,
                 noItemsFoundBuilder: (context) => null,
                 suggestionsBoxDecoration: widget.suggestionsBoxDecoration,
-                suggestionsBoxVerticalOffset: widget.suggestionsBoxVerticalOffset,
+                suggestionsBoxVerticalOffset:
+                    widget.suggestionsBoxVerticalOffset,
                 transitionBuilder: widget.transitionBuilder,
                 autoFlipDirection: true,
                 itemBuilder: (context, item) {
                   return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         // Type.
-                        if(item.type != null)
-                          Text(item.type,
+                        if (item.type != null)
+                          Text(
+                            item.type,
                             style: defaultInputTextStyle.copyWith(
                               color: Colors.grey,
                               fontSize: 10,
                             ),
                           ),
                         // Name.
-                        Text(item.label,
+                        Text(
+                          item.label,
                           style: defaultInputTextStyle.copyWith(
                             color: item.color,
                             fontSize: 12,
@@ -357,7 +377,7 @@ class PowerfulTextFieldState<T> extends State<PowerfulTextField> with StateMixin
                 },
                 onSuggestionSelected: (item) {
                   final text = insertTextAtCursorPosition(
-                    widget.controller, 
+                    widget.controller,
                     item.value,
                     fromSuggestion: true,
                   );
@@ -365,7 +385,9 @@ class PowerfulTextFieldState<T> extends State<PowerfulTextField> with StateMixin
                 },
                 suggestionsCallback: (item) async {
                   final cursorPosition = widget.controller.selection.start;
-                  return await widget.suggestionsCallback?.call(item, cursorPosition) ?? const [];
+                  return await widget.suggestionsCallback
+                          ?.call(item, cursorPosition) ??
+                      const [];
                 },
               );
             },
