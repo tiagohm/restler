@@ -79,6 +79,7 @@ class _MoveCallDialogState extends State<MoveCallDialog>
                 // Workspace.
                 BlocBuilder<DropdownBloc<WorkspaceEntity>,
                     DropdownState<WorkspaceEntity>>(
+                  key: const Key('dropdown-workspace'),
                   cubit: _workspaceDropdownBloc,
                   builder: (context, state) {
                     return DropdownButtonFormField<WorkspaceEntity>(
@@ -102,6 +103,7 @@ class _MoveCallDialogState extends State<MoveCallDialog>
                 // Folder.
                 BlocBuilder<DropdownBloc<FolderEntity>,
                     DropdownState<FolderEntity>>(
+                  key: const Key('dropdown-folder'),
                   cubit: _folderDropdownBloc,
                   builder: (context, state) {
                     return DropdownButtonFormField<FolderEntity>(

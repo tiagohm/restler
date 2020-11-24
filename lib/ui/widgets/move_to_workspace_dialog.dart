@@ -75,6 +75,7 @@ class _MoveToWorkspaceDialogState extends State<MoveToWorkspaceDialog>
                 // Workspace.
                 BlocBuilder<DropdownBloc<WorkspaceEntity>,
                     DropdownState<WorkspaceEntity>>(
+                  key: const Key('dropdown-workspace'),
                   cubit: _workspaceDropdownBloc,
                   builder: (context, state) {
                     return DropdownButtonFormField<WorkspaceEntity>(

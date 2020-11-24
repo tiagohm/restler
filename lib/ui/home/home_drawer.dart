@@ -74,6 +74,7 @@ class _HomeDrawerState extends State<HomeDrawer> with StateMixin<HomeDrawer> {
                     // List.
                     Expanded(
                       child: BlocBuilder<WorkspaceBloc, WorkspaceState>(
+                        key: const Key('home-workspace-list'),
                         builder: (context, state) {
                           return DropdownButton<WorkspaceEntity>(
                             items: mapWorkspaceEntityToDropdownItem(
@@ -188,6 +189,7 @@ class _HomeDrawerState extends State<HomeDrawer> with StateMixin<HomeDrawer> {
                     // List.
                     Expanded(
                       child: BlocBuilder<WorkspaceBloc, WorkspaceState>(
+                        key: const Key('home-environment-list'),
                         builder: (context, state) {
                           return Container(
                             decoration: ShapeDecoration(
@@ -264,6 +266,7 @@ class _HomeDrawerState extends State<HomeDrawer> with StateMixin<HomeDrawer> {
                       Text(i18n.history),
                       // Enabled.
                       BlocBuilder<SettingsBloc, SettingsState>(
+                        key: const Key('home-settings-history'),
                         cubit: _settingsBloc,
                         buildWhen: (a, b) =>
                             a.historyEnabled != b.historyEnabled,
@@ -307,6 +310,7 @@ class _HomeDrawerState extends State<HomeDrawer> with StateMixin<HomeDrawer> {
                       Text(i18n.cookie),
                       // Enabled.
                       BlocBuilder<SettingsBloc, SettingsState>(
+                        key: const Key('home-settings-cookie'),
                         cubit: _settingsBloc,
                         buildWhen: (a, b) => a.cookieEnabled != b.cookieEnabled,
                         builder: (context, state) {
@@ -336,6 +340,7 @@ class _HomeDrawerState extends State<HomeDrawer> with StateMixin<HomeDrawer> {
                       Text(i18n.certificate),
                       // Enabled.
                       BlocBuilder<SettingsBloc, SettingsState>(
+                        key: const Key('home-settings-certificate'),
                         cubit: _settingsBloc,
                         buildWhen: (a, b) =>
                             a.certificateEnabled != b.certificateEnabled,
@@ -366,6 +371,7 @@ class _HomeDrawerState extends State<HomeDrawer> with StateMixin<HomeDrawer> {
                       Text(i18n.proxy),
                       // Enabled.
                       BlocBuilder<SettingsBloc, SettingsState>(
+                        key: const Key('home-settings-proxy'),
                         cubit: _settingsBloc,
                         buildWhen: (a, b) => a.proxyEnabled != b.proxyEnabled,
                         builder: (context, state) {
@@ -395,6 +401,7 @@ class _HomeDrawerState extends State<HomeDrawer> with StateMixin<HomeDrawer> {
                       Text(i18n.dns),
                       // Enabled.
                       BlocBuilder<SettingsBloc, SettingsState>(
+                        key: const Key('home-settings-dns'),
                         cubit: _settingsBloc,
                         buildWhen: (a, b) => a.dnsEnabled != b.dnsEnabled,
                         builder: (context, state) {
@@ -437,6 +444,7 @@ class _HomeDrawerState extends State<HomeDrawer> with StateMixin<HomeDrawer> {
                       Text(i18n.darkTheme),
                       // Enabled.
                       BlocBuilder<SettingsBloc, SettingsState>(
+                        key: const Key('home-settings-theme'),
                         cubit: _settingsBloc,
                         buildWhen: (a, b) => a.darkTheme != b.darkTheme,
                         builder: (context, state) {

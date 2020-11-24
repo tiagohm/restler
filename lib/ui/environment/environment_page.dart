@@ -54,6 +54,7 @@ class _EnvironmentPageState extends State<EnvironmentPage> {
         onBack: () => true,
         // Title.
         title: BlocBuilder<EnvironmentBloc, EnvironmentState>(
+          key: const Key('environment-title'),
           cubit: _bloc,
           buildWhen: (a, b) => a.search != b.search,
           builder: (context, state) {
@@ -78,6 +79,7 @@ class _EnvironmentPageState extends State<EnvironmentPage> {
                   Text(i18n.environment),
                   // Counter.
                   BlocBuilder<EnvironmentBloc, EnvironmentState>(
+                    key: const Key('environment-counter'),
                     cubit: _bloc,
                     buildWhen: (a, b) => a.data.length != b.data.length,
                     builder: (context, state) {
@@ -119,6 +121,7 @@ class _EnvironmentPageState extends State<EnvironmentPage> {
       ),
       // List.
       body: BlocBuilder<EnvironmentBloc, EnvironmentState>(
+        key: const Key('environment-list'),
         cubit: _bloc,
         buildWhen: (a, b) => a.data != b.data,
         builder: (context, state) {

@@ -50,6 +50,7 @@ class _ProxyPageState extends State<ProxyPage> with StateMixin<ProxyPage> {
         onBack: () => true,
         // Title.
         title: BlocBuilder<ProxyBloc, ProxyState>(
+          key: const Key('proxy-title'),
           cubit: _bloc,
           buildWhen: (a, b) => a.search != b.search,
           builder: (context, state) {
@@ -74,6 +75,7 @@ class _ProxyPageState extends State<ProxyPage> with StateMixin<ProxyPage> {
                   Text(i18n.proxy),
                   // Counter.
                   BlocBuilder<ProxyBloc, ProxyState>(
+                    key: const Key('proxy-counter'),
                     cubit: _bloc,
                     buildWhen: (a, b) => a.data.length != b.data.length,
                     builder: (context, state) {
@@ -115,6 +117,7 @@ class _ProxyPageState extends State<ProxyPage> with StateMixin<ProxyPage> {
       ),
       // List.
       body: BlocBuilder<ProxyBloc, ProxyState>(
+        key: const Key('proxy-list'),
         cubit: _bloc,
         buildWhen: (a, b) => a.data != b.data,
         builder: (context, state) {

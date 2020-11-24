@@ -17,10 +17,13 @@ import 'package:restler/data/entities/query_entity.dart';
 import 'package:restler/data/entities/redirect_entity.dart';
 import 'package:restler/data/entities/request_auth_entity.dart';
 import 'package:restler/data/entities/request_body_entity.dart';
+import 'package:restler/data/entities/request_data_entity.dart';
 import 'package:restler/data/entities/request_entity.dart';
 import 'package:restler/data/entities/request_header_entity.dart';
+import 'package:restler/data/entities/request_notification_entity.dart';
 import 'package:restler/data/entities/request_query_entity.dart';
 import 'package:restler/data/entities/request_settings_entity.dart';
+import 'package:restler/data/entities/request_target_entity.dart';
 import 'package:restler/data/entities/response_entity.dart';
 import 'package:restler/data/entities/target_entity.dart';
 import 'package:restler/data/entities/variable_entity.dart';
@@ -883,10 +886,13 @@ class RequestBloc extends Bloc<RequestEvent, RequestState>
     final request = state.request.copyWith(
       method: 'GET',
       scheme: 'https',
-      body: const RequestBodyEntity(),
-      query: const RequestQueryEntity(),
-      header: const RequestHeaderEntity(),
-      auth: const RequestAuthEntity(),
+      body: RequestBodyEntity.empty,
+      query: RequestQueryEntity.empty,
+      header: RequestHeaderEntity.empty,
+      target: RequestTargetEntity.empty,
+      data: RequestDataEntity.empty,
+      notification: RequestNotificationEntity.empty,
+      auth: RequestAuthEntity.empty,
       url: '',
       settings: RequestSettingsEntity.empty,
     );

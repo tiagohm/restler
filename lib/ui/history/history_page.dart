@@ -50,6 +50,7 @@ class _HistoryPageState extends State<HistoryPage>
         onBack: () => true,
         // Title.
         title: BlocBuilder<HistoryBloc, HistoryState>(
+          key: const Key('history-title'),
           cubit: _bloc,
           buildWhen: (a, b) => a.search != b.search,
           builder: (context, state) {
@@ -74,6 +75,7 @@ class _HistoryPageState extends State<HistoryPage>
                   Text(i18n.history),
                   // Counter.
                   BlocBuilder<HistoryBloc, HistoryState>(
+                    key: const Key('history-counter'),
                     cubit: _bloc,
                     buildWhen: (a, b) => a.data.length != b.data.length,
                     builder: (context, state) {
@@ -125,6 +127,7 @@ class _HistoryPageState extends State<HistoryPage>
       ),
       // List.
       body: BlocBuilder<HistoryBloc, HistoryState>(
+        key: const Key('history-list'),
         cubit: _bloc,
         buildWhen: (a, b) => a.data != b.data,
         builder: (context, state) {

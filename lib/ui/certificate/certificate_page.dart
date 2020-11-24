@@ -51,6 +51,7 @@ class _CertificatePageState extends State<CertificatePage>
         onBack: () => true,
         // Title.
         title: BlocBuilder<CertificateBloc, CertificateState>(
+          key: const Key('certificate-title'),
           cubit: _bloc,
           buildWhen: (a, b) => a.search != b.search,
           builder: (context, state) {
@@ -75,6 +76,7 @@ class _CertificatePageState extends State<CertificatePage>
                   Text(i18n.certificate),
                   // Counter.
                   BlocBuilder<CertificateBloc, CertificateState>(
+                    key: const Key('certificate-counter'),
                     cubit: _bloc,
                     buildWhen: (a, b) => a.data.length != b.data.length,
                     builder: (context, state) {
@@ -116,6 +118,7 @@ class _CertificatePageState extends State<CertificatePage>
       ),
       // List.
       body: BlocBuilder<CertificateBloc, CertificateState>(
+        key: const Key('certificate-list'),
         cubit: _bloc,
         buildWhen: (a, b) => a.data != b.data,
         builder: (context, state) {

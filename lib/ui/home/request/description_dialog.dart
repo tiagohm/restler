@@ -79,7 +79,7 @@ class _DescriptionDialogState extends State<DescriptionDialog>
                     autocorrect: false,
                     maxLines: null,
                     minLines: 13,
-                    buildCounter: _charCounter,
+                    buildCounter: charCounter,
                     decoration: InputDecoration(
                       hintText: i18n.enterTextHere,
                     ),
@@ -97,21 +97,6 @@ class _DescriptionDialogState extends State<DescriptionDialog>
           },
         );
       },
-    );
-  }
-
-  Widget _charCounter(
-    BuildContext context, {
-    int currentLength,
-    int maxLength,
-    bool isFocused,
-  }) {
-    return Text(
-      i18n.charCount(currentLength),
-      style: TextStyle(
-        fontSize: 12,
-        color: isFocused ? Theme.of(context).indicatorColor : null,
-      ),
     );
   }
 

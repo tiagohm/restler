@@ -50,6 +50,7 @@ class _ResponsePageState extends State<ResponsePage>
             tabs: [
               // Body.
               BlocBuilder<ResponseBloc, ResponseState>(
+                key: const Key('response-tab-body'),
                 cubit: widget.bloc,
                 builder: (context, state) {
                   return CheckableTab(
@@ -80,6 +81,7 @@ class _ResponsePageState extends State<ResponsePage>
               ),
               // Header.
               BlocBuilder<ResponseBloc, ResponseState>(
+                key: const Key('response-tab-header'),
                 cubit: widget.bloc,
                 buildWhen: (a, b) =>
                     a.response.headers.length != b.response.headers.length,
@@ -93,6 +95,7 @@ class _ResponsePageState extends State<ResponsePage>
               ),
               // Cookie.
               BlocBuilder<ResponseBloc, ResponseState>(
+                key: const Key('response-tab-cookie'),
                 cubit: widget.bloc,
                 buildWhen: (a, b) =>
                     a.response.cookies.length != b.response.cookies.length,
@@ -106,6 +109,7 @@ class _ResponsePageState extends State<ResponsePage>
               ),
               // Redirect.
               BlocBuilder<ResponseBloc, ResponseState>(
+                key: const Key('response-tab-redirect'),
                 cubit: widget.bloc,
                 buildWhen: (a, b) =>
                     a.response.redirects.length != b.response.redirects.length,
@@ -127,6 +131,7 @@ class _ResponsePageState extends State<ResponsePage>
                 children: [
                   // Body.
                   BlocBuilder<ResponseBloc, ResponseState>(
+                    key: const Key('response-content-body'),
                     cubit: widget.bloc,
                     builder: (context, state) {
                       return ResponseBodyPage(
@@ -138,6 +143,7 @@ class _ResponsePageState extends State<ResponsePage>
                   ),
                   // Header.
                   BlocBuilder<ResponseBloc, ResponseState>(
+                    key: const Key('response-content-header'),
                     cubit: widget.bloc,
                     buildWhen: (a, b) =>
                         a.response.headers != b.response.headers,
@@ -147,6 +153,7 @@ class _ResponsePageState extends State<ResponsePage>
                   ),
                   // Cookie.
                   BlocBuilder<ResponseBloc, ResponseState>(
+                    key: const Key('response-content-cookie'),
                     cubit: widget.bloc,
                     buildWhen: (a, b) =>
                         a.response.cookies != b.response.cookies,
@@ -156,6 +163,7 @@ class _ResponsePageState extends State<ResponsePage>
                   ),
                   // Redirect.
                   BlocBuilder<ResponseBloc, ResponseState>(
+                    key: const Key('response-content-redirect'),
                     cubit: widget.bloc,
                     buildWhen: (a, b) =>
                         a.response.redirects != b.response.redirects,

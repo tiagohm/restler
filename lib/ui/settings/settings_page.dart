@@ -64,6 +64,7 @@ class _SettingsPageState extends State<SettingsPage>
                 children: <Widget>[
                   // Follow Redirects.
                   BlocBuilder<SettingsBloc, SettingsState>(
+                    key: const Key('settings-follow-redirects'),
                     cubit: _bloc,
                     buildWhen: (a, b) => a.followRedirects != b.followRedirects,
                     builder: (context, state) {
@@ -78,6 +79,7 @@ class _SettingsPageState extends State<SettingsPage>
                   ),
                   // Max Redirects.
                   BlocBuilder<SettingsBloc, SettingsState>(
+                    key: const Key('settings-max-redirects'),
                     cubit: _bloc,
                     buildWhen: (a, b) => a.maxRedirects != b.maxRedirects,
                     builder: (context, state) {
@@ -97,6 +99,7 @@ class _SettingsPageState extends State<SettingsPage>
                   ),
                   // Connection timeout.
                   BlocBuilder<SettingsBloc, SettingsState>(
+                    key: const Key('settings-conn-timeout'),
                     cubit: _bloc,
                     buildWhen: (a, b) =>
                         a.connectionTimeout != b.connectionTimeout,
@@ -117,6 +120,7 @@ class _SettingsPageState extends State<SettingsPage>
                   ),
                   // Session timeout.
                   BlocBuilder<SettingsBloc, SettingsState>(
+                    key: const Key('settings-session-timeout'),
                     cubit: _bloc,
                     buildWhen: (a, b) => a.sessionTimeout != b.sessionTimeout,
                     builder: (context, state) {
@@ -133,6 +137,7 @@ class _SettingsPageState extends State<SettingsPage>
                   ),
                   // Validate Certificates.
                   BlocBuilder<SettingsBloc, SettingsState>(
+                    key: const Key('settings-validate-certificate'),
                     cubit: _bloc,
                     buildWhen: (a, b) =>
                         a.validateCertificates != b.validateCertificates,
@@ -149,6 +154,7 @@ class _SettingsPageState extends State<SettingsPage>
                   ),
                   // User-Agent.
                   BlocBuilder<SettingsBloc, SettingsState>(
+                    key: const Key('settings-user-agent'),
                     cubit: _bloc,
                     buildWhen: (a, b) => a.userAgent != b.userAgent,
                     builder: (context, state) {
@@ -181,6 +187,7 @@ class _SettingsPageState extends State<SettingsPage>
                 children: <Widget>[
                   // Save Response Body.
                   BlocBuilder<SettingsBloc, SettingsState>(
+                    key: const Key('settings-save-response'),
                     cubit: _bloc,
                     buildWhen: (a, b) =>
                         a.saveResponseBody != b.saveResponseBody,
@@ -196,6 +203,7 @@ class _SettingsPageState extends State<SettingsPage>
                   ),
                   // Font size.
                   BlocBuilder<SettingsBloc, SettingsState>(
+                    key: const Key('settings-font-size'),
                     cubit: _bloc,
                     buildWhen: (a, b) =>
                         a.responseBodyFontSize != b.responseBodyFontSize,
@@ -225,6 +233,7 @@ class _SettingsPageState extends State<SettingsPage>
                 children: <Widget>[
                   // Enable.
                   BlocBuilder<SettingsBloc, SettingsState>(
+                    key: const Key('settings-cache'),
                     cubit: _bloc,
                     buildWhen: (a, b) => a.cacheEnabled != b.cacheEnabled,
                     builder: (context, state) {
@@ -244,6 +253,7 @@ class _SettingsPageState extends State<SettingsPage>
                   ),
                   // Max Size.
                   BlocBuilder<SettingsBloc, SettingsState>(
+                    key: const Key('settings-max-size'),
                     cubit: _bloc,
                     buildWhen: (a, b) => a.cacheMaxSize != b.cacheMaxSize,
                     builder: (context, state) {
@@ -264,6 +274,7 @@ class _SettingsPageState extends State<SettingsPage>
                   ),
                   // Clear.
                   BlocBuilder<SettingsBloc, SettingsState>(
+                    key: const Key('settings-clear'),
                     cubit: _bloc,
                     buildWhen: (a, b) => a.cacheSize != b.cacheSize,
                     builder: (context, state) {

@@ -93,6 +93,7 @@ class _CopyCallDialogState extends State<CopyCallDialog>
                 // Workspace.
                 BlocBuilder<DropdownBloc<WorkspaceEntity>,
                     DropdownState<WorkspaceEntity>>(
+                  key: const Key('dropdown-workspace'),
                   cubit: _workspaceDropdownBloc,
                   builder: (context, state) {
                     return DropdownButtonFormField<WorkspaceEntity>(
@@ -115,6 +116,7 @@ class _CopyCallDialogState extends State<CopyCallDialog>
                 // Folder.
                 BlocBuilder<DropdownBloc<FolderEntity>,
                     DropdownState<FolderEntity>>(
+                  key: const Key('dropdown-folder'),
                   cubit: _folderDropdownBloc,
                   builder: (context, state) {
                     return DropdownButtonFormField<FolderEntity>(

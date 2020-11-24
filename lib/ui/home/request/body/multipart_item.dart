@@ -7,6 +7,7 @@ import 'package:restler/helper.dart';
 import 'package:restler/mdi.dart';
 import 'package:restler/ui/constants.dart';
 import 'package:restler/ui/widgets/dot_menu_button.dart';
+import 'package:restler/ui/widgets/multiline_text_dialog.dart';
 import 'package:restler/ui/widgets/state_mixin.dart';
 import 'package:restler/ui/widgets/powerful_text_field.dart';
 
@@ -116,7 +117,6 @@ class _MultipartItemState extends State<MultipartItem>
                   if (type == MultipartType.text) {
                     return PowerfulTextField(
                       controller: _valueTextController,
-                      // TODO: Suportar futuramente multiline exibindo num dialog.
                       keyboardType: TextInputType.text,
                       style: defaultInputTextStyle,
                       hintText: i18n.value.toLowerCase(),
@@ -127,6 +127,7 @@ class _MultipartItemState extends State<MultipartItem>
                       },
                       suggestionsCallback: variableSuggestions,
                       showDefaultItems: false,
+                      maxLines: null,
                     );
                   } else {
                     // Choose file...
@@ -155,44 +156,79 @@ class _MultipartItemState extends State<MultipartItem>
           valueListenable: _type,
           builder: (context, type, child) {
             // Menu.
-            return DotMenuButton<MultipartItemAction>(
+            return DotMenuButton<String>(
               items: _obtainActionsByType(type),
               itemBuilder: (context, index, action) {
                 switch (action) {
                   // Text.
-                  case MultipartItemAction.text:
+                  case 'text':
                     return ListTile(
                       leading: const Icon(Mdi.text),
                       title: Text(i18n.text),
                     );
                   // File.
-                  case MultipartItemAction.file:
+                  case 'file':
                     return ListTile(
                       leading: const Icon(Mdi.file),
                       title: Text(i18n.file),
                     );
-                  case MultipartItemAction.remove:
+                  case 'remove':
                     return ListTile(
                       leading: const Icon(Icons.clear),
                       title: Text(i18n.clear),
                     );
                   // Duplicate.
-                  case MultipartItemAction.duplicate:
+                  case 'duplicate':
                     return ListTile(
                       leading: const Icon(Icons.content_copy),
                       title: Text(i18n.duplicate),
                     );
                   // Delete.
-                  case MultipartItemAction.delete:
+                  case 'delete':
                     return ListTile(
                       leading: const Icon(Icons.delete),
                       title: Text(i18n.delete),
+                    );
+                  // Edit.
+                  case 'edit':
+                    return ListTile(
+                      leading: const Icon(Icons.edit),
+                      title: Text(i18n.edit),
                     );
                   default:
                     return null;
                 }
               },
-              onSelected: _onActionSelected,
+              onSelected: (value) async {
+                switch (value) {
+                  case 'remove':
+                    return _onActionSelected(MultipartItemAction.remove);
+                  case 'text':
+                    return _onActionSelected(MultipartItemAction.text);
+                  case 'file':
+                    return _onActionSelected(MultipartItemAction.file);
+                  case 'duplicate':
+                    return _onActionSelected(MultipartItemAction.duplicate);
+                  case 'delete':
+                    return _onActionSelected(MultipartItemAction.delete);
+                  case 'edit':
+                    final res = await MultilineTextDialog.show(
+                      context,
+                      i18n.value,
+                      _valueTextController.text,
+                      suggestionsCallback: variableSuggestions,
+                    );
+
+                    if (res != null && !res.cancelled) {
+                      final text = res.data;
+                      _valueTextController.text = text;
+                      widget.onValueChanged?.call(text);
+                      widget.onItemChanged
+                          ?.call(widget.item.copyWith(value: text));
+                    }
+                    break;
+                }
+              },
             );
           },
         ),
@@ -200,34 +236,42 @@ class _MultipartItemState extends State<MultipartItem>
     );
   }
 
-  List<MultipartItemAction> _obtainActionsByType(MultipartType type) {
-    return [
-      if (type == MultipartType.file) ...[
-        MultipartItemAction.remove,
-        MultipartItemAction.text,
-      ] else
-        MultipartItemAction.file,
-      MultipartItemAction.duplicate,
-      MultipartItemAction.delete,
-    ];
+  static const _fileActions = [
+    'remove',
+    'text',
+    'duplicate',
+    null,
+    'delete',
+  ];
+
+  static const _textActions = [
+    'file',
+    'duplicate',
+    'edit',
+    null,
+    'delete',
+  ];
+
+  List<String> _obtainActionsByType(MultipartType type) {
+    return type == MultipartType.file ? _fileActions : _textActions;
   }
 
   void _onActionSelected(MultipartItemAction action) {
+    final item = widget.item;
+
     if (action == MultipartItemAction.file) {
       _type.value = MultipartType.file;
       widget.onTypeChanged?.call(MultipartType.file);
-      widget.onItemChanged
-          ?.call(widget.item.copyWith(type: MultipartType.file));
+      widget.onItemChanged?.call(item.copyWith(type: MultipartType.file));
     } else if (action == MultipartItemAction.text) {
       _type.value = MultipartType.text;
       widget.onTypeChanged?.call(MultipartType.file);
-      widget.onItemChanged
-          ?.call(widget.item.copyWith(type: MultipartType.text));
+      widget.onItemChanged?.call(item.copyWith(type: MultipartType.text));
     } else if (action == MultipartItemAction.remove) {
       _file.value = MultipartFileEntity.empty;
       widget.onFileChanged?.call(MultipartFileEntity.empty);
       widget.onItemChanged
-          ?.call(widget.item.copyWith(file: MultipartFileEntity.empty));
+          ?.call(item.copyWith(file: MultipartFileEntity.empty));
     }
 
     widget.onActionSelected?.call(action);
