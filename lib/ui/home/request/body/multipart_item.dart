@@ -127,6 +127,7 @@ class _MultipartItemState extends State<MultipartItem>
                       },
                       suggestionsCallback: variableSuggestions,
                       showDefaultItems: false,
+                      maxLines: null,
                     );
                   } else {
                     // Choose file...
