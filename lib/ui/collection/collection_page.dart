@@ -69,6 +69,7 @@ class _CollectionPageState extends State<CollectionPage>
         },
         // Title.
         title: BlocBuilder<CollectionBloc, CollectionState>(
+          key: const Key('collection-title'),
           cubit: _bloc,
           buildWhen: (a, b) => a.search != b.search,
           builder: (context, state) {
@@ -93,6 +94,7 @@ class _CollectionPageState extends State<CollectionPage>
                   Text(i18n.collection),
                   // Counter.
                   BlocBuilder<CollectionBloc, CollectionState>(
+                    key: const Key('collection-counter'),
                     cubit: _bloc,
                     buildWhen: (a, b) => a.data.length != b.data.length,
                     builder: (context, state) {
@@ -150,6 +152,7 @@ class _CollectionPageState extends State<CollectionPage>
       ),
       // List.
       body: BlocBuilder<CollectionBloc, CollectionState>(
+        key: const Key('collection-list'),
         cubit: _bloc,
         buildWhen: (a, b) => a.data != b.data,
         builder: (context, state) {

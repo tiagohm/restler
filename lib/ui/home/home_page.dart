@@ -131,6 +131,7 @@ class _HomePageState extends State<HomePage>
         ),
         // Title.
         title: BlocBuilder<TabBloc, TabState>(
+          key: const Key('home-title'),
           cubit: _tabBloc,
           buildWhen: (a, b) => a.tabs != b.tabs,
           builder: (context, tab) {
@@ -166,6 +167,7 @@ class _HomePageState extends State<HomePage>
         actions: [
           // Save.
           BlocBuilder<TabBloc, TabState>(
+            key: const Key('home-action-save'),
             cubit: _tabBloc,
             buildWhen: (a, b) =>
                 a.currentTab?.saved != b.currentTab?.saved ||
@@ -184,6 +186,7 @@ class _HomePageState extends State<HomePage>
           ),
           // Send.
           BlocBuilder<RequestBloc, RequestState>(
+            key: const Key('home-action-send'),
             cubit: _requestBloc,
             buildWhen: (a, b) => a.sending != b.sending,
             builder: (context, state) {
@@ -306,6 +309,7 @@ class _HomePageState extends State<HomePage>
                               children: <Widget>[
                                 // Type.
                                 BlocBuilder<RequestBloc, RequestState>(
+                                  key: const Key('home-url-type'),
                                   cubit: _requestBloc,
                                   buildWhen: (a, b) =>
                                       a.request.type != b.request.type,
@@ -321,6 +325,7 @@ class _HomePageState extends State<HomePage>
                                 // Method.
                                 if (_isRest)
                                   BlocBuilder<RequestBloc, RequestState>(
+                                    key: const Key('home-url-method'),
                                     cubit: _requestBloc,
                                     buildWhen: (a, b) =>
                                         a.request.method != b.request.method,
@@ -355,6 +360,7 @@ class _HomePageState extends State<HomePage>
                                 // Scheme.
                                 if (_isRest)
                                   BlocBuilder<RequestBloc, RequestState>(
+                                    key: const Key('home-url-scheme'),
                                     cubit: _requestBloc,
                                     buildWhen: (a, b) =>
                                         a.request.scheme != b.request.scheme,
@@ -448,6 +454,7 @@ class _HomePageState extends State<HomePage>
                             children: [
                               // Status.
                               BlocBuilder<ResponseBloc, ResponseState>(
+                                key: const Key('home-response-status'),
                                 cubit: _responseBloc,
                                 buildWhen: (a, b) =>
                                     a.response.status != b.response.status,
@@ -463,6 +470,7 @@ class _HomePageState extends State<HomePage>
                               Container(width: 4),
                               // Time.
                               BlocBuilder<ResponseBloc, ResponseState>(
+                                key: const Key('home-response-time'),
                                 cubit: _responseBloc,
                                 buildWhen: (a, b) =>
                                     a.response.time != b.response.time,
@@ -476,6 +484,7 @@ class _HomePageState extends State<HomePage>
                               Container(width: 4),
                               // Size.
                               BlocBuilder<ResponseBloc, ResponseState>(
+                                key: const Key('home-response-size'),
                                 cubit: _responseBloc,
                                 buildWhen: (a, b) =>
                                     a.response.size != b.response.size,

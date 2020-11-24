@@ -59,6 +59,7 @@ class _SseState extends State<SsePage>
         onBack: () => true,
         // Title.
         title: BlocBuilder<SseBloc, SseState>(
+          key: const Key('sse-title'),
           cubit: _bloc,
           buildWhen: (a, b) => a.search != b.search,
           builder: (context, state) {
@@ -92,6 +93,7 @@ class _SseState extends State<SsePage>
             return const Icon(Icons.search);
           } else if (action == SsePageAction.connect) {
             return BlocBuilder<SseBloc, SseState>(
+              key: const Key('sse-state-icon'),
               cubit: _bloc,
               buildWhen: (a, b) => a.connected != b.connected,
               builder: (context, state) {
@@ -155,6 +157,7 @@ class _SseState extends State<SsePage>
                 tabs: <Widget>[
                   // Response.
                   BlocBuilder<SseBloc, SseState>(
+                    key: const Key('sse-tab-response'),
                     cubit: _bloc,
                     buildWhen: (a, b) {
                       return a.filteredMessages.length !=
@@ -191,6 +194,7 @@ class _SseState extends State<SsePage>
         children: <Widget>[
           // Response.
           BlocBuilder<SseBloc, SseState>(
+            key: const Key('sse-content-response'),
             cubit: _bloc,
             buildWhen: (a, b) => a.filteredMessages != b.filteredMessages,
             builder: (context, state) {

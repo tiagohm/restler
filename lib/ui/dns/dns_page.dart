@@ -49,6 +49,7 @@ class _DnsPageState extends State<DnsPage> with StateMixin<DnsPage> {
         onBack: () => true,
         // Title.
         title: BlocBuilder<DnsBloc, DnsState>(
+          key: const Key('dns-title'),
           cubit: _bloc,
           buildWhen: (a, b) => a.search != b.search,
           builder: (context, state) {
@@ -73,6 +74,7 @@ class _DnsPageState extends State<DnsPage> with StateMixin<DnsPage> {
                   Text(i18n.dns),
                   // Counter.
                   BlocBuilder<DnsBloc, DnsState>(
+                    key: const Key('dns-counter'),
                     cubit: _bloc,
                     buildWhen: (a, b) => a.data.length != b.data.length,
                     builder: (context, state) {
@@ -114,6 +116,7 @@ class _DnsPageState extends State<DnsPage> with StateMixin<DnsPage> {
       ),
       // List.
       body: BlocBuilder<DnsBloc, DnsState>(
+        key: const Key('dns-list'),
         cubit: _bloc,
         buildWhen: (a, b) => a.data != b.data,
         builder: (context, state) {
