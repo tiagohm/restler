@@ -1,4 +1,5 @@
-import 'package:file_picker/file_picker.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -17,10 +18,10 @@ import 'package:restler/ui/collection/import_dialog.dart';
 import 'package:restler/ui/collection/move_call_dialog.dart';
 import 'package:restler/ui/collection/move_folder_dialog.dart';
 import 'package:restler/ui/widgets/default_app_bar.dart';
-import 'package:restler/ui/widgets/state_mixin.dart';
 import 'package:restler/ui/widgets/input_text_dialog.dart';
 import 'package:restler/ui/widgets/list_page.dart';
 import 'package:restler/ui/widgets/powerful_text_field.dart';
+import 'package:restler/ui/widgets/state_mixin.dart';
 
 enum CollectionPageAction { search, import, export }
 
@@ -140,7 +141,7 @@ class _CollectionPageState extends State<CollectionPage>
 
             if (res != null && !res.cancelled && res.data != null) {
               if (await handlePermission(Permission.storage)) {
-                final path = await FilePicker.platform.getDirectoryPath();
+                final path = kiwi<Directory>('app').path;
 
                 if (path != null) {
                   _bloc.add(CollectionExported(res.data, path));

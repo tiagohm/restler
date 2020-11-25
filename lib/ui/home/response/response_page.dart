@@ -1,4 +1,5 @@
-import 'package:file_picker/file_picker.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -12,9 +13,9 @@ import 'package:restler/ui/home/response/response_cookie_page.dart';
 import 'package:restler/ui/home/response/response_header_page.dart';
 import 'package:restler/ui/home/response/response_redirect_page.dart';
 import 'package:restler/ui/widgets/checkable_tab.dart';
-import 'package:restler/ui/widgets/state_mixin.dart';
 import 'package:restler/ui/widgets/input_text_dialog.dart';
 import 'package:restler/ui/widgets/label.dart';
+import 'package:restler/ui/widgets/state_mixin.dart';
 
 enum BodyAction { copy, pretty, raw, visual, saveAsFile }
 
@@ -267,7 +268,7 @@ class _ResponsePageState extends State<ResponsePage>
 
           // O usuário escolheu um nome (não cancelou a janela).
           if (res != null && !res.cancelled) {
-            final path = await FilePicker.platform.getDirectoryPath();
+            final path = kiwi<Directory>('app').path;
 
             if (path != null) {
               widget.bloc.add(ResponseBodySavedAsFile(res.data, path));

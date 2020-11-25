@@ -56,6 +56,9 @@ import 'package:sqflite/sqflite.dart';
 final kiwi = KiwiContainer();
 
 Future<void> initInject() async {
+  // App.
+  final appStorage = await getExternalStorageDirectory();
+  kiwi.registerInstance(appStorage, name: 'app');
   // Database.
   final database = await _initDatabase();
   final storage = Storage(database);
