@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:restler/helper.dart';
-import 'package:restler/i18n.dart';
 import 'package:restler/ui/constants.dart';
 import 'package:restler/ui/widgets/powerful_text_field.dart';
 import 'package:restler/ui/widgets/state_mixin.dart';
