@@ -52,36 +52,39 @@ class _DonationDialogState extends State<DonationDialog>
       onDone: _onDonate,
       title: i18n.donation,
       bodyBuilder: (context) {
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            // Message.
-            Text(i18n.donateMessage),
-            // Products.
-            ValueListenableBuilder<_Product>(
-              valueListenable: _selectedProduct,
-              builder: (context, product, child) {
-                return ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: _products.length,
-                  itemBuilder: (context, index) {
-                    // Product.
-                    return RadioListTile<_Product>(
-                      title: Text(_products[index].price),
-                      value: _products[index],
-                      groupValue: _selectedProduct.value,
-                      onChanged: (item) {
-                        print('${item.id}: ${item.price}');
-                        _selectedProduct.value = item;
-                      },
-                    );
-                  },
-                );
-              },
-            ),
-            // Instruction.
-            Text(i18n.donateInstruction),
-          ],
+        return Container(
+          width: 0,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              // Message.
+              Text(i18n.donateMessage),
+              // Products.
+              ValueListenableBuilder<_Product>(
+                valueListenable: _selectedProduct,
+                builder: (context, product, child) {
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: _products.length,
+                    itemBuilder: (context, index) {
+                      // Product.
+                      return RadioListTile<_Product>(
+                        title: Text(_products[index].price),
+                        value: _products[index],
+                        groupValue: _selectedProduct.value,
+                        onChanged: (item) {
+                          print('${item.id}: ${item.price}');
+                          _selectedProduct.value = item;
+                        },
+                      );
+                    },
+                  );
+                },
+              ),
+              // Instruction.
+              Text(i18n.donateInstruction),
+            ],
+          ),
         );
       },
     );

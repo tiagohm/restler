@@ -55,6 +55,7 @@ class _VariablePageState extends State<VariablePage>
         onBack: () => true,
         // Title.
         title: BlocBuilder<VariableBloc, VariableState>(
+          key: const Key('variable-title'),
           cubit: _bloc,
           buildWhen: (a, b) => a.search != b.search,
           builder: (context, state) {
@@ -79,6 +80,7 @@ class _VariablePageState extends State<VariablePage>
                   Text(widget.environment.name ?? i18n.global),
                   // Counter.
                   BlocBuilder<VariableBloc, VariableState>(
+                    key: const Key('variable-counter'),
                     cubit: _bloc,
                     buildWhen: (a, b) => a.data.length != b.data.length,
                     builder: (context, state) {
@@ -120,6 +122,7 @@ class _VariablePageState extends State<VariablePage>
       ),
       // List.
       body: BlocBuilder<VariableBloc, VariableState>(
+        key: const Key('variable-list'),
         cubit: _bloc,
         buildWhen: (a, b) => a.data != b.data,
         builder: (context, state) {

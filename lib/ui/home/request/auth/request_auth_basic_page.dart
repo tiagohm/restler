@@ -45,33 +45,33 @@ class _RequestAuthBasicState extends State<RequestAuthBasicPage>
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8),
-      child: ListView(
-        shrinkWrap: true,
-        children: [
-          // Username.
-          ListTile(
-            title: PowerfulTextField(
-              controller: _usernameController,
-              hintText: i18n.username,
-              style: defaultInputTextStyle,
-              onChanged: widget.onUsernameChanged,
-              suggestionsCallback: variableSuggestions,
-            ),
+    return ListView(
+      padding: const EdgeInsets.all(16),
+      shrinkWrap: true,
+      children: [
+        // Username.
+        ListTile(
+          contentPadding: EdgeInsets.zero,
+          title: PowerfulTextField(
+            controller: _usernameController,
+            hintText: i18n.username,
+            style: defaultInputTextStyle,
+            onChanged: widget.onUsernameChanged,
+            suggestionsCallback: variableSuggestions,
           ),
-          // Password.
-          ListTile(
-            title: PowerfulTextField(
-              controller: _passwordController,
-              hintText: i18n.password,
-              style: defaultInputTextStyle,
-              onChanged: widget.onPasswordChanged,
-              isPassword: true,
-            ),
+        ),
+        // Password.
+        ListTile(
+          contentPadding: EdgeInsets.zero,
+          title: PowerfulTextField(
+            controller: _passwordController,
+            hintText: i18n.password,
+            style: defaultInputTextStyle,
+            onChanged: widget.onPasswordChanged,
+            isPassword: true,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

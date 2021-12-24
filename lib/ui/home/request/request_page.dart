@@ -62,13 +62,16 @@ class _RequestPageState extends State<RequestPage>
               // Target.
               if (!widget.isRest)
                 BlocBuilder<RequestBloc, RequestState>(
+                  key: const Key('request-fcm-tab-target'),
                   cubit: widget.bloc,
                   buildWhen: (a, b) {
                     return a.request.target.enabled !=
                             b.request.target.enabled ||
-                        a.request.target.targets != b.request.target.targets;
+                        a.request.target.targets.length !=
+                            b.request.target.targets.length;
                   },
                   builder: (context, state) {
+                    print('vish gg: ${state.request.target.targets}');
                     return CheckableTab(
                       title: Text(i18n.targets.toUpperCase()),
                       isCheckable: false,
@@ -79,10 +82,12 @@ class _RequestPageState extends State<RequestPage>
               // Data.
               if (!widget.isRest)
                 BlocBuilder<RequestBloc, RequestState>(
+                  key: const Key('request-fcm-tab-data'),
                   cubit: widget.bloc,
                   buildWhen: (a, b) {
                     return a.request.data.enabled != b.request.data.enabled ||
-                        a.request.data.data != b.request.data.data;
+                        a.request.data.data.length !=
+                            b.request.data.data.length;
                   },
                   builder: (context, state) {
                     return CheckableTab(
@@ -98,12 +103,13 @@ class _RequestPageState extends State<RequestPage>
               // Notification.
               if (!widget.isRest)
                 BlocBuilder<RequestBloc, RequestState>(
+                  key: const Key('request-fcm-tab-notification'),
                   cubit: widget.bloc,
                   buildWhen: (a, b) {
                     return a.request.notification.enabled !=
                             b.request.notification.enabled ||
-                        a.request.notification.notifications !=
-                            b.request.notification.notifications;
+                        a.request.notification.notifications.length !=
+                            b.request.notification.notifications.length;
                   },
                   builder: (context, state) {
                     return CheckableTab(
@@ -122,6 +128,7 @@ class _RequestPageState extends State<RequestPage>
               // Body.
               if (widget.isRest)
                 BlocBuilder<RequestBloc, RequestState>(
+                  key: const Key('request-rest-tab-body'),
                   cubit: widget.bloc,
                   buildWhen: (a, b) {
                     return a.request.body != b.request.body;
@@ -150,10 +157,12 @@ class _RequestPageState extends State<RequestPage>
               // Query.
               if (widget.isRest)
                 BlocBuilder<RequestBloc, RequestState>(
+                  key: const Key('request-rest-tab-query'),
                   cubit: widget.bloc,
                   buildWhen: (a, b) {
                     return a.request.query.enabled != b.request.query.enabled ||
-                        a.request.query.queries != b.request.query.queries;
+                        a.request.query.queries.length !=
+                            b.request.query.queries.length;
                   },
                   builder: (context, state) {
                     return CheckableTab(
@@ -169,11 +178,13 @@ class _RequestPageState extends State<RequestPage>
               // Header.
               if (widget.isRest)
                 BlocBuilder<RequestBloc, RequestState>(
+                  key: const Key('request-rest-tab-header'),
                   cubit: widget.bloc,
                   buildWhen: (a, b) {
                     return a.request.header.enabled !=
                             b.request.header.enabled ||
-                        a.request.header.headers != b.request.header.headers;
+                        a.request.header.headers.length !=
+                            b.request.header.headers.length;
                   },
                   builder: (context, state) {
                     return CheckableTab(
@@ -189,6 +200,7 @@ class _RequestPageState extends State<RequestPage>
               // Auth.
               if (widget.isRest)
                 BlocBuilder<RequestBloc, RequestState>(
+                  key: const Key('request-rest-tab-auth'),
                   cubit: widget.bloc,
                   buildWhen: (a, b) {
                     return a.request.auth.type != b.request.auth.type ||
@@ -226,6 +238,7 @@ class _RequestPageState extends State<RequestPage>
                   // Target.
                   if (!widget.isRest)
                     BlocBuilder<RequestBloc, RequestState>(
+                      key: const Key('request-fcm-content-target'),
                       cubit: widget.bloc,
                       buildWhen: (a, b) {
                         return a.request.target.targets !=
@@ -252,6 +265,7 @@ class _RequestPageState extends State<RequestPage>
                   // Data.
                   if (!widget.isRest)
                     BlocBuilder<RequestBloc, RequestState>(
+                      key: const Key('request-fcm-content-data'),
                       cubit: widget.bloc,
                       buildWhen: (a, b) {
                         return a.request.data.data != b.request.data.data;
@@ -277,6 +291,7 @@ class _RequestPageState extends State<RequestPage>
                   // Notification.
                   if (!widget.isRest)
                     BlocBuilder<RequestBloc, RequestState>(
+                      key: const Key('request-fcm-content-notification'),
                       cubit: widget.bloc,
                       buildWhen: (a, b) {
                         return a.request.notification.notifications !=
@@ -305,6 +320,7 @@ class _RequestPageState extends State<RequestPage>
                   // Body.
                   if (widget.isRest)
                     BlocBuilder<RequestBloc, RequestState>(
+                      key: const Key('request-rest-content-body'),
                       cubit: widget.bloc,
                       buildWhen: (a, b) {
                         return a.request.body != b.request.body;
@@ -325,6 +341,7 @@ class _RequestPageState extends State<RequestPage>
                         else if (state.request.body.type ==
                             RequestBodyType.form) {
                           return BlocBuilder<RequestBloc, RequestState>(
+                            key: const Key('request-rest-content-body-form'),
                             cubit: widget.bloc,
                             buildWhen: (a, b) {
                               return a.request.body.formItems !=
@@ -353,6 +370,7 @@ class _RequestPageState extends State<RequestPage>
                         else if (state.request.body.type ==
                             RequestBodyType.multipart) {
                           return BlocBuilder<RequestBloc, RequestState>(
+                            key: const Key('request-rest-content-body-mult'),
                             cubit: widget.bloc,
                             buildWhen: (a, b) {
                               return a.request.body.multipartItems !=
@@ -381,6 +399,7 @@ class _RequestPageState extends State<RequestPage>
                         else if (state.request.body.type ==
                             RequestBodyType.file) {
                           return BlocBuilder<RequestBloc, RequestState>(
+                            key: const Key('request-rest-content-body-file'),
                             cubit: widget.bloc,
                             buildWhen: (a, b) {
                               return a.request.body.file != b.request.body.file;
@@ -402,6 +421,7 @@ class _RequestPageState extends State<RequestPage>
                         // Text.
                         else {
                           return BlocBuilder<RequestBloc, RequestState>(
+                            key: const Key('request-rest-content-body-text'),
                             cubit: widget.bloc,
                             buildWhen: (a, b) {
                               return a.request.body.text !=
@@ -429,6 +449,7 @@ class _RequestPageState extends State<RequestPage>
                   // Query.
                   if (widget.isRest)
                     BlocBuilder<RequestBloc, RequestState>(
+                      key: const Key('request-rest-content-query'),
                       cubit: widget.bloc,
                       buildWhen: (a, b) {
                         return a.request.query.queries !=
@@ -455,6 +476,7 @@ class _RequestPageState extends State<RequestPage>
                   // Header.
                   if (widget.isRest)
                     BlocBuilder<RequestBloc, RequestState>(
+                      key: const Key('request-rest-content-header'),
                       cubit: widget.bloc,
                       buildWhen: (a, b) {
                         return a.request.header.headers !=
@@ -481,6 +503,7 @@ class _RequestPageState extends State<RequestPage>
                   // Auth.
                   if (widget.isRest)
                     BlocBuilder<RequestBloc, RequestState>(
+                      key: const Key('request-rest-content-auth'),
                       cubit: widget.bloc,
                       buildWhen: (a, b) {
                         return a.request.auth.type != b.request.auth.type;
@@ -489,6 +512,7 @@ class _RequestPageState extends State<RequestPage>
                         switch (state.request.auth.type) {
                           case RequestAuthType.basic:
                             return BlocBuilder<RequestBloc, RequestState>(
+                              key: const Key('request-rest-content-auth-basic'),
                               cubit: widget.bloc,
                               buildWhen: (a, b) {
                                 return a.request.auth != b.request.auth;
@@ -508,6 +532,7 @@ class _RequestPageState extends State<RequestPage>
                             );
                           case RequestAuthType.bearer:
                             return BlocBuilder<RequestBloc, RequestState>(
+                              key: const Key('request-rest-content-auth-beare'),
                               cubit: widget.bloc,
                               buildWhen: (a, b) {
                                 return a.request.auth != b.request.auth;
@@ -527,6 +552,7 @@ class _RequestPageState extends State<RequestPage>
                             );
                           case RequestAuthType.digest:
                             return BlocBuilder<RequestBloc, RequestState>(
+                              key: const Key('request-rest-content-auth-diges'),
                               cubit: widget.bloc,
                               buildWhen: (a, b) {
                                 return a.request.auth != b.request.auth;
@@ -546,6 +572,7 @@ class _RequestPageState extends State<RequestPage>
                             );
                           case RequestAuthType.hawk:
                             return BlocBuilder<RequestBloc, RequestState>(
+                              key: const Key('request-rest-content-auth-hawk'),
                               cubit: widget.bloc,
                               buildWhen: (a, b) {
                                 return a.request.auth != b.request.auth;

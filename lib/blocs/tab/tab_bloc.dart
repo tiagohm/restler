@@ -400,12 +400,16 @@ class TabBloc extends Bloc<TabEvent, TabState> {
     final index = state.position;
 
     // Duplica a aba.
-    final duplicatedTab = tab.copyWith(
+    final duplicatedTab = TabEntity(
       uid: generateUuid(),
-      request: tab.request.clone(),
-      response: tab.response.copyWith(uid: generateUuid()),
       name: tab.name,
+      request: tab.request.clone(),
+      // response: tab.response.copyWith(uid: generateUuid()),
+      // call: tab.call,
+      favorited: tab.favorited,
+      openedAt: tab.openedAt,
       saved: true,
+      workspace: tab.workspace,
     );
 
     // Insere no banco e na lista de abas.

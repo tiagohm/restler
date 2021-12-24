@@ -113,406 +113,417 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
-    final scaffold = Scaffold(
-      key: _scaffoldKey,
-      resizeToAvoidBottomInset: false,
-      drawer: HomeDrawer(
-        onHistoryClosed: _open,
-        onCollectionClosed: _open,
-      ),
-      appBar: AppBar(
-        elevation: 0,
-        // Hamburger.
-        leading: IconButton(
-          icon: const Icon(Icons.menu),
-          onPressed: () {
-            _scaffoldKey.currentState.openDrawer();
-          },
+    return BlocProvider.value(
+      value: _workspaceBloc,
+      child: Scaffold(
+        key: _scaffoldKey,
+        resizeToAvoidBottomInset: false,
+        drawer: HomeDrawer(
+          onHistoryClosed: _open,
+          onCollectionClosed: _open,
         ),
-        // Title.
-        title: BlocBuilder<TabBloc, TabState>(
-          cubit: _tabBloc,
-          buildWhen: (a, b) => a.tabs != b.tabs,
-          builder: (context, tab) {
-            return HomeTab<TabEntity>(
-              initialValue: tab.currentTab,
-              itemBuilder: (context, index, item) {
-                return item?.name?.isNotEmpty == true ? item.name : i18n.tab;
-              },
-              items: tab.tabs,
-              onTabSelected: (item) {
-                _dispatch(TabOpened(item));
-              },
-              onActionSelected: (action, index, item) async {
-                if (action == HomeTabAction.rename) {
-                  // Exibe uma janela de diálogo para que o usuário possa renomear a aba.
-                  final res = await InputTextDialog.show(
-                    context,
-                    item.name ?? '',
-                    i18n.name,
-                    i18n.tab,
-                  );
-
-                  if (res != null && !res.cancelled) {
-                    _dispatch(TabRenamed(res.data));
-                  }
-                } else if (action == HomeTabAction.close) {
-                  _dispatch(TabClosed(item));
-                }
-              },
-            );
-          },
-        ),
-        actions: [
-          // Save.
-          BlocBuilder<TabBloc, TabState>(
-            cubit: _tabBloc,
-            buildWhen: (a, b) =>
-                a.currentTab?.saved != b.currentTab?.saved ||
-                a.currentTab?.call != b.currentTab?.call,
-            builder: (context, state) {
-              return Visibility(
-                visible: state.currentTab?.call?.isNotEmpty == true,
-                child: SaveButton(
-                  saved: state.currentTab.saved,
-                  onPressed: () {
-                    _dispatch(TabSaved());
-                  },
-                ),
-              );
+        appBar: AppBar(
+          elevation: 0,
+          // Hamburger.
+          leading: IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: () {
+              _scaffoldKey.currentState.openDrawer();
             },
           ),
-          // Send.
-          BlocBuilder<RequestBloc, RequestState>(
-            cubit: _requestBloc,
-            buildWhen: (a, b) => a.sending != b.sending,
-            builder: (context, state) {
-              return SendButton(
-                sending: state.sending,
-                onStateChanged: (sending) {
-                  if (sending) {
-                    _dispatch(RequestSent());
-                  } else {
-                    _requestBloc.state.call?.cancel(i18n.cancelled);
+          // Title.
+          title: BlocBuilder<TabBloc, TabState>(
+            key: const Key('home-title'),
+            cubit: _tabBloc,
+            buildWhen: (a, b) => a.tabs != b.tabs,
+            builder: (context, tab) {
+              return HomeTab<TabEntity>(
+                initialValue: tab.currentTab,
+                itemBuilder: (context, index, item) {
+                  return item?.name?.isNotEmpty == true ? item.name : i18n.tab;
+                },
+                items: tab.tabs,
+                onTabSelected: (item) {
+                  _dispatch(TabOpened(item));
+                },
+                onActionSelected: (action, index, item) async {
+                  if (action == HomeTabAction.rename) {
+                    // Exibe uma janela de diálogo para que o usuário possa renomear a aba.
+                    final res = await InputTextDialog.show(
+                      context,
+                      item.name ?? '',
+                      i18n.name,
+                      i18n.tab,
+                    );
+
+                    if (res != null && !res.cancelled) {
+                      _dispatch(TabRenamed(res.data));
+                    }
+                  } else if (action == HomeTabAction.close) {
+                    _dispatch(TabClosed(item));
                   }
                 },
               );
             },
           ),
-          // More options.
-          DotMenuButton<HomeAction>(
-            items: const [
-              HomeAction.newTab,
-              HomeAction.duplicateTab,
-              HomeAction.reopenClosedTab,
-              null, // Divider.
-              HomeAction.discardChanges,
-              HomeAction.clear,
-              null, // Divider.
-              HomeAction.saveAs,
-              null, // Divider.
-              HomeAction.settings,
-            ],
-            itemBuilder: (context, index, item) {
-              return ListTile(
-                leading: Icon(_obtainHomeActionIcon(item)),
-                title: Text(_obtainHomeActionTitle(item)),
-              );
-            },
-            onSelected: (action) async {
-              switch (action) {
-                // Clear.
-                case HomeAction.clear:
-                  _dispatch(RequestCleared());
-                  break;
-                // Clear.
-                case HomeAction.discardChanges:
-                  _dispatch(TabReseted());
-                  break;
-                // New.
-                case HomeAction.newTab:
-                  final res = await InputTextDialog.show(
-                    context,
-                    null,
-                    i18n.name,
-                    i18n.newTab,
-                  );
-
-                  if (res != null && !res.cancelled) {
-                    _open(res.data);
-                  }
-                  break;
-                // Duplicate.
-                case HomeAction.duplicateTab:
-                  _dispatch(TabDuplicated());
-                  break;
-                // Reopen.
-                case HomeAction.reopenClosedTab:
-                  _dispatch(TabReopened());
-                  break;
-                // Save As...
-                case HomeAction.saveAs:
-                  final res = await SaveCallDialog.show(
-                    context,
-                    i18n.saveAs,
-                    _tabBloc.state.currentTab.name,
-                  );
-
-                  if (res != null &&
-                      !res.cancelled &&
-                      res.data != null &&
-                      res.data.length == 2) {
-                    _dispatch(TabSavedAs(res.data[0], res.data[1]));
-                  }
-                  break;
-                // Settings.
-                case HomeAction.settings:
-                  final request = _tabBloc.state.currentTab.request;
-
-                  final res = await RequestSettingsDialog.show(
-                    context,
-                    request.settings,
-                    isRest: _isRest,
-                  );
-
-                  if (res != null && !res.cancelled && res.data != null) {
-                    _dispatch(RequestSettingsEdited(res.data));
-                  }
-                  break;
-                default:
-                  // nada.
-                  break;
-              }
-            },
-          ),
-        ],
-        // URL/API Key.
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(96),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 8, right: 8),
-                child: Material(
-                  borderRadius: BorderRadius.circular(4),
-                  child: Padding(
-                    padding: const EdgeInsets.all(4),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: <Widget>[
-                                // Type.
-                                BlocBuilder<RequestBloc, RequestState>(
-                                  cubit: _requestBloc,
-                                  buildWhen: (a, b) =>
-                                      a.request.type != b.request.type,
-                                  builder: (context, state) {
-                                    return TypeButton(
-                                      initialValue: state.request.type,
-                                      onChanged: (type) {
-                                        _dispatch(TypeChanged(type));
-                                      },
-                                    );
-                                  },
-                                ),
-                                // Method.
-                                if (_isRest)
-                                  BlocBuilder<RequestBloc, RequestState>(
-                                    cubit: _requestBloc,
-                                    buildWhen: (a, b) =>
-                                        a.request.method != b.request.method,
-                                    builder: (context, state) {
-                                      return MethodButton(
-                                        initialValue: state.request.method,
-                                        onChanged: (method) async {
-                                          if (method == 'CUSTOM') {
-                                            // Exibe uma janela de diálogo para digitar um método.
-                                            final res =
-                                                await InputTextDialog.show(
-                                              context,
-                                              _requestBloc.state.request.method,
-                                              i18n.name,
-                                              i18n.httpMethod,
-                                              uppercase: true,
-                                            );
-
-                                            if (res != null &&
-                                                !res.cancelled &&
-                                                res.data != null) {
-                                              _dispatch(
-                                                  MethodChanged(res.data));
-                                            }
-                                          } else {
-                                            _dispatch(MethodChanged(method));
-                                          }
-                                        },
-                                      );
-                                    },
-                                  ),
-                                // Scheme.
-                                if (_isRest)
-                                  BlocBuilder<RequestBloc, RequestState>(
-                                    cubit: _requestBloc,
-                                    buildWhen: (a, b) =>
-                                        a.request.scheme != b.request.scheme,
-                                    builder: (context, state) {
-                                      return SchemeButton(
-                                        initialValue: state.request.scheme,
-                                        onChanged: (scheme) {
-                                          _dispatch(SchemeChanged(scheme));
-                                        },
-                                      );
-                                    },
-                                  ),
-                              ],
-                            ),
-                            // Description.
-                            IconButton(
-                              icon: const Icon(Icons.description),
-                              onPressed: () async {
-                                final res = await DescriptionDialog.show(
-                                  context,
-                                  _requestBloc.state.request.description,
-                                );
-
-                                if (res != null && !res.cancelled) {
-                                  _dispatch(DescriptionChanged(res.data));
-                                }
-                              },
-                            ),
-                          ],
-                        ),
-                        // URL/API Key.
-                        Row(
-                          children: [
-                            Expanded(
-                              child: PowerfulTextField(
-                                controller: _urlTextController,
-                                onChanged: (text) {
-                                  _dispatch(UrlChanged(text));
-                                },
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  labelText: _isRest ? 'URL' : 'API Key',
-                                  contentPadding: const EdgeInsets.only(
-                                    left: 8,
-                                    top: 4,
-                                    bottom: 4,
-                                  ),
-                                ),
-                                keyboardType: _isRest
-                                    ? TextInputType.url
-                                    : TextInputType.text,
-                                suggestionsCallback: variableSuggestions,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+          actions: [
+            // Save.
+            BlocBuilder<TabBloc, TabState>(
+              key: const Key('home-action-save'),
+              cubit: _tabBloc,
+              buildWhen: (a, b) =>
+                  a.currentTab?.saved != b.currentTab?.saved ||
+                  a.currentTab?.call != b.currentTab?.call,
+              builder: (context, state) {
+                return Visibility(
+                  visible: state.currentTab?.call?.isNotEmpty == true,
+                  child: SaveButton(
+                    saved: state.currentTab.saved,
+                    onPressed: () {
+                      _dispatch(TabSaved());
+                    },
                   ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-      body: Material(
-        color: Theme.of(context).primaryColor,
-        child: Stack(
-          children: <Widget>[
-            Column(
+                );
+              },
+            ),
+            // Send.
+            BlocBuilder<RequestBloc, RequestState>(
+              key: const Key('home-action-send'),
+              cubit: _requestBloc,
+              buildWhen: (a, b) => a.sending != b.sending,
+              builder: (context, state) {
+                return SendButton(
+                  sending: state.sending,
+                  onStateChanged: (sending) {
+                    if (sending) {
+                      _dispatch(RequestSent());
+                    } else {
+                      _requestBloc.state.call?.cancel(i18n.cancelled);
+                    }
+                  },
+                );
+              },
+            ),
+            // More options.
+            DotMenuButton<HomeAction>(
+              items: const [
+                HomeAction.newTab,
+                HomeAction.duplicateTab,
+                HomeAction.reopenClosedTab,
+                null, // Divider.
+                HomeAction.discardChanges,
+                HomeAction.clear,
+                null, // Divider.
+                HomeAction.saveAs,
+                null, // Divider.
+                HomeAction.settings,
+              ],
+              itemBuilder: (context, index, item) {
+                return ListTile(
+                  leading: Icon(_obtainHomeActionIcon(item)),
+                  title: Text(_obtainHomeActionTitle(item)),
+                );
+              },
+              onSelected: (action) async {
+                switch (action) {
+                  // Clear.
+                  case HomeAction.clear:
+                    _dispatch(RequestCleared());
+                    break;
+                  // Clear.
+                  case HomeAction.discardChanges:
+                    _dispatch(TabReseted());
+                    break;
+                  // New.
+                  case HomeAction.newTab:
+                    final res = await InputTextDialog.show(
+                      context,
+                      null,
+                      i18n.name,
+                      i18n.newTab,
+                    );
+
+                    if (res != null && !res.cancelled) {
+                      _open(res.data);
+                    }
+                    break;
+                  // Duplicate.
+                  case HomeAction.duplicateTab:
+                    _dispatch(TabDuplicated());
+                    break;
+                  // Reopen.
+                  case HomeAction.reopenClosedTab:
+                    _dispatch(TabReopened());
+                    break;
+                  // Save As...
+                  case HomeAction.saveAs:
+                    final res = await SaveCallDialog.show(
+                      context,
+                      i18n.saveAs,
+                      _tabBloc.state.currentTab.name,
+                    );
+
+                    if (res != null &&
+                        !res.cancelled &&
+                        res.data != null &&
+                        res.data.length == 2) {
+                      _dispatch(TabSavedAs(res.data[0], res.data[1]));
+                    }
+                    break;
+                  // Settings.
+                  case HomeAction.settings:
+                    final request = _tabBloc.state.currentTab.request;
+
+                    final res = await RequestSettingsDialog.show(
+                      context,
+                      request.settings,
+                      isRest: _isRest,
+                    );
+
+                    if (res != null && !res.cancelled && res.data != null) {
+                      _dispatch(RequestSettingsEdited(res.data));
+                    }
+                    break;
+                  default:
+                    // nada.
+                    break;
+                }
+              },
+            ),
+          ],
+          // URL/API Key.
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(96),
+            child: Column(
               children: [
-                // Abas.
-                TabBar(
-                  controller: _tabController,
-                  tabs: [
-                    // Request.
-                    Tab(
-                      text: i18n.request.toUpperCase(),
-                    ),
-                    // Response.
-                    Tab(
+                Padding(
+                  padding: const EdgeInsets.only(left: 8, right: 8),
+                  child: Material(
+                    borderRadius: BorderRadius.circular(4),
+                    child: Padding(
+                      padding: const EdgeInsets.all(4),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 4),
-                            child: Text(i18n.response.toUpperCase()),
-                          ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              // Status.
-                              BlocBuilder<ResponseBloc, ResponseState>(
-                                cubit: _responseBloc,
-                                buildWhen: (a, b) =>
-                                    a.response.status != b.response.status,
-                                builder: (context, state) {
-                                  return Label(
-                                    text: state.response.status >= 0
-                                        ? '${state.response.status}'
-                                        : i18n.error.toUpperCase(),
-                                    color: state.response.status.statusColor,
+                              Row(
+                                children: <Widget>[
+                                  // Type.
+                                  BlocBuilder<RequestBloc, RequestState>(
+                                    key: const Key('home-url-type'),
+                                    cubit: _requestBloc,
+                                    buildWhen: (a, b) =>
+                                        a.request.type != b.request.type,
+                                    builder: (context, state) {
+                                      return TypeButton(
+                                        initialValue: state.request.type,
+                                        onChanged: (type) {
+                                          _dispatch(TypeChanged(type));
+                                        },
+                                      );
+                                    },
+                                  ),
+                                  // Method.
+                                  if (_isRest)
+                                    BlocBuilder<RequestBloc, RequestState>(
+                                      key: const Key('home-url-method'),
+                                      cubit: _requestBloc,
+                                      buildWhen: (a, b) =>
+                                          a.request.method != b.request.method,
+                                      builder: (context, state) {
+                                        return MethodButton(
+                                          initialValue: state.request.method,
+                                          onChanged: (method) async {
+                                            if (method == 'CUSTOM') {
+                                              // Exibe uma janela de diálogo para digitar um método.
+                                              final res =
+                                                  await InputTextDialog.show(
+                                                context,
+                                                _requestBloc
+                                                    .state.request.method,
+                                                i18n.name,
+                                                i18n.httpMethod,
+                                                uppercase: true,
+                                              );
+
+                                              if (res != null &&
+                                                  !res.cancelled &&
+                                                  res.data != null) {
+                                                _dispatch(
+                                                    MethodChanged(res.data));
+                                              }
+                                            } else {
+                                              _dispatch(MethodChanged(method));
+                                            }
+                                          },
+                                        );
+                                      },
+                                    ),
+                                  // Scheme.
+                                  if (_isRest)
+                                    BlocBuilder<RequestBloc, RequestState>(
+                                      key: const Key('home-url-scheme'),
+                                      cubit: _requestBloc,
+                                      buildWhen: (a, b) =>
+                                          a.request.scheme != b.request.scheme,
+                                      builder: (context, state) {
+                                        return SchemeButton(
+                                          initialValue: state.request.scheme,
+                                          onChanged: (scheme) {
+                                            _dispatch(SchemeChanged(scheme));
+                                          },
+                                        );
+                                      },
+                                    ),
+                                ],
+                              ),
+                              // Description.
+                              IconButton(
+                                icon: const Icon(Icons.description),
+                                onPressed: () async {
+                                  final res = await DescriptionDialog.show(
+                                    context,
+                                    _requestBloc.state.request.description,
                                   );
+
+                                  if (res != null && !res.cancelled) {
+                                    _dispatch(DescriptionChanged(res.data));
+                                  }
                                 },
                               ),
-                              Container(width: 4),
-                              // Time.
-                              BlocBuilder<ResponseBloc, ResponseState>(
-                                cubit: _responseBloc,
-                                buildWhen: (a, b) =>
-                                    a.response.time != b.response.time,
-                                builder: (context, state) {
-                                  return Label(
-                                    text: '${state.response.time} ms',
-                                    color: Theme.of(context).indicatorColor,
-                                  );
-                                },
-                              ),
-                              Container(width: 4),
-                              // Size.
-                              BlocBuilder<ResponseBloc, ResponseState>(
-                                cubit: _responseBloc,
-                                buildWhen: (a, b) =>
-                                    a.response.size != b.response.size,
-                                builder: (context, state) {
-                                  return Label(
-                                    text: '${state.response.size} B',
-                                    color: Theme.of(context).indicatorColor,
-                                  );
-                                },
+                            ],
+                          ),
+                          // URL/API Key.
+                          Row(
+                            children: [
+                              Expanded(
+                                child: PowerfulTextField(
+                                  controller: _urlTextController,
+                                  onChanged: (text) {
+                                    _dispatch(UrlChanged(text));
+                                  },
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    labelText: _isRest ? 'URL' : 'API Key',
+                                    contentPadding: const EdgeInsets.only(
+                                      left: 8,
+                                      top: 4,
+                                      bottom: 4,
+                                    ),
+                                  ),
+                                  keyboardType: _isRest
+                                      ? TextInputType.url
+                                      : TextInputType.text,
+                                  suggestionsCallback: variableSuggestions,
+                                ),
                               ),
                             ],
                           ),
                         ],
                       ),
                     ),
-                  ],
-                ),
-                // Content.
-                Expanded(
-                  child: TabBarView(
-                    controller: _tabController,
-                    children: [
-                      RequestPage(bloc: _requestBloc, isRest: _isRest),
-                      ResponsePage(bloc: _responseBloc, isRest: _isRest),
-                    ],
                   ),
                 ),
               ],
             ),
-          ],
+          ),
+        ),
+        body: SafeArea(
+          child: Material(
+            color: Theme.of(context).primaryColor,
+            child: Stack(
+              children: <Widget>[
+                Column(
+                  children: [
+                    // Abas.
+                    TabBar(
+                      controller: _tabController,
+                      tabs: [
+                        // Request.
+                        Tab(
+                          text: i18n.request.toUpperCase(),
+                        ),
+                        // Response.
+                        Tab(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 4),
+                                child: Text(i18n.response.toUpperCase()),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  // Status.
+                                  BlocBuilder<ResponseBloc, ResponseState>(
+                                    key: const Key('home-response-status'),
+                                    cubit: _responseBloc,
+                                    buildWhen: (a, b) =>
+                                        a.response.status != b.response.status,
+                                    builder: (context, state) {
+                                      return Label(
+                                        text: state.response.status >= 0
+                                            ? '${state.response.status}'
+                                            : i18n.error.toUpperCase(),
+                                        color:
+                                            state.response.status.statusColor,
+                                      );
+                                    },
+                                  ),
+                                  Container(width: 4),
+                                  // Time.
+                                  BlocBuilder<ResponseBloc, ResponseState>(
+                                    key: const Key('home-response-time'),
+                                    cubit: _responseBloc,
+                                    buildWhen: (a, b) =>
+                                        a.response.time != b.response.time,
+                                    builder: (context, state) {
+                                      return Label(
+                                        text: '${state.response.time} ms',
+                                        color: Theme.of(context).indicatorColor,
+                                      );
+                                    },
+                                  ),
+                                  Container(width: 4),
+                                  // Size.
+                                  BlocBuilder<ResponseBloc, ResponseState>(
+                                    key: const Key('home-response-size'),
+                                    cubit: _responseBloc,
+                                    buildWhen: (a, b) =>
+                                        a.response.size != b.response.size,
+                                    builder: (context, state) {
+                                      return Label(
+                                        text: '${state.response.size} B',
+                                        color: Theme.of(context).indicatorColor,
+                                      );
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    // Content.
+                    Expanded(
+                      child: TabBarView(
+                        controller: _tabController,
+                        children: [
+                          RequestPage(bloc: _requestBloc, isRest: _isRest),
+                          ResponsePage(bloc: _responseBloc, isRest: _isRest),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
         ),
       ),
-    );
-
-    return BlocProvider.value(
-      value: _workspaceBloc,
-      child: scaffold,
     );
   }
 

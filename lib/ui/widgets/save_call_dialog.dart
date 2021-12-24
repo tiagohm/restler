@@ -95,6 +95,7 @@ class _SaveCallDialogState extends State<SaveCallDialog>
                 ),
                 // Folder.
                 BlocBuilder<_SaveCallBloc, DropdownState<FolderEntity>>(
+                  key: const Key('dropdown-folder'),
                   cubit: _bloc,
                   builder: (context, state) {
                     return DropdownButtonFormField<FolderEntity>(

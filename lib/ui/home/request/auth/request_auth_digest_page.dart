@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:restler/helper.dart';
-import 'package:restler/i18n.dart';
 import 'package:restler/ui/constants.dart';
 import 'package:restler/ui/widgets/powerful_text_field.dart';
+import 'package:restler/ui/widgets/state_mixin.dart';
 
 class RequestAuthDigestPage extends StatefulWidget {
   final String username;
@@ -24,7 +24,8 @@ class RequestAuthDigestPage extends StatefulWidget {
   }
 }
 
-class _RequestAuthDigestState extends State<RequestAuthDigestPage> {
+class _RequestAuthDigestState extends State<RequestAuthDigestPage>
+    with StateMixin<RequestAuthDigestPage> {
   TextEditingController _usernameController;
   TextEditingController _passwordController;
 
@@ -44,35 +45,33 @@ class _RequestAuthDigestState extends State<RequestAuthDigestPage> {
 
   @override
   Widget build(BuildContext context) {
-    final i18n = I18n.of(context);
-
-    return Padding(
-      padding: const EdgeInsets.all(8),
-      child: ListView(
-        shrinkWrap: true,
-        children: [
-          // Username.
-          ListTile(
-            title: PowerfulTextField(
-              controller: _usernameController,
-              hintText: i18n.username,
-              style: defaultInputTextStyle,
-              onChanged: widget.onUsernameChanged,
-              suggestionsCallback: variableSuggestions,
-            ),
+    return ListView(
+      padding: const EdgeInsets.all(16),
+      shrinkWrap: true,
+      children: [
+        // Username.
+        ListTile(
+          contentPadding: EdgeInsets.zero,
+          title: PowerfulTextField(
+            controller: _usernameController,
+            hintText: i18n.username,
+            style: defaultInputTextStyle,
+            onChanged: widget.onUsernameChanged,
+            suggestionsCallback: variableSuggestions,
           ),
-          // Password.
-          ListTile(
-            title: PowerfulTextField(
-              controller: _passwordController,
-              hintText: i18n.password,
-              style: defaultInputTextStyle,
-              onChanged: widget.onPasswordChanged,
-              isPassword: true,
-            ),
+        ),
+        // Password.
+        ListTile(
+          contentPadding: EdgeInsets.zero,
+          title: PowerfulTextField(
+            controller: _passwordController,
+            hintText: i18n.password,
+            style: defaultInputTextStyle,
+            onChanged: widget.onPasswordChanged,
+            isPassword: true,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

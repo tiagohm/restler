@@ -98,6 +98,8 @@ String insertTextAtCursorPosition(
           if (i >= 1 && text[i - 1] == '{') {
             braceLeftIndex++;
           }
+
+          break;
         }
       }
 
@@ -108,6 +110,8 @@ String insertTextAtCursorPosition(
           if (i < text.length - 1 && text[i + 1] == '}') {
             braceRightIndex++;
           }
+
+          break;
         }
       }
 
@@ -134,7 +138,7 @@ String insertTextAtCursorPosition(
   else if (controller.selection.end == 0) {
     b = text.substring(controller.selection.end + braceRightIndex);
   }
-  // MEIO ou SELEÇÂO.
+  // MEIO ou SELEÇÃO.
   else {
     a = text.substring(0, controller.selection.start - braceLeftIndex);
     b = text.substring(controller.selection.end + braceRightIndex);
@@ -244,8 +248,6 @@ List splitText(
       break;
     }
   }
-
-  print('$a | $b');
 
   if (exit) {
     return null;

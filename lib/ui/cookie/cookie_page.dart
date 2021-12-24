@@ -50,6 +50,7 @@ class _CookiePageState extends State<CookiePage> with StateMixin<CookiePage> {
         onBack: () => true,
         // Title.
         title: BlocBuilder<CookieBloc, CookieState>(
+          key: const Key('cookie-title'),
           cubit: _bloc,
           buildWhen: (a, b) => a.search != b.search,
           builder: (context, state) {
@@ -74,6 +75,7 @@ class _CookiePageState extends State<CookiePage> with StateMixin<CookiePage> {
                   Text(i18n.cookie),
                   // Counter.
                   BlocBuilder<CookieBloc, CookieState>(
+                    key: const Key('cookie-counter'),
                     cubit: _bloc,
                     buildWhen: (a, b) => a.data.length != b.data.length,
                     builder: (context, state) {
@@ -115,6 +117,7 @@ class _CookiePageState extends State<CookiePage> with StateMixin<CookiePage> {
       ),
       // List.
       body: BlocBuilder<CookieBloc, CookieState>(
+        key: const Key('cookie-list'),
         cubit: _bloc,
         buildWhen: (a, b) => a.data != b.data,
         builder: (context, state) {

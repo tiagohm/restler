@@ -28,7 +28,7 @@ class ResponseBodyPage extends StatefulWidget {
 }
 
 class _ResponseBodyState extends State<ResponseBodyPage>
-    with StateMixin<ResponseBodyPage> {
+    with StateMixin<ResponseBodyPage>, AutomaticKeepAliveClientMixin {
   var _shouldUpdate = false;
   TextSpan _highlighted;
   bool _isDark;
@@ -40,7 +40,12 @@ class _ResponseBodyState extends State<ResponseBodyPage>
   }
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
+
     return FutureBuilder(
       future: _buildBody(context, widget.state),
       builder: (context, snapshot) {

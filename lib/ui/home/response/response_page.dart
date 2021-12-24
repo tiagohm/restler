@@ -1,4 +1,5 @@
-import 'package:file_picker/file_picker.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -12,9 +13,9 @@ import 'package:restler/ui/home/response/response_cookie_page.dart';
 import 'package:restler/ui/home/response/response_header_page.dart';
 import 'package:restler/ui/home/response/response_redirect_page.dart';
 import 'package:restler/ui/widgets/checkable_tab.dart';
-import 'package:restler/ui/widgets/state_mixin.dart';
 import 'package:restler/ui/widgets/input_text_dialog.dart';
 import 'package:restler/ui/widgets/label.dart';
+import 'package:restler/ui/widgets/state_mixin.dart';
 
 enum BodyAction { copy, pretty, raw, visual, saveAsFile }
 
@@ -50,6 +51,7 @@ class _ResponsePageState extends State<ResponsePage>
             tabs: [
               // Body.
               BlocBuilder<ResponseBloc, ResponseState>(
+                key: const Key('response-tab-body'),
                 cubit: widget.bloc,
                 builder: (context, state) {
                   return CheckableTab(
@@ -80,6 +82,7 @@ class _ResponsePageState extends State<ResponsePage>
               ),
               // Header.
               BlocBuilder<ResponseBloc, ResponseState>(
+                key: const Key('response-tab-header'),
                 cubit: widget.bloc,
                 buildWhen: (a, b) =>
                     a.response.headers.length != b.response.headers.length,
@@ -93,6 +96,7 @@ class _ResponsePageState extends State<ResponsePage>
               ),
               // Cookie.
               BlocBuilder<ResponseBloc, ResponseState>(
+                key: const Key('response-tab-cookie'),
                 cubit: widget.bloc,
                 buildWhen: (a, b) =>
                     a.response.cookies.length != b.response.cookies.length,
@@ -106,6 +110,7 @@ class _ResponsePageState extends State<ResponsePage>
               ),
               // Redirect.
               BlocBuilder<ResponseBloc, ResponseState>(
+                key: const Key('response-tab-redirect'),
                 cubit: widget.bloc,
                 buildWhen: (a, b) =>
                     a.response.redirects.length != b.response.redirects.length,
@@ -127,6 +132,7 @@ class _ResponsePageState extends State<ResponsePage>
                 children: [
                   // Body.
                   BlocBuilder<ResponseBloc, ResponseState>(
+                    key: const Key('response-content-body'),
                     cubit: widget.bloc,
                     builder: (context, state) {
                       return ResponseBodyPage(
@@ -138,6 +144,7 @@ class _ResponsePageState extends State<ResponsePage>
                   ),
                   // Header.
                   BlocBuilder<ResponseBloc, ResponseState>(
+                    key: const Key('response-content-header'),
                     cubit: widget.bloc,
                     buildWhen: (a, b) =>
                         a.response.headers != b.response.headers,
@@ -147,6 +154,7 @@ class _ResponsePageState extends State<ResponsePage>
                   ),
                   // Cookie.
                   BlocBuilder<ResponseBloc, ResponseState>(
+                    key: const Key('response-content-cookie'),
                     cubit: widget.bloc,
                     buildWhen: (a, b) =>
                         a.response.cookies != b.response.cookies,
@@ -156,6 +164,7 @@ class _ResponsePageState extends State<ResponsePage>
                   ),
                   // Redirect.
                   BlocBuilder<ResponseBloc, ResponseState>(
+                    key: const Key('response-content-redirect'),
                     cubit: widget.bloc,
                     buildWhen: (a, b) =>
                         a.response.redirects != b.response.redirects,
@@ -259,7 +268,7 @@ class _ResponsePageState extends State<ResponsePage>
 
           // O usuário escolheu um nome (não cancelou a janela).
           if (res != null && !res.cancelled) {
-            final path = await FilePicker.platform.getDirectoryPath();
+            final path = kiwi<Directory>('app').path;
 
             if (path != null) {
               widget.bloc.add(ResponseBodySavedAsFile(res.data, path));

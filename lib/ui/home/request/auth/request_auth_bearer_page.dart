@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:restler/helper.dart';
-import 'package:restler/i18n.dart';
 import 'package:restler/ui/constants.dart';
 import 'package:restler/ui/widgets/powerful_text_field.dart';
+import 'package:restler/ui/widgets/state_mixin.dart';
 
 class RequestAuthBearerPage extends StatefulWidget {
   final String token;
@@ -24,7 +24,8 @@ class RequestAuthBearerPage extends StatefulWidget {
   }
 }
 
-class _RequestAuthBearerState extends State<RequestAuthBearerPage> {
+class _RequestAuthBearerState extends State<RequestAuthBearerPage>
+    with StateMixin<RequestAuthBearerPage> {
   TextEditingController _tokenController;
   TextEditingController _prefixController;
 
@@ -44,35 +45,33 @@ class _RequestAuthBearerState extends State<RequestAuthBearerPage> {
 
   @override
   Widget build(BuildContext context) {
-    final i18n = I18n.of(context);
-
-    return Padding(
-      padding: const EdgeInsets.all(8),
-      child: ListView(
-        shrinkWrap: true,
-        children: [
-          // Token.
-          ListTile(
-            title: PowerfulTextField(
-              controller: _tokenController,
-              hintText: i18n.token,
-              style: defaultInputTextStyle,
-              onChanged: widget.onTokenChanged,
-              suggestionsCallback: variableSuggestions,
-            ),
+    return ListView(
+      padding: const EdgeInsets.all(16),
+      shrinkWrap: true,
+      children: [
+        // Token.
+        ListTile(
+          contentPadding: EdgeInsets.zero,
+          title: PowerfulTextField(
+            controller: _tokenController,
+            hintText: i18n.token,
+            style: defaultInputTextStyle,
+            onChanged: widget.onTokenChanged,
+            suggestionsCallback: variableSuggestions,
           ),
-          // Prefix.
-          ListTile(
-            title: PowerfulTextField(
-              controller: _prefixController,
-              hintText: i18n.prefix,
-              style: defaultInputTextStyle,
-              onChanged: widget.onPrefixChanged,
-              suggestionsCallback: variableSuggestions,
-            ),
+        ),
+        // Prefix.
+        ListTile(
+          contentPadding: EdgeInsets.zero,
+          title: PowerfulTextField(
+            controller: _prefixController,
+            hintText: i18n.prefix,
+            style: defaultInputTextStyle,
+            onChanged: widget.onPrefixChanged,
+            suggestionsCallback: variableSuggestions,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

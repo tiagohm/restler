@@ -61,6 +61,7 @@ class _WebSocketState extends State<WebSocketPage>
         onBack: () => true,
         // Title.
         title: BlocBuilder<WebSocketBloc, WebSocketState>(
+          key: const Key('ws-title'),
           cubit: _bloc,
           buildWhen: (a, b) => a.search != b.search,
           builder: (context, state) {
@@ -109,6 +110,7 @@ class _WebSocketState extends State<WebSocketPage>
             return const Icon(Icons.search);
           } else if (action == WebSocketPageAction.connect) {
             return BlocBuilder<WebSocketBloc, WebSocketState>(
+              key: const Key('ws-state-icon'),
               cubit: _bloc,
               buildWhen: (a, b) => a.connected != b.connected,
               builder: (context, state) {
@@ -180,6 +182,7 @@ class _WebSocketState extends State<WebSocketPage>
                   ),
                   // Header.
                   BlocBuilder<WebSocketBloc, WebSocketState>(
+                    key: const Key('ws-tab-header'),
                     cubit: _bloc,
                     buildWhen: (a, b) {
                       return a.headers.length != b.headers.length;
@@ -194,6 +197,7 @@ class _WebSocketState extends State<WebSocketPage>
                   ),
                   // Response.
                   BlocBuilder<WebSocketBloc, WebSocketState>(
+                    key: const Key('ws-tab-response'),
                     cubit: _bloc,
                     buildWhen: (a, b) {
                       return a.filteredMessages.length !=
@@ -230,6 +234,7 @@ class _WebSocketState extends State<WebSocketPage>
         children: <Widget>[
           // Body.
           BlocBuilder<WebSocketBloc, WebSocketState>(
+            key: const Key('ws-content-body'),
             cubit: _bloc,
             builder: (context, state) {
               return WebSocketBodyPage(
@@ -242,6 +247,7 @@ class _WebSocketState extends State<WebSocketPage>
           ),
           // Header.
           BlocBuilder<WebSocketBloc, WebSocketState>(
+            key: const Key('ws-content-header'),
             cubit: _bloc,
             buildWhen: (a, b) => a.headers != b.headers,
             builder: (context, state) {
@@ -264,6 +270,7 @@ class _WebSocketState extends State<WebSocketPage>
           ),
           // Response.
           BlocBuilder<WebSocketBloc, WebSocketState>(
+            key: const Key('ws-content-response'),
             cubit: _bloc,
             buildWhen: (a, b) => a.filteredMessages != b.filteredMessages,
             builder: (context, state) {

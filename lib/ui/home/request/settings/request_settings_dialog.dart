@@ -77,6 +77,7 @@ class _RequestSettingsDialogState extends State<RequestSettingsDialog>
               children: [
                 // Proxy.
                 BlocBuilder<RequestSettingsBloc, RequestSettingsState>(
+                  key: const Key('request-settings-proxy'),
                   cubit: _bloc,
                   buildWhen: (a, b) {
                     return a.settings.proxy != b.settings.proxy ||
@@ -100,6 +101,7 @@ class _RequestSettingsDialogState extends State<RequestSettingsDialog>
                 ),
                 // Dns.
                 BlocBuilder<RequestSettingsBloc, RequestSettingsState>(
+                  key: const Key('request-settings-dns'),
                   cubit: _bloc,
                   buildWhen: (a, b) {
                     return a.settings.dns != b.settings.dns || a.dnss != b.dnss;
@@ -122,6 +124,7 @@ class _RequestSettingsDialogState extends State<RequestSettingsDialog>
                 ),
                 // Send cookies.
                 BlocBuilder<RequestSettingsBloc, RequestSettingsState>(
+                  key: const Key('request-settings-send-cookies'),
                   cubit: _bloc,
                   buildWhen: (a, b) {
                     return a.settings.sendCookies != b.settings.sendCookies;
@@ -140,6 +143,7 @@ class _RequestSettingsDialogState extends State<RequestSettingsDialog>
                 ),
                 // Store cookies.
                 BlocBuilder<RequestSettingsBloc, RequestSettingsState>(
+                  key: const Key('request-settings-store-cookies'),
                   cubit: _bloc,
                   buildWhen: (a, b) {
                     return a.settings.storeCookies != b.settings.storeCookies;
@@ -158,6 +162,7 @@ class _RequestSettingsDialogState extends State<RequestSettingsDialog>
                 ),
                 // Cache.
                 BlocBuilder<RequestSettingsBloc, RequestSettingsState>(
+                  key: const Key('request-settings-cache'),
                   cubit: _bloc,
                   buildWhen: (a, b) {
                     return a.settings.cache != b.settings.cache;
@@ -178,6 +183,7 @@ class _RequestSettingsDialogState extends State<RequestSettingsDialog>
                 ),
                 // Enable Variables.
                 BlocBuilder<RequestSettingsBloc, RequestSettingsState>(
+                  key: const Key('request-settings-variables'),
                   cubit: _bloc,
                   buildWhen: (a, b) {
                     return a.settings.enableVariables !=
@@ -197,6 +203,7 @@ class _RequestSettingsDialogState extends State<RequestSettingsDialog>
                 ),
                 // Keep Equal Sign For Empty Query.
                 BlocBuilder<RequestSettingsBloc, RequestSettingsState>(
+                  key: const Key('request-settings-queries'),
                   cubit: _bloc,
                   buildWhen: (a, b) {
                     return a.settings.keepEqualSign != b.settings.keepEqualSign;
@@ -217,6 +224,7 @@ class _RequestSettingsDialogState extends State<RequestSettingsDialog>
                 ),
                 // Disable Persistent Connection.
                 BlocBuilder<RequestSettingsBloc, RequestSettingsState>(
+                  key: const Key('request-settings-persitent'),
                   cubit: _bloc,
                   buildWhen: (a, b) {
                     return a.settings.persistentConnection !=

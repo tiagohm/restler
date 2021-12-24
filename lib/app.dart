@@ -30,6 +30,7 @@ class _AppState extends State<App> {
     const i18n = I18n.delegate;
 
     return BlocBuilder<SettingsBloc, SettingsState>(
+      key: const Key('app'),
       cubit: _settingsBloc,
       buildWhen: (a, b) => a.darkTheme != b.darkTheme,
       builder: (context, state) {

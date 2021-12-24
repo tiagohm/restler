@@ -61,71 +61,73 @@ class _RequestAuthHawkState extends State<RequestAuthHawkPage>
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8),
-      child: ListView(
-        shrinkWrap: true,
-        children: [
-          // Id.
-          ListTile(
-            title: PowerfulTextField(
-              controller: _idController,
-              hintText: i18n.id,
-              style: defaultInputTextStyle,
-              onChanged: widget.onIdChanged,
-              suggestionsCallback: variableSuggestions,
-            ),
+    return ListView(
+      padding: const EdgeInsets.all(16),
+      shrinkWrap: true,
+      children: [
+        // Id.
+        ListTile(
+          contentPadding: EdgeInsets.zero,
+          title: PowerfulTextField(
+            controller: _idController,
+            hintText: i18n.id,
+            style: defaultInputTextStyle,
+            onChanged: widget.onIdChanged,
+            suggestionsCallback: variableSuggestions,
           ),
-          // Key.
-          ListTile(
-            title: PowerfulTextField(
-              controller: _keyController,
-              hintText: i18n.key,
-              style: defaultInputTextStyle,
-              onChanged: widget.onKeyChanged,
-              suggestionsCallback: variableSuggestions,
-            ),
+        ),
+        // Key.
+        ListTile(
+          contentPadding: EdgeInsets.zero,
+          title: PowerfulTextField(
+            controller: _keyController,
+            hintText: i18n.key,
+            style: defaultInputTextStyle,
+            onChanged: widget.onKeyChanged,
+            suggestionsCallback: variableSuggestions,
           ),
-          // Ext.
-          ListTile(
-            title: PowerfulTextField(
-              controller: _extController,
-              hintText: i18n.ext,
-              style: defaultInputTextStyle,
-              onChanged: widget.onExtChanged,
-              suggestionsCallback: variableSuggestions,
-            ),
+        ),
+        // Ext.
+        ListTile(
+          contentPadding: EdgeInsets.zero,
+          title: PowerfulTextField(
+            controller: _extController,
+            hintText: i18n.ext,
+            style: defaultInputTextStyle,
+            onChanged: widget.onExtChanged,
+            suggestionsCallback: variableSuggestions,
           ),
-          // Algorithm.
-          ListTile(
-            title: ContextMenuButton<HawkAlgorithm>(
-              items: HawkAlgorithm.values,
-              itemBuilder: (context, index, item) {
-                if (index == -1) {
-                  return TextField(
-                    controller: _algorithmController,
-                    enabled: false,
-                    readOnly: true,
-                    decoration: InputDecoration(
-                      labelText: i18n.algorithm,
-                    ),
-                    style: defaultInputTextStyle,
-                  );
-                } else {
-                  return Text(
-                    _obtainHawkAlgorithmName(item),
-                    style: defaultInputTextStyle,
-                  );
-                }
-              },
-              onChanged: (algorithm) {
-                widget.onAlgorithmChanged?.call(algorithm);
-                _algorithmController.text = _obtainHawkAlgorithmName(algorithm);
-              },
-            ),
+        ),
+        // Algorithm.
+        ListTile(
+          contentPadding: EdgeInsets.zero,
+          title: ContextMenuButton<HawkAlgorithm>(
+            items: HawkAlgorithm.values,
+            itemBuilder: (context, index, item) {
+              if (index == -1) {
+                return TextField(
+                  controller: _algorithmController,
+                  enabled: false,
+                  readOnly: true,
+                  decoration: InputDecoration(
+                    labelText: i18n.algorithm,
+                  ),
+                  style: defaultInputTextStyle,
+                );
+              } else {
+                return Text(
+                  _obtainHawkAlgorithmName(item),
+                  style: defaultInputTextStyle,
+                );
+              }
+            },
+            onChanged: (algorithm) {
+              widget.onAlgorithmChanged?.call(algorithm);
+              _algorithmController.text = _obtainHawkAlgorithmName(algorithm);
+            },
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
